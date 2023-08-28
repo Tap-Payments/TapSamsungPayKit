@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.tap.samsungpay
 
 import org.junit.Test
 
