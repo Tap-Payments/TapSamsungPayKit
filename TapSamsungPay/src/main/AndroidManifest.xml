@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <application>
+        <activity
+            android:name="com.tap.samsungpay.internal.SamsungPayActivity"
+            android:persistent="true"
+            android:exported="false"  android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
+    </application>
+
     <queries>
         <package android:name="com.samsung.android.spay" />
     </queries>

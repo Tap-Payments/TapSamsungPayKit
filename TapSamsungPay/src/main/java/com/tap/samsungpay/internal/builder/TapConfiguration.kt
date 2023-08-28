@@ -2,8 +2,10 @@ package company.tap.tapcardformkit.open.builder
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import com.google.gson.Gson
+import com.tap.samsungpay.internal.SamsungPayActivity
 import com.tap.samsungpay.open.enums.Scope
 import company.tap.tapcardformkit.open.builder.PublicKeybuilder.PublicKeyConfiguration
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
@@ -161,7 +163,11 @@ class TapConfiguration private constructor(
             sdkDelegate: SDKDelegate? = null
 
         ) {
+            val intent = Intent(context, SamsungPayActivity::class.java)
+            context.startActivity(intent)
+
             with(tapConfiguration) {
+
                 DataConfiguration.initalizeCheckoutProfileAPi(
                     context = context as Activity,
                     tapConfiguration

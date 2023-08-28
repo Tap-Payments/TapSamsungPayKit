@@ -13,6 +13,8 @@ import com.samsung.android.sdk.samsungpay.v2.payment.CardInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
+import com.tap.samsungpay.open.DataConfiguration
+import com.tap.samsungpay.open.SDKDelegate
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 class SamsungPayActivity : Activity() {
@@ -39,6 +41,7 @@ class SamsungPayActivity : Activity() {
             override fun onSuccess(status: Int, bundle: Bundle) {
                 when (status) {
                     SpaySdk.SPAY_READY -> {
+                        DataConfiguration.getListener()?.onError("SPAY_READY")
                         Toast.makeText(
                             this@SamsungPayActivity,
                             "Samsung Pay Ready",
@@ -50,6 +53,7 @@ class SamsungPayActivity : Activity() {
                     }
                     SpaySdk.SPAY_NOT_READY -> {
 
+                        DataConfiguration.getListener()?.onError("SPAY_NOT_READY")
 
                         Toast.makeText(
                             this@SamsungPayActivity,
@@ -71,7 +75,7 @@ class SamsungPayActivity : Activity() {
                         //dataBinding.samsungPayButton.visibility = View.INVISIBLE
                     }
                     SpaySdk.SPAY_NOT_ALLOWED_TEMPORALLY -> {
-
+                        DataConfiguration.getListener()?.onError("SPAY_NOT_ALLOWED_TEMPORALLY")
 
                         Toast.makeText(
                             this@SamsungPayActivity,
@@ -84,11 +88,12 @@ class SamsungPayActivity : Activity() {
                         //  dataBinding.samsungPayButton.visibility = View.INVISIBLE
                     }
                     SpaySdk.SPAY_NOT_SUPPORTED -> {
-                        Toast.makeText(
-                            this@SamsungPayActivity,
-                            "Samsung Pay SPAY_NOT_SUPPORTED",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        DataConfiguration.getListener()?.onError("SPAY_NOT_SUPPORTED")
+//                        Toast.makeText(
+//                            this@SamsungPayActivity,
+//                            "Samsung Pay SPAY_NOT_SUPPORTED",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
                         //     dataBinding.samsungPayButton.visibility = View.INVISIBLE
                     }
 
