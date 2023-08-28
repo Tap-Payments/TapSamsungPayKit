@@ -3,7 +3,6 @@ package com.tap.samsungpay
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myapplication.R
 import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.open.DataConfiguration
 import com.tap.samsungpay.open.SDKDelegate
@@ -53,6 +52,11 @@ class MainActivity : AppCompatActivity() {
             BigDecimal.ONE
         ) //**Required Amount**/
         dataConfig.setEnvironmentMode(SDKMode.ENVIRONMENT_TEST) //**Required SDK MODE**/
+        /**
+         * scope :
+         * SMSNung PAY token , Tap Token .
+         *
+         */
         dataConfig.setTransactionCurrency("USD") //**Required Currency **/
         dataConfig.setCountryCode("US") //**Required Country **/
         dataConfig.setAllowedCardAuthMethods(AllowedMethods.ALL) //**Required type of auth PAN_ONLY, CRYPTOGRAM , ALL**/

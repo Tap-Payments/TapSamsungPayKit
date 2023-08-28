@@ -11,6 +11,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
+
+
+
+<!--        <meta-data-->
+<!--            android:name="debug_mode"-->
+<!--            android:value="Y" />-->
+<!--        <meta-data-->
+<!--            android:name="spay_debug_api_key"-->
+<!--            android:value="asdfggkndkeie17283094858" />-->
+
+
+<!--        <meta-data-->
+<!--            android:name="debug_mode"-->
+<!--            android:value="N" />-->
         <activity
             android:name=".MainActivity"
             android:exported="true">

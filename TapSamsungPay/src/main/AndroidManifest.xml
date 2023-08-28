@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <queries>
+        <package android:name="com.samsung.android.spay" />
+    </queries>
+
+    <!--     Release mode-->
+
+    <meta-data
+        android:name="debug_mode"
+        android:value="N" /> <!--set to Y if debug mode-->
+
+    <!-- uncomment if debug mode-->
+    <!--        <meta-data-->
+    <!--            android:name="debug_mode"-->
+    <!--            android:value="Y" />-->
+    <!--        <meta-data-->
+    <!--            android:name="spay_debug_api_key"-->
+    <!--            android:value="asdfggkndkeie17283094858" />-->
+
+
 </manifest>
