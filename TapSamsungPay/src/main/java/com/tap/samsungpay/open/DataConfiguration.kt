@@ -11,7 +11,7 @@ import company.tap.tapcardformkit.internal.api.CardViewEvent
 import company.tap.tapcardformkit.internal.api.SmsungPayViewModel
 import company.tap.tapcardformkit.internal.api.enums.PaymentType
 import company.tap.tapcardformkit.internal.api.enums.TransactionMode
-import company.tap.tapcardformkit.open.builder.TapConfiguration
+import com.tap.samsungpay.internal.builder.TapConfiguration
 import company.tap.tapnetworkkit.connection.NetworkApp
 
 
@@ -30,10 +30,6 @@ object DataConfiguration {
         return sdkDelegate
     }
 
-    /// Inidcates the tap provided keys for this merchant to use for his transactions. If not set, any transaction will fail. Please if you didn't get a tap key yet, refer to https://www.tap.company/en/sell
-    fun initSDK(context: Context, secretKeys: String, packageID: String) {
-        initNetworkCallOfKit(context, secretKeys, packageID)
-    }
 
     private fun initNetworkCallOfKit(context: Context, secretKeys: String, packageID: String) {
         NetworkApp.initNetwork(

@@ -15,6 +15,10 @@ class Transaction(
         if (amount.toString().isEmpty())
             throw IllegalArgumentException("Amount must not be null or blank.")
 
+
+        if (currency.toString().isEmpty())
+            throw IllegalArgumentException("Currency must not be null or blank.")
+
     }
 
 

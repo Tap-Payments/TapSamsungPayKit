@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.*
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
+import com.tap.samsungpay.internal.models.TapCustomer
 import company.tap.tapcardformkit.internal.api.enums.AmountModificatorType
 import company.tap.tapcardformkit.internal.api.models.AmountModificator
 import company.tap.tapcardformkit.internal.api.models.MetaData
@@ -22,7 +23,7 @@ data class OrderObject(
 
     @SerializedName("customer")
     @Expose
-    private var customer: company.tap.tapcardformkit.open.models.TapCustomer? = null,
+    private var customer: TapCustomer? = null,
 
     @SerializedName("items")
     @Expose

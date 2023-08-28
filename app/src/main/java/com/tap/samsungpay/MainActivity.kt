@@ -8,16 +8,15 @@ import com.tap.samsungpay.internal.api.Tax
 import com.tap.samsungpay.open.enums.*
 import company.tap.tapcardformkit.open.builder.AuthKey
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
-import company.tap.tapcardformkit.open.builder.TapConfiguration
+import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
+import com.tap.samsungpay.internal.models.*
 import com.tap.samsungpay.open.SDKDelegate
-import company.tap.tapcardformkit.open.models.Acceptance
-import company.tap.tapcardformkit.open.models.PhoneNumber
-import company.tap.tapcardformkit.open.models.TapInterface
 import company.tap.tapcardvalidator_android.CardBrand
 
 class MainActivity : AppCompatActivity() {
+
     lateinit var tapConfiguration: TapConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +49,7 @@ class MainActivity : AppCompatActivity() {
                         supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
                     )
                 )
+                .setFields(Fields(shipping = true, billing = true))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
                     TapInterface("en", Edges.CURVED, ThemeMode.LIGHT)
@@ -85,8 +85,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getTapCustomer(): company.tap.tapcardformkit.open.models.TapCustomer =
-        company.tap.tapcardformkit.open.models.TapCustomer(
+    private fun getTapCustomer(): TapCustomer =
+        TapCustomer(
             identifier = "cus_TS012520211349Za012907577",
             editable = true,
             nameOnCard = "Test",

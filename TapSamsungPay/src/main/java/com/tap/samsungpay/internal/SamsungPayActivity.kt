@@ -2,9 +2,11 @@ package com.tap.samsungpay.internal
 
 import android.app.Activity
 import android.os.Bundle
-import android.os.PersistableBundle
+import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RestrictTo
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.samsung.android.sdk.samsungpay.v2.PartnerInfo
 import com.samsung.android.sdk.samsungpay.v2.SamsungPay
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
@@ -13,16 +15,21 @@ import com.samsung.android.sdk.samsungpay.v2.payment.CardInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
+import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.open.DataConfiguration
-import com.tap.samsungpay.open.SDKDelegate
+import company.tap.tapcardformkit.internal.api.models.TapCardDataConfiguration
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-class SamsungPayActivity : Activity() {
+class SamsungPayActivity : AppCompatActivity() {
     private lateinit var partnerInfo: PartnerInfo
     private lateinit var paymentManager: PaymentManager
+    val samsungPayViewModel = SamsungPayViewModel()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         val bundle = Bundle()
         bundle.putString(SpaySdk.PARTNER_SERVICE_TYPE, SpaySdk.ServiceType.INAPP_PAYMENT.toString())
@@ -31,6 +38,9 @@ class SamsungPayActivity : Activity() {
          */
         partnerInfo = PartnerInfo("SERVICE_ID", bundle)
         updateSamsungPayButton()
+
+
+
 
     }
 
@@ -47,8 +57,7 @@ class SamsungPayActivity : Activity() {
                             "Samsung Pay Ready",
                             Toast.LENGTH_SHORT
                         ).show()
-//                        dataBinding.samsungPayButton.visibility = View.VISIBLE
-
+                        startCallForCheckoutProfileAPi()
                         // Perform your operation.
                     }
                     SpaySdk.SPAY_NOT_READY -> {
@@ -71,8 +80,6 @@ class SamsungPayActivity : Activity() {
                         if (extraError == SamsungPay.ERROR_SPAY_SETUP_NOT_COMPLETED) {
                             doActivateSamsungPay(SpaySdk.ServiceType.INAPP_PAYMENT.toString())
                         }
-
-                        //dataBinding.samsungPayButton.visibility = View.INVISIBLE
                     }
                     SpaySdk.SPAY_NOT_ALLOWED_TEMPORALLY -> {
                         DataConfiguration.getListener()?.onError("SPAY_NOT_ALLOWED_TEMPORALLY")
@@ -84,17 +91,10 @@ class SamsungPayActivity : Activity() {
                         ).show()
                         // If EXTRA_ERROR_REASON is ERROR_SPAY_CONNECTED_WITH_EXTERNAL_DISPLAY,
                         // guide user to disconnect it.
-
-                        //  dataBinding.samsungPayButton.visibility = View.INVISIBLE
                     }
                     SpaySdk.SPAY_NOT_SUPPORTED -> {
+
                         DataConfiguration.getListener()?.onError("SPAY_NOT_SUPPORTED")
-//                        Toast.makeText(
-//                            this@SamsungPayActivity,
-//                            "Samsung Pay SPAY_NOT_SUPPORTED",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-                        //     dataBinding.samsungPayButton.visibility = View.INVISIBLE
                     }
 
                 }
@@ -112,6 +112,15 @@ class SamsungPayActivity : Activity() {
                 ).show()
             }
         })
+    }
+
+    private fun startCallForCheckoutProfileAPi() {
+        with(TapConfiguration.getTapConfiguration()) {
+            DataConfiguration.initalizeCheckoutProfileAPi(
+                context = this@SamsungPayActivity,
+                this!!
+            )
+        }
     }
 
     private fun doActivateSamsungPay(serviceType: String) {

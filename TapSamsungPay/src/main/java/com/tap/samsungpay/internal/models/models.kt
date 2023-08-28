@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.open.models
+package com.tap.samsungpay.internal.models
 
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.open.enums.*
@@ -36,13 +36,16 @@ data class Acceptance(
     val supportedPaymentAuthentications: SupportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS,
 )
 
-data class Fields(var cardHolder: Boolean = true)
 
 data class AddOns(
     var loader: Boolean = true,
     var displayCardScanning: Boolean = true,
     var showHideNfc: Boolean = true
 
+)
+data class Fields(
+    var shipping: Boolean = true,
+    var billing: Boolean = true,
 )
 
 data class TapInterface(var locale: String, var edges: Edges,var theme:ThemeMode)

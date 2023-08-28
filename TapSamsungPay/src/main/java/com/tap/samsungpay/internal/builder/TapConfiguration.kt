@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.open.builder
+package com.tap.samsungpay.internal.builder
 
 import android.app.Activity
 import android.content.Context
@@ -6,26 +6,33 @@ import android.content.Intent
 import android.util.Log
 import com.google.gson.Gson
 import com.tap.samsungpay.internal.SamsungPayActivity
+import com.tap.samsungpay.internal.SamsungPayViewModel
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
+import com.tap.samsungpay.internal.models.*
 import com.tap.samsungpay.open.DataConfiguration
 import com.tap.samsungpay.open.SDKDelegate
 import com.tap.samsungpay.open.enums.SDKMODE
-import company.tap.tapcardformkit.open.models.*
+import com.tap.samsungpay.open.enums.SupportedFundSource
+import com.tap.samsungpay.open.enums.SupportedPaymentAuthentications
+import company.tap.tapcardformkit.open.builder.AuthKey
 
 
 class TapConfiguration private constructor(
     val publicKey: Operator?,
-    val environment: SDKMODE?,
-    val scope: Scope,
+    val environment: SDKMODE? = SDKMODE.SANDBOX,
+    val scope: Scope = Scope.TAPTOKEN,
     val transaction: Transaction,
     val merchant: Merchant,
     val tapCustomer: TapCustomer?,
-    val acceptance: Acceptance?,
-    val fields: Fields?,
+    val acceptance: Acceptance? = Acceptance(
+        supportedFundSource = SupportedFundSource.ALL,
+        supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
+    ),
+    val fields: Fields = Fields(shipping = true, billing = true),
     val addOns: AddOns?,
     val tapInterface: TapInterface?,
     val authToken: AuthKey?,
@@ -64,13 +71,6 @@ class TapConfiguration private constructor(
         fun setTransactions(transaction: Transaction) = apply {
             this.transaction = transaction
         }
-
-
-//        var order: Order? = null
-//        fun setOrder(order: Order) = apply {
-//            this.order = order
-//        }
-
 
         var features: Features? = null
         fun setFeatures(features: Features?) = apply {
@@ -134,7 +134,7 @@ class TapConfiguration private constructor(
                 merchant!!,
                 tapCustomer,
                 acceptance,
-                fields,
+                fields!!,
                 addOns,
                 tapInterface,
                 authTokenn,
@@ -157,6 +157,7 @@ class TapConfiguration private constructor(
     }
 
     companion object {
+        var tapConfigurationS: TapConfiguration? = null
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,
@@ -165,16 +166,18 @@ class TapConfiguration private constructor(
         ) {
             val intent = Intent(context, SamsungPayActivity::class.java)
             context.startActivity(intent)
+            DataConfiguration.addSDKDelegate(sdkDelegate)
+            setTapConfiguration(tapConfiguration)
 
-            with(tapConfiguration) {
 
-                DataConfiguration.initalizeCheckoutProfileAPi(
-                    context = context as Activity,
-                    tapConfiguration
-                )
-                DataConfiguration.addSDKDelegate(sdkDelegate)
-            }
+        }
 
+        fun setTapConfiguration(tapConfiguration: TapConfiguration) {
+            this.tapConfigurationS = tapConfiguration
+        }
+
+        fun getTapConfiguration(): TapConfiguration? {
+            return tapConfigurationS
         }
 
 

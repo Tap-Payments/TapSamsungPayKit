@@ -11,6 +11,7 @@ import company.tap.tapcardformkit.internal.api.responses.MerchantData
 import company.tap.tapcardformkit.internal.api.enums.TransactionMode
 import company.tap.tapcardformkit.internal.api.models.*
 import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
+import com.tap.samsungpay.internal.models.TapCustomer
 import com.tap.samsungpay.open.enums.SDKMODE
 
 import java.math.BigDecimal
@@ -41,7 +42,7 @@ object PaymentDataSourceImpl : PaymentDataSource {
     private var requires3DSecure = false
     private var postURL: String? = null
     private var paymentDescription: String? = null
-    private lateinit var tapCustomer: company.tap.tapcardformkit.open.models.TapCustomer
+    private lateinit var tapCustomer: TapCustomer
     private val cardIssuer: CardIssuer? = null
     var paymentOptionsResponse: PaymentOptionsResponse? = null
     private var selectedAmount: BigDecimal? = null
@@ -195,7 +196,7 @@ object PaymentDataSourceImpl : PaymentDataSource {
      *
      * @param tapCustomer the tapCustomer
      */
-    fun setCustomer(tapCustomer: company.tap.tapcardformkit.open.models.TapCustomer) {
+    fun setCustomer(tapCustomer: TapCustomer) {
         this.tapCustomer = tapCustomer
     }
 
@@ -331,7 +332,7 @@ object PaymentDataSourceImpl : PaymentDataSource {
         return postURL
     }
 
-    override fun getCustomer(): company.tap.tapcardformkit.open.models.TapCustomer? {
+    override fun getCustomer(): TapCustomer? {
         return tapCustomer
     }
 

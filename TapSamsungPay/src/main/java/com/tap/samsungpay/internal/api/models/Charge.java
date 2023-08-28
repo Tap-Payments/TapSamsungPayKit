@@ -26,7 +26,7 @@ import company.tap.tapcardformkit.internal.api.models.Source;
 import company.tap.tapcardformkit.internal.api.models.TopUp;
 import company.tap.tapcardformkit.internal.api.models.TrackingURL;
 import company.tap.tapcardformkit.internal.api.models.TransactionDetails;
-import company.tap.tapcardformkit.open.models.TapCustomer;
+import com.tap.samsungpay.internal.models.TapCustomer;
 
 
 //@RestrictTo(RestrictTo.Scope.LIBRARY)

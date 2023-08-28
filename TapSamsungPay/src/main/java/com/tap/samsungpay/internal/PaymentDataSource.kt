@@ -8,6 +8,7 @@ import company.tap.tapcardformkit.internal.api.models.*
 import company.tap.tapcardformkit.internal.api.responses.InitResponseModel
 import company.tap.tapcardformkit.internal.api.responses.MerchantData
 import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
+import com.tap.samsungpay.internal.models.TapCustomer
 import com.tap.samsungpay.open.enums.SDKMODE
 import java.math.BigDecimal
 
@@ -122,7 +123,7 @@ interface PaymentDataSource {
     /**
      * TapCustomer. @return the customer
      */
-    fun getCustomer(): company.tap.tapcardformkit.open.models.TapCustomer?
+    fun getCustomer(): TapCustomer?
     /**
      * Description of the payment. @return the payment description
      */

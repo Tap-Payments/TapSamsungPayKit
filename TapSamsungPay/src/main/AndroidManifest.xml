@@ -5,7 +5,7 @@
         <activity
             android:name="com.tap.samsungpay.internal.SamsungPayActivity"
             android:persistent="true"
-            android:exported="false"  android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+            android:exported="false"  android:theme="@style/Theme.AppCompat.Translucent"/>
 
     </application>
 
