@@ -2,13 +2,13 @@ package com.tap.samsungpay
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import com.tap.samsungpay.internal.api.Shipping
+import com.tap.samsungpay.internal.api.Tax
 import com.tap.samsungpay.open.enums.*
 import company.tap.tapcardformkit.open.builder.AuthKey
-import company.tap.tapcardformkit.open.builder.PublicKeybuilder.PublicKeyConfiguration
+import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import company.tap.tapcardformkit.open.builder.TapConfiguration
-import com.tap.samsungpay.internal.builder.TransactionBuilder.TapCurrency
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.open.SDKDelegate
@@ -26,17 +26,17 @@ class MainActivity : AppCompatActivity() {
 
         tapConfiguration =
             TapConfiguration.Builder()
-                .setPublicKey(
-                    PublicKeyConfiguration.Builder()
-                        .setSandBoxKey("pk_test_Vlk842B1EA7tDN5QbrfGjYzh")
-                        .setProductionKey("test")
+                .setOperator(
+                    Operator.Builder()
+                        .setPublicKey("pk_test_Vlk842B1EA7tDN5QbrfGjYzh")
+                        .setHashString("test")
                         .build()
                 )
                 .setEnvironment(SDKMODE.SANDBOX)
                 .setMerchant(Merchant.Builder().setId("1124340").setGatwayId("tappayments").build())
                 .setTransactions(
-                    Transaction.Builder().setAmount(2.4)
-                        .setCurrency(TapCurrency("USD")).build()
+                    Transaction.Builder().setAmount(2.4).setCurrency("USD")
+                        .setShipping(Shipping("test", 1)).setTax(Tax("test", 1)).build()
                 )
 
                 .setScope(Scope.TAPTOKEN)

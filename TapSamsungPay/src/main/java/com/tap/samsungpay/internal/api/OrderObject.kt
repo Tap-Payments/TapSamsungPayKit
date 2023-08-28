@@ -44,20 +44,18 @@ data class OrderObject(
     private var metaData: MetaData? = null,
 
 
-
     )
-
-
 
 
 data class ItemsModel(
     @field:Expose
     @field:SerializedName("product_id")
-    val productId: String?=null,
+    val productId: String? = null,
 
     @field:Expose
     @field:SerializedName(
-        "name")
+        "name"
+    )
     val name: String? = null,
 
     @field:Expose
@@ -66,7 +64,7 @@ data class ItemsModel(
 
     @field:Expose
     @field:SerializedName("currency")
-    val currency: String?="",
+    val currency: String? = "",
 
     @field:Expose
     @field:SerializedName("quantity")
@@ -74,18 +72,18 @@ data class ItemsModel(
 
     @SerializedName("category")
     @Expose
-    private var category: Category?=null,
+    private var category: Category? = null,
 
     @SerializedName("discount")
-    @Expose val discount: AmountModificator?=null,
+    @Expose val discount: AmountModificator? = null,
 
     @SerializedName("vendor")
     @Expose
-    private val vendor: Vendor?=null,
+    private val vendor: Vendor? = null,
 
     @SerializedName("fulfillment_service")
     @Expose
-    val fulfillmentService: String?=null,
+    val fulfillmentService: String? = null,
 
     @SerializedName("requires_shipping")
     @Expose
@@ -93,39 +91,39 @@ data class ItemsModel(
 
     @SerializedName("item_code")
     @Expose
-    val itemCode: String?=null,
+    val itemCode: String? = null,
 
     @SerializedName("account_code")
     @Expose
-    val accountCode: String?=null,
+    val accountCode: String? = null,
 
     @SerializedName("description")
     @Expose
-    val description: String?=null,
+    val description: String? = null,
 
     @SerializedName("image")
     @Expose
-    val image: String?=null,
+    val image: String? = null,
 
     @SerializedName("reference")
     @Expose
-    private val reference: ReferenceItem?=null,
+    private val reference: ReferenceItem? = null,
 
     @SerializedName("dimensions")
     @Expose
-    val dimensions: ItemDimensions?=null,
+    val dimensions: ItemDimensions? = null,
 
     @SerializedName("tags")
     @Expose
-    val tags: String?=null,
+    val tags: String? = null,
 
     @SerializedName("meta_data")
     @Expose
-    val metaData: MetaData?=null,
+    val metaData: MetaData? = null,
 
     var isExpandedItem: Boolean = false,
 
-    var totalAmount :BigDecimal? = BigDecimal.ONE
+    var totalAmount: BigDecimal? = BigDecimal.ONE
 ) : Serializable {
 
 
@@ -184,13 +182,8 @@ class AuthorizeAction {
 
 }
 
-class Shipping {
-
-}
-
-class Tax {
-
-}
+data class Shipping(var name: String, var amount: Int)
+data class Tax(var name: String, var amount: Int)
 
 
 class TapCurrency(isoCode: String) {
@@ -200,6 +193,7 @@ class TapCurrency(isoCode: String) {
      * @return the iso code
      */
     val isoCode: String
+
     init {
         if (isoCode.isEmpty()) {
             this.isoCode = isoCode
@@ -224,6 +218,7 @@ enum class Category {
     @SerializedName("DIGITAL_GOODS")
     DIGITAL_GOODS
 }
+
 open class AmountModificator(
     @SerializedName("type")
     @Expose var amnttype: AmountModificatorType? = null,
@@ -231,6 +226,7 @@ open class AmountModificator(
     @SerializedName("value")
     @Expose var bigvalue: BigDecimal? = null
 )
+
 class Vendor     //  Constructor is private to prevent access from client app, it must be through inner Builder class only
     (
     @field:Expose @field:SerializedName("id") private val id: String?,
@@ -240,9 +236,11 @@ class Vendor     //  Constructor is private to prevent access from client app, i
 ) : Serializable
 
 data class ReferenceItem
-    (@SerializedName("SKU") @Expose var SKU: String? = null,
+    (
+    @SerializedName("SKU") @Expose var SKU: String? = null,
 
-     @SerializedName("GTIN") @Expose var GTIN: String? = null): Serializable{
+    @SerializedName("GTIN") @Expose var GTIN: String? = null
+) : Serializable {
 
     init {
 
@@ -252,6 +250,7 @@ data class ReferenceItem
     }
 
 }
+
 data class ItemDimensions(
     @SerializedName("weight_type") @Expose
     private var weightType: String? = null,
@@ -277,11 +276,6 @@ data class ItemDimensions(
     @Expose
     private val height: Double? = null
 )
-
-
-
-
-
 
 
 data class TaxObject(var name: String, var description: String?, var amount: AmountModificator)

@@ -63,7 +63,7 @@ object DataConfiguration {
                 ?.toMutableList())
             PaymentDataSourceImpl.setSupportedCurrencies(
                 arrayListOf(
-                    this.transaction.currency?.isoCode.toString()
+                    this.transaction.currency!!
                 )
             )
 
@@ -77,13 +77,13 @@ object DataConfiguration {
             PaymentDataSourceImpl.setOrder(
                 OrderObject(
                     amount = this.transaction.amount!!.toBigDecimal(),
-                    currency = this.transaction.currency!!.isoCode,
+                    currency = this.transaction.currency!!,
                     customer = this.tapCustomer,
                     items = arrayListOf(
                         ItemsModel(
                             amount = this.transaction.amount?.toBigDecimal(),
                             totalAmount = this.transaction.amount?.toBigDecimal(),
-                            currency = this.transaction.currency?.isoCode
+                            currency = this.transaction.currency
                         )
                     ),
                     tax = null,
@@ -93,11 +93,11 @@ object DataConfiguration {
             )
 
         }
-        PaymentDataSourceImpl.setSelectedCurrency(dataConfig.transaction.currency?.isoCode)
+        PaymentDataSourceImpl.setSelectedCurrency(dataConfig.transaction.currency)
         PaymentDataSourceImpl.setDefaultCardHolderName(dataConfig.tapCustomer?.nameOnCard.toString())
 
         NetworkApp.initNetwork(
-            context, dataConfig.publicKey?.sandBoxKey,
+            context, dataConfig.publicKey?.publicKey,
             dataConfig.packageName,
             ApiService.BASE_URL,
             dataConfig.typeDevice,

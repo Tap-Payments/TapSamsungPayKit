@@ -7,7 +7,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.tap.samsungpay.internal.SamsungPayActivity
 import com.tap.samsungpay.open.enums.Scope
-import company.tap.tapcardformkit.open.builder.PublicKeybuilder.PublicKeyConfiguration
+import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
@@ -18,7 +18,7 @@ import company.tap.tapcardformkit.open.models.*
 
 
 class TapConfiguration private constructor(
-    val publicKey: PublicKeyConfiguration?,
+    val publicKey: Operator?,
     val environment: SDKMODE?,
     val scope: Scope,
     val transaction: Transaction,
@@ -44,9 +44,9 @@ class TapConfiguration private constructor(
     }
 
     class Builder {
-        var publicKey: PublicKeyConfiguration? = null
-        fun setPublicKey(publicKey: PublicKeyConfiguration) = apply {
-            this.publicKey = publicKey
+        var operator: Operator? = null
+        fun setOperator(publicKey: Operator) = apply {
+            this.operator = publicKey
         }
 
         var environment: SDKMODE? = SDKMODE.SANDBOX
@@ -127,7 +127,7 @@ class TapConfiguration private constructor(
 
         fun build(): TapConfiguration {
             return TapConfiguration(
-                publicKey,
+                operator,
                 environment,
                 scope,
                 transaction!!,
