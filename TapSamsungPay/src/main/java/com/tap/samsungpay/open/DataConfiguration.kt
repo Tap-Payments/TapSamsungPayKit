@@ -49,6 +49,7 @@ object  DataConfiguration {
     /// Indicates the mode the merchant wants to run the sdk with. Default is sandbox mode
     fun setEnvironmentMode(sdkMode: SDKMode) {
         paymentDataSource?.setEnvironmentMode(sdkMode)
+        
     }
     /**
      * set gatewayId
