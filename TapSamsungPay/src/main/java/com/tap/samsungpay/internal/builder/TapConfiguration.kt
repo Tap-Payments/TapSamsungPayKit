@@ -2,33 +2,28 @@ package company.tap.tapcardformkit.open.builder
 
 import android.app.Activity
 import android.content.Context
-import android.provider.ContactsContract.Data
 import android.util.Log
 import com.google.gson.Gson
-import com.tap.samsungpay.open.enums.SDKMODE
 import com.tap.samsungpay.open.enums.Scope
 import company.tap.tapcardformkit.open.builder.PublicKeybuilder.PublicKeyConfiguration
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.open.DataConfiguration
-import com.tap.samsungpay.open.enums.AllowedMethods
-import com.tap.samsungpay.open.enums.SDKMode
-import company.tap.tapcardformkit.open.builder.orderBuilder.Order
+import com.tap.samsungpay.open.enums.SDKMODE
 import company.tap.tapcardformkit.open.models.*
-import java.math.BigDecimal
 
 
 class TapConfiguration private constructor(
     val publicKey: PublicKeyConfiguration?,
-    val environment: SDKMode?,
+    val environment: SDKMODE?,
     val scope: Scope,
     val transaction: Transaction,
     val merchant: Merchant,
     val tapCustomer: TapCustomer?,
     val acceptance: Acceptance?,
     val fields: Fields?,
-    val addOns: AddOns,
+    val addOns: AddOns?,
     val tapInterface: TapInterface?,
     val authToken: AuthKey?,
     val packageName: String?,
@@ -51,8 +46,8 @@ class TapConfiguration private constructor(
             this.publicKey = publicKey
         }
 
-        var environment: SDKMode? = SDKMode.ENVIRONMENT_TEST
-        fun setEnvironment(sdkmode: SDKMode) = apply {
+        var environment: SDKMODE? = SDKMODE.SANDBOX
+        fun setEnvironment(sdkmode: SDKMODE) = apply {
             this.environment = sdkmode
         }
 
@@ -68,10 +63,10 @@ class TapConfiguration private constructor(
         }
 
 
-        var order: Order? = null
-        fun setOrder(order: Order) = apply {
-            this.order = order
-        }
+//        var order: Order? = null
+//        fun setOrder(order: Order) = apply {
+//            this.order = order
+//        }
 
 
         var features: Features? = null
@@ -137,7 +132,7 @@ class TapConfiguration private constructor(
                 tapCustomer,
                 acceptance,
                 fields,
-                addOns!!,
+                addOns,
                 tapInterface,
                 authTokenn,
                 packageName,
@@ -162,8 +157,8 @@ class TapConfiguration private constructor(
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,
-            tapCardFormConfigurationDelegate: TapCardFormConfigurationDelegate? = null,
-            tapCardInputDelegate: TapCardInputDelegate? = null
+//            tapCardFormConfigurationDelegate: TapCardFormConfigurationDelegate? = null,
+//            tapCardInputDelegate: TapCardInputDelegate? = null
 
         ) {
 
@@ -171,23 +166,24 @@ class TapConfiguration private constructor(
             with(tapConfiguration) {
                 DataConfiguration.initSDK(
                     context,
-                    secretKeys = this.authToken?.sandBoxKey.toString(),
+                    secretKeys = this.publicKey?.sandBoxKey.toString(),
                     packageID = this.packageName.toString()
                 )
-                DataConfiguration.setGatewayId(this.merchant.gatewayId.toString())  //**Required GATEWAY ID**/
-                DataConfiguration.setGatewayMerchantID(this.merchant.id.toString()) //**Required GATEWAY Merchant ID**/
-                DataConfiguration.setAmount(
-                    this.transaction.amount?.toBigDecimal() ?: BigDecimal.ONE
-                ) //**Required Amount**/
-                this.environment?.let { DataConfiguration.setEnvironmentMode(it) } //**Required SDK MODE**/
-                /**
-                 * scope :
-                 * SMSNung PAY token , Tap Token .
-                 *
-                 */
-                DataConfiguration.setTransactionCurrency(this.transaction.currency?.isoCode.toString()) //**Required Currency **/
-                DataConfiguration.setCountryCode("USA") //**Required Country **/
-                dataConfig.setAllowedCardAuthMethods(AllowedMethods.ALL) //**Required type of auth PAN_ONLY, CRYPTOGRAM , ALL**/
+                DataConfiguration.initalizeCheckoutProfileAPi(context = context as Activity,tapConfiguration)
+//                DataConfiguration.setGatewayId(this.merchant.gatewayId.toString())  //**Required GATEWAY ID**/
+//                DataConfiguration.setGatewayMerchantID(this.merchant.id.toString()) //**Required GATEWAY Merchant ID**/
+//                DataConfiguration.setAmount(
+//                    this.transaction.amount?.toBigDecimal() ?: BigDecimal.ONE
+//                ) //**Required Amount**/
+//              //  this.environment?.let { DataConfiguration.setEnvironmentMode(it) } //**Required SDK MODE**/
+//                /**
+//                 * scope :
+//                 * SMSNung PAY token , Tap Token .
+//                 *
+//                 */
+//                DataConfiguration.setTransactionCurrency(this.transaction.currency?.isoCode.toString()) //**Required Currency **/
+//                DataConfiguration.setCountryCode("USA") //**Required Country **/
+//                dataConfig.setAllowedCardAuthMethods(AllowedMethods.ALL) //**Required type of auth PAN_ONLY, CRYPTOGRAM , ALL**/
             }
 
         }

@@ -4,7 +4,10 @@ object ApiService {
     /**
      * The Base url.
      */
-    const val BASE_URL = "https://api.tap.company/v2/"
+   // const val BASE_URL = "https://api.tap.company/v2/"
+    const val BASE_URL = "https://mw-sdk.dev.tap.company/v2/checkout/"
+
+    const val INIT = "checkoutprofile"
 
     /**
      * The Auth token key.

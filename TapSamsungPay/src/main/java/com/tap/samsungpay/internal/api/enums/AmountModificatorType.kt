@@ -8,20 +8,15 @@ import com.google.gson.annotations.SerializedName
 Copyright (c) 2022    Tap Payments.
 All rights reserved.
  **/
-
-/**
- * The enum Token type.
- */
-enum class TokenType {
+enum class AmountModificatorType (val amountModificatorType:String){
     /**
-     * Card token type.
+     * Percentage amount modificator type.
      */
-    @SerializedName("CARD")
-    CARD,
-
+    @SerializedName("P")
+    PERCENTAGE("P"),
     /**
-     * Saved card token type.
+     * Fixed amount modificator type.
      */
-    @SerializedName("SAVED_CARD")
-    SAVED_CARD
+    @SerializedName("F")
+    FIXED("F")
 }

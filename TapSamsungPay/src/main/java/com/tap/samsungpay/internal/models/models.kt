@@ -2,8 +2,6 @@ package company.tap.tapcardformkit.open.models
 
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.open.enums.*
-import company.tap.cardinputwidget.CardBrand
-import company.tap.tapcardformkit.open.enums.*
 import company.tap.tapcardvalidator_android.CardBrand
 import kotlin.collections.ArrayList
 
@@ -47,4 +45,4 @@ data class AddOns(
 
 )
 
-data class TapInterface(var locale: String, var edges: Edges,theme:Theme)
+data class TapInterface(var locale: String, var edges: Edges,var theme:ThemeMode)

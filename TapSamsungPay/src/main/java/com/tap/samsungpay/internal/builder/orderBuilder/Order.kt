@@ -1,6 +1,5 @@
-package company.tap.tapcardformkit.open.builder.orderBuilder
+package com.tap.samsungpay.internal.builder.orderBuilder
 
-import company.tap.tapcardformkit.internal.interfaces.TapCurrency
 
 class Order(
     var identifier: String?

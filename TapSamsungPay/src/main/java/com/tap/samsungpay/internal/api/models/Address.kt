@@ -1,10 +1,20 @@
-package com.tap.samsungpay.internal.api.enums
+package company.tap.tapcardformkit.internal.api.models
 
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.SerializedName
+import com.tap.samsungpay.internal.api.enums.AddressFormat
 import company.tap.tapcardformkit.internal.api.enums.AddressType
 import java.io.Serializable
 
+/**
+ * Created by AhlaamK on 3/23/22.
+
+Copyright (c) 2022    Tap Payments.
+All rights reserved.
+ **/
+/**
+ * The type Address.
+ */
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 data class Address(
     @SerializedName("format") var format: AddressFormat,
