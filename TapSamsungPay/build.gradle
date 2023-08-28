@@ -42,5 +42,7 @@ dependencies {
     api 'com.google.code.gson:gson:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation files('libs/SamsungPaySDK_2.18.00_release.jar')
+    implementation 'com.github.Tap-Payments:TapCardScannerKit-Android:0.0.1.11'
+    api 'com.github.Tap-Payments:TapCardInputKit-Android:0.1.0.36.218'
 
 }
