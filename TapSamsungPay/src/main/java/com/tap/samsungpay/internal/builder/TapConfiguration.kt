@@ -6,7 +6,6 @@ import android.content.Intent
 import android.util.Log
 import com.google.gson.Gson
 import com.tap.samsungpay.internal.SamsungPayActivity
-import com.tap.samsungpay.internal.SamsungPayViewModel
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction

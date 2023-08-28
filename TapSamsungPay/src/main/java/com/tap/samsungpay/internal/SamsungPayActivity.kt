@@ -23,7 +23,6 @@ import company.tap.tapcardformkit.internal.api.models.TapCardDataConfiguration
 class SamsungPayActivity : AppCompatActivity() {
     private lateinit var partnerInfo: PartnerInfo
     private lateinit var paymentManager: PaymentManager
-    val samsungPayViewModel = SamsungPayViewModel()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,7 +56,7 @@ class SamsungPayActivity : AppCompatActivity() {
                             "Samsung Pay Ready",
                             Toast.LENGTH_SHORT
                         ).show()
-                        startCallForCheckoutProfileAPi()
+//                        startCallForCheckoutProfileAPi()
                         // Perform your operation.
                     }
                     SpaySdk.SPAY_NOT_READY -> {
@@ -93,6 +92,7 @@ class SamsungPayActivity : AppCompatActivity() {
                         // guide user to disconnect it.
                     }
                     SpaySdk.SPAY_NOT_SUPPORTED -> {
+                        startCallForCheckoutProfileAPi()
 
                         DataConfiguration.getListener()?.onError("SPAY_NOT_SUPPORTED")
                     }
