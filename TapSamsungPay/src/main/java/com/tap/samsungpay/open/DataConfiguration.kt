@@ -19,7 +19,7 @@ object DataConfiguration {
     private var sdkDelegate: SDKDelegate? = null
 
 
-    fun addSDKDelegate(_sdkDelegate: SDKDelegate) {
+    fun addSDKDelegate(_sdkDelegate: SDKDelegate?) {
         println("addSDKDelegate sdk ${_sdkDelegate}")
         sdkDelegate = _sdkDelegate
 
@@ -59,18 +59,17 @@ object DataConfiguration {
             PaymentDataSourceImpl.setTransactionMode(
                 TransactionMode.TOKENIZE_CARD
             )
-            PaymentDataSourceImpl.setSupportedPaymentMethods(this.acceptance?.supportedBrands?.map { it.rawValue }?.toMutableList())
+            PaymentDataSourceImpl.setSupportedPaymentMethods(this.acceptance?.supportedBrands?.map { it.rawValue }
+                ?.toMutableList())
             PaymentDataSourceImpl.setSupportedCurrencies(
                 arrayListOf(
-                    this.transaction.currency?.isoCode?.toUpperCase().toString()
+                    this.transaction.currency?.isoCode.toString()
                 )
             )
 
             PaymentDataSourceImpl.setSelectedAmount(this.transaction.amount?.toBigDecimal()!!)
-            // PaymentDataSource.setShipping(null)
             PaymentDataSourceImpl.setTaxes(null)
             PaymentDataSourceImpl.setDestination(null)
-            //  this.transaction.currency?.let { PaymentDataSourceImpl.setTransactionCurrency(it) }
             PaymentDataSourceImpl.setCustomer(this.tapCustomer!!)
             PaymentDataSourceImpl.setMerchant(this.merchant)
             PaymentDataSourceImpl.setPaymentType(PaymentType.CARD.name)
@@ -98,7 +97,6 @@ object DataConfiguration {
         PaymentDataSourceImpl.setDefaultCardHolderName(dataConfig.tapCustomer?.nameOnCard.toString())
 
         NetworkApp.initNetwork(
-
             context, dataConfig.publicKey?.sandBoxKey,
             dataConfig.packageName,
             ApiService.BASE_URL,
@@ -118,24 +116,5 @@ object DataConfiguration {
         )
     }
 
-
-//    @RequiresApi(Build.VERSION_CODES.N)
-    // fun startGooglePay(activity: Activity, googlePayButton: View,googleButtonType: GooglePayButtonType?){
-//    fun startGooglePay(activity: Activity, googlePayButton: GooglePayButton){
-//        googlePayButton.possiblyShowGooglePayButton(activity,googlePayButton,false)
-//
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    fun getGooglePayToken(activity: Activity,googlePayButton: GooglePayButton){
-//        googlePayButton.possiblyShowGooglePayButton(activity,googlePayButton,true)
-//
-//    }
-//
-//    @RequiresApi(Build.VERSION_CODES.N)
-//    fun getTapToken(activity: Activity,googlePayButton: GooglePayButton){
-//        googlePayButton.possiblyShowGooglePayButton(activity,googlePayButton,false)
-//
-//    }
 }
 

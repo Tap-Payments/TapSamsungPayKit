@@ -2,6 +2,8 @@ package com.tap.samsungpay
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import com.tap.samsungpay.open.enums.*
 import company.tap.tapcardformkit.open.builder.AuthKey
 import company.tap.tapcardformkit.open.builder.PublicKeybuilder.PublicKeyConfiguration
@@ -9,6 +11,7 @@ import company.tap.tapcardformkit.open.builder.TapConfiguration
 import com.tap.samsungpay.internal.builder.TransactionBuilder.TapCurrency
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
+import com.tap.samsungpay.open.SDKDelegate
 import company.tap.tapcardformkit.open.models.Acceptance
 import company.tap.tapcardformkit.open.models.PhoneNumber
 import company.tap.tapcardformkit.open.models.TapInterface
@@ -59,7 +62,25 @@ class MainActivity : AppCompatActivity() {
                 .setDeviceType("Android Native")
                 .build()
 
-        TapConfiguration.configureSamsungPayWithTapConfiguration(tapConfiguration, this)
+        TapConfiguration.configureSamsungPayWithTapConfiguration(
+            tapConfiguration,
+            this,
+            object : SDKDelegate {
+                override fun onError(error: String?) {
+                    Toast.makeText(this@MainActivity, "error + $error", Toast.LENGTH_SHORT).show()
+
+                }
+
+                override fun onSuccess(token: String) {
+                    Toast.makeText(this@MainActivity, "TokenRecieceved", Toast.LENGTH_SHORT).show()
+                }
+
+                override fun onCancel() {
+                    Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+
+                }
+
+            })
 
 
     }

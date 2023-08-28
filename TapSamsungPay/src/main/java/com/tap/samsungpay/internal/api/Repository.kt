@@ -13,6 +13,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
+import com.tap.samsungpay.open.DataConfiguration
 import company.tap.checkout.open.models.Destinations
 import company.tap.tapcardformkit.internal.api.SmsungPayViewModel
 import company.tap.tapcardformkit.internal.api.CardViewState
@@ -124,7 +125,6 @@ class Repository : APIRequestCallback {
                 response.body().let {
 
                     if (response.body() != null) {
-                        Log.e("response",response.body().toString())
 
                         response.body().let {
                             initResponseModel = Gson().fromJson(it, InitResponseModel::class.java)
@@ -197,6 +197,7 @@ class Repository : APIRequestCallback {
                             PaymentDataSourceImpl.setMerchantData(merchantDataModel)
                             PaymentDataSourceImpl.setInitResponse(initResponseModel)
                             PaymentDataSourceImpl.setTokenConfig(initResponseModel?.session)
+                            DataConfiguration.getListener()?.onSuccess("token recieved")
 
                         }
 
@@ -229,35 +230,7 @@ class Repository : APIRequestCallback {
 
 
     override fun onFailure(requestCode: Int, errorDetails: GoSellError?) {
-        Log.e("response",errorDetails?.errorMessage.toString())
-
-        errorDetails?.let {
-            if (it.errorBody != null) {
-//                resultObservable.onError(it.throwable)
-              //  tokenizeParams.tapCardFormConfigurationDelegate?.onError(it.errorBody)
-
-
-                //   tokenizeParams.getListener()?.backendUnknownError("Required fields are empty")
-              //  _tapCardInputView.showFailure()
-
-            } else
-                try {
-                    // resultObservable.onError(Throwable(it.errorMessage))
-                    RxJavaPlugins.setErrorHandler(Throwable::printStackTrace)
-                    if (requestCode == CREATE_TOKEN_CODE) {
-                    //    tokenizeParams.getListener()?.cardTokenizedFailed(errorDetails)
-
-                    } else {
-
-                    }
-
-
-                } catch (e: Exception) {
-
-                }
-
-
-        }
+        DataConfiguration.getListener()?.onError(errorDetails?.errorBody)
     }
 
 

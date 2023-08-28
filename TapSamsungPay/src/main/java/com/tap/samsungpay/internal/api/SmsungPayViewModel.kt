@@ -60,9 +60,7 @@ class SmsungPayViewModel : ViewModel() {
         event: CardViewEvent,
         cardDataRequest: CreateTokenCard? = null,
         context: Context? = null,
-        binValue: String? = null,
         activity: AppCompatActivity? = null,
-        savedResponseId: String? = null,
     ) {
         when (event) {
             CardViewEvent.InitEvent -> getInitData(this, context)

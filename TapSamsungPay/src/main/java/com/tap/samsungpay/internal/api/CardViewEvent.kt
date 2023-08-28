@@ -10,9 +10,6 @@ All rights reserved.
  **/
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 sealed class CardViewEvent {
-    object ConfigEvent : CardViewEvent()
     object InitEvent : CardViewEvent()
     object CreateTokenEvent :CardViewEvent()
-    object RetreiveSaveCardEvent :CardViewEvent()
-    object RetreiveBinLookupEvent :CardViewEvent()
 }

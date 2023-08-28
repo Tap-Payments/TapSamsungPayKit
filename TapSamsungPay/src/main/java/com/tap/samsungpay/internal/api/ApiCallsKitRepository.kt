@@ -34,7 +34,7 @@ class ApiCallsKitRepository : APIRequestCallback{
             response?.body().let {
                 println("response is"+response)
                 tokenResponse = Gson().fromJson(it, Token::class.java)
-              DataConfiguration.getListener()?.onTapToken(tokenResponse)
+             // DataConfiguration.getListener()?.onTapToken(tokenResponse)
                 activity.finish()
             }
         }
@@ -44,7 +44,7 @@ class ApiCallsKitRepository : APIRequestCallback{
         if (requestCode == CREATE_GPAY_TOKEN_CODE) {
             errorDetails?.errorBody.let {
 
-                errorDetails?.errorBody?.let { it1 -> DataConfiguration.getListener()?.onFailed(it1) }
+            //    errorDetails?.errorBody?.let { it1 -> DataConfiguration.getListener()?.onError(it1) }
                 activity.finish()
             }
         }

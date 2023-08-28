@@ -10,6 +10,7 @@ import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.open.DataConfiguration
+import com.tap.samsungpay.open.SDKDelegate
 import com.tap.samsungpay.open.enums.SDKMODE
 import company.tap.tapcardformkit.open.models.*
 
@@ -157,77 +158,19 @@ class TapConfiguration private constructor(
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,
-//            tapCardFormConfigurationDelegate: TapCardFormConfigurationDelegate? = null,
-//            tapCardInputDelegate: TapCardInputDelegate? = null
+            sdkDelegate: SDKDelegate? = null
 
         ) {
-
-            val dataConfig: DataConfiguration = DataConfiguration //** Required**//
             with(tapConfiguration) {
-                DataConfiguration.initSDK(
-                    context,
-                    secretKeys = this.publicKey?.sandBoxKey.toString(),
-                    packageID = this.packageName.toString()
+                DataConfiguration.initalizeCheckoutProfileAPi(
+                    context = context as Activity,
+                    tapConfiguration
                 )
-                DataConfiguration.initalizeCheckoutProfileAPi(context = context as Activity,tapConfiguration)
-//                DataConfiguration.setGatewayId(this.merchant.gatewayId.toString())  //**Required GATEWAY ID**/
-//                DataConfiguration.setGatewayMerchantID(this.merchant.id.toString()) //**Required GATEWAY Merchant ID**/
-//                DataConfiguration.setAmount(
-//                    this.transaction.amount?.toBigDecimal() ?: BigDecimal.ONE
-//                ) //**Required Amount**/
-//              //  this.environment?.let { DataConfiguration.setEnvironmentMode(it) } //**Required SDK MODE**/
-//                /**
-//                 * scope :
-//                 * SMSNung PAY token , Tap Token .
-//                 *
-//                 */
-//                DataConfiguration.setTransactionCurrency(this.transaction.currency?.isoCode.toString()) //**Required Currency **/
-//                DataConfiguration.setCountryCode("USA") //**Required Country **/
-//                dataConfig.setAllowedCardAuthMethods(AllowedMethods.ALL) //**Required type of auth PAN_ONLY, CRYPTOGRAM , ALL**/
+                DataConfiguration.addSDKDelegate(sdkDelegate)
             }
 
         }
 
-//        fun setTapThemeAndLanguage(context: Context, language: TapLanguage, themeMode: ThemeMode) {
-//            when (themeMode) {
-//                ThemeMode.light -> {
-//                    DataConfiguration.setTheme(
-//                        context, context.resources, null,
-//                        R.raw.defaultlighttheme, ThemeMode.light.name
-//                    )
-//                    ThemeManager.currentThemeName = ThemeMode.light.name
-//                }
-//                ThemeMode.dark -> {
-//                    DataConfiguration.setTheme(
-//                        context, context.resources, null,
-//                        R.raw.defaultdarktheme, ThemeMode.dark.name
-//                    )
-//                    ThemeManager.currentThemeName = ThemeMode.dark.name
-//                }
-//                else -> {}
-//            }
-//
-//            DataConfiguration.setLocale(context, language.name, null, context.resources, R.raw.lang)
-//        }
-//
-
-//        private fun initialzeTapCardForm(tapCardConfiguration: TapCardConfiguration) {
-//            with(tapCardConfiguration) {
-//                tapCardInputView?.tapInLineCardInput?.holderNameEditable = false
-//                tapCardInputView?.tapInLineCardInput?.holderNameEnabled = false
-//                tapCardInputView?.cardBrandShoworHide = this.features?.acceptanceBadge == true
-//                tapCardInputView?.showHideScanner = this.addOns.displayCardScanning
-//                tapCardInputView?.showHideNFC = this.addOns.showHideNfc
-//                tapCardInputView?.showDefaultHolderName = this.fields?.cardHolder == true
-//                tapCardInputView?.enableDefaultHolderName = this.fields?.cardHolder == true
-//                tapCardInputView?.enablePowerd = this.tapInterface?.Powered == true
-//                DataConfiguration.setLoadingViewBoolean(this.addOns.loader)
-//                DataConfiguration.setWebViewHeaderBoolean(false)
-//                DataConfiguration.setDefaultBorderColor(0)
-//                DataConfiguration.setSelectedAnim("")
-//
-//            }
-//        }
 
     }
 
