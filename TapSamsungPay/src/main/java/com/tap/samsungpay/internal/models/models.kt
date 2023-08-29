@@ -8,7 +8,6 @@ import kotlin.collections.ArrayList
 
 data class TapCustomer(
     var identifier: String,
-    var nameOnCard: String = "Card Holder Name",
     var editable: Boolean,
     @SerializedName("email")
     var emailAddress: String,

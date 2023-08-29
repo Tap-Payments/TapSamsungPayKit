@@ -82,7 +82,7 @@ class Repository : APIRequestCallback {
         )
 
         val jsonString = Gson().toJson(requestBody)
-        println("requestBody$jsonString")
+        println("requestBody : $jsonString")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             NetworkController.getInstance().processRequest(
@@ -184,13 +184,6 @@ class Repository : APIRequestCallback {
 //                            }
 //                            //    }
 
-                            NetworkApp.initNetworkToken(
-                                initResponseModel?.session,
-                                cardRepositoryContext,
-                                ApiService.BASE_URL,
-                                true,
-                                null
-                            )
                             PaymentDataSourceImpl.setPaymentOptionsResponseNew(
                                 paymentOptionsResponse
                             )

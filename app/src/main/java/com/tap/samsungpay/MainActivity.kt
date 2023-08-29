@@ -31,20 +31,18 @@ class MainActivity : AppCompatActivity() {
                         .setHashString("test")
                         .build()
                 )
-                .setEnvironment(SDKMODE.SANDBOX)
                 .setMerchant(Merchant.Builder().setId("1124340").setGatwayId("tappayments").build())
                 .setTransactions(
                     Transaction.Builder().setAmount(2.4).setCurrency("USD")
                         .setShipping(Shipping("test", 1)).setTax(Tax("test", 1)).build()
                 )
-
                 .setScope(Scope.TAPTOKEN)
                 .setAcceptance(
                     Acceptance(
                         supportedFundSource = SupportedFundSource.DEBIT,
                         supportedBrands = arrayListOf<CardBrand>(
-//                            CardBrand.SAMSUNG_PAY,
-                            CardBrand.masterCard,
+                              CardBrand.SAMSUNG_PAY,
+                            //CardBrand.masterCard,
                         ),
                         supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
                     )
@@ -58,7 +56,7 @@ class MainActivity : AppCompatActivity() {
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
                         .setProductionLiveKey("sk_test_kovrMB0mupFJXfNZWx6Etg5y").build()
                 )
-                .setPackageName("company.tap.goSellSDKExample")
+                .setPackageName("company.tap.samsungpay")
                 .setDeviceType("Android Native")
                 .build()
 
@@ -89,7 +87,6 @@ class MainActivity : AppCompatActivity() {
         TapCustomer(
             identifier = "cus_TS012520211349Za012907577",
             editable = true,
-            nameOnCard = "Test",
             emailAddress = "abcd@gmail.com",
             phoneNumber = PhoneNumber("+20", "1066490871"),
             firstName = "Aslm",

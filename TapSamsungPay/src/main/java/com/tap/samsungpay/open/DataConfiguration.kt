@@ -2,6 +2,7 @@ package com.tap.samsungpay.open
 
 import android.app.Activity
 import android.content.Context
+import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import com.tap.samsungpay.internal.api.ApiService
 import com.tap.samsungpay.internal.api.ItemsModel
@@ -12,6 +13,7 @@ import company.tap.tapcardformkit.internal.api.SmsungPayViewModel
 import company.tap.tapcardformkit.internal.api.enums.PaymentType
 import company.tap.tapcardformkit.internal.api.enums.TransactionMode
 import com.tap.samsungpay.internal.builder.TapConfiguration
+import com.tap.samsungpay.open.enums.SDKMODE
 import company.tap.tapnetworkkit.connection.NetworkApp
 
 
@@ -30,20 +32,6 @@ object DataConfiguration {
         return sdkDelegate
     }
 
-
-    private fun initNetworkCallOfKit(context: Context, secretKeys: String, packageID: String) {
-        NetworkApp.initNetwork(
-            context,
-            secretKeys,
-            packageID,
-            ApiService.BASE_URL,
-            //   sdkIdentifier,BuildConfig.EncryptAPIKEY)
-            "NATIVE",
-            true,
-            context.resources.getString(company.tap.tapnetworkkit_android.R.string.enryptkey),
-            null
-        )
-    }
 
 
     fun initalizeCheckoutProfileAPi(
@@ -90,12 +78,12 @@ object DataConfiguration {
 
         }
         PaymentDataSourceImpl.setSelectedCurrency(dataConfig.transaction.currency)
-        PaymentDataSourceImpl.setDefaultCardHolderName(dataConfig.tapCustomer?.nameOnCard.toString())
+        PaymentDataSourceImpl.setDefaultCardHolderName("")
 
         NetworkApp.initNetwork(
             context, dataConfig.publicKey?.publicKey,
             dataConfig.packageName,
-            ApiService.BASE_URL,
+            if (dataConfig.environment == SDKMODE.SANDBOX) ApiService.BASE_URL else ApiService.PRODUCTION_URL,
             dataConfig.typeDevice,
             true,
             context.resources.getString(company.tap.tapnetworkkit_android.R.string.enryptkey),
