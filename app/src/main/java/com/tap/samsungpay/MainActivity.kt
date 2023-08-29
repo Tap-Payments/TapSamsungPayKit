@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                 .setMerchant(Merchant.Builder().setId("1124340").setGatwayId("tappayments").build())
                 .setTransactions(
                     Transaction.Builder().setAmount(2.4).setCurrency("USD")
-                        .setShipping(Shipping("test", 1)).setTax(Tax("test", 1)).build()
+                        .setShipping(Shipping("test", 1.0)).setTax(Tax("test", 1.0)).build()
                 )
                 .setScope(Scope.TAPTOKEN)
                 .setAcceptance(
@@ -42,6 +42,9 @@ class MainActivity : AppCompatActivity() {
                         supportedFundSource = SupportedFundSource.DEBIT,
                         supportedBrands = arrayListOf<CardBrand>(
                               CardBrand.SAMSUNG_PAY,
+                            CardBrand.masterCard,
+                            CardBrand.visa,
+
                             //CardBrand.masterCard,
                         ),
                         supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS

@@ -183,8 +183,8 @@ class AuthorizeAction {
 
 }
 
-data class Shipping(var name: String, var amount: Int)
-data class Tax(var name: String, var amount: Int)
+data class Shipping(var name: String, var amount: Double)
+data class Tax(var name: String, var amount: Double)
 
 
 class TapCurrency(isoCode: String) {
