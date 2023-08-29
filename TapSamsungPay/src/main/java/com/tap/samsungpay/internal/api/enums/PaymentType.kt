@@ -20,6 +20,8 @@ enum class PaymentType(val paymentType: String) {
      */
     @SerializedName("card")
     CARD("card"),
+    @SerializedName("device")
+    DEVICE("card"),
     /**
      * Web payment type.
      */

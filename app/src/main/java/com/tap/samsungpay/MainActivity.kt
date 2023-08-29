@@ -41,11 +41,7 @@ class MainActivity : AppCompatActivity() {
                     Acceptance(
                         supportedFundSource = SupportedFundSource.DEBIT,
                         supportedBrands = arrayListOf<CardBrand>(
-                              CardBrand.SAMSUNG_PAY,
-                            CardBrand.masterCard,
-                            CardBrand.visa,
-
-                            //CardBrand.masterCard,
+                            CardBrand.SAMSUNG_PAY
                         ),
                         supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
                     )

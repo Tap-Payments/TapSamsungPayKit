@@ -13,7 +13,8 @@ import com.samsung.android.sdk.samsungpay.v2.SpaySdk
 import com.samsung.android.sdk.samsungpay.v2.StatusListener
 import com.samsung.android.sdk.samsungpay.v2.payment.CardInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
-import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager
+import com.samsung.android.sdk.samsungpay.v2
+.payment.PaymentManager
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.open.DataConfiguration
@@ -35,7 +36,7 @@ class SamsungPayActivity : AppCompatActivity() {
         /**
          * we need service ID for creating the partner info and service type
          */
-        partnerInfo = PartnerInfo("SERVICE_ID", bundle)
+        partnerInfo = PartnerInfo("fff80d901c2849ba8f3641", bundle)
         updateSamsungPayButton()
 
 

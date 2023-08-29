@@ -56,7 +56,7 @@ object DataConfiguration {
             PaymentDataSourceImpl.setDestination(null)
             PaymentDataSourceImpl.setCustomer(this.tapCustomer!!)
             PaymentDataSourceImpl.setMerchant(this.merchant)
-            PaymentDataSourceImpl.setPaymentType(PaymentType.CARD.name)
+            PaymentDataSourceImpl.setPaymentType(PaymentType.DEVICE.name)
             PaymentDataSourceImpl.setCardType(this.acceptance?.supportedFundSource?.name)
             PaymentDataSourceImpl.setOrder(
                 OrderObject(
