@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.button.MaterialButton
@@ -94,6 +95,8 @@ class SamsungPayButton : LinearLayout {
         Glide.with(this)
             .asBitmap()
             .load(samsungPayPaymentAsset)
+            .apply( RequestOptions().override(50, 50))
+
             .into(object : CustomTarget<Bitmap>() {
 
                 override fun onResourceReady(
@@ -121,10 +124,10 @@ class SamsungPayButton : LinearLayout {
             backgroundDrawable = GradientDrawable(
                 GradientDrawable.Orientation.RIGHT_LEFT, backgroundColors,
             )
+            backgroundDrawable.cornerRadius = 30f
             with(buttonSamsung) {
                 background = (backgroundDrawable)
-                layoutParams.height =
-                    resources.getDimensionPixelSize(com.tap.tapsamsungpay.R.dimen.fifty)
+                layoutParams.height = resources.getDimensionPixelSize(com.tap.tapsamsungpay.R.dimen.fifty)
             }
 
 

@@ -11,8 +11,10 @@
         android:id="@+id/btn_samsung"
         app:iconTintMode="multiply"
         app:iconTint="@null"
+        android:elevation="10dp"
+        android:padding="5dp"
         app:iconPadding="15dp"
-
+        app:cornerRadius="10dp"
         app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

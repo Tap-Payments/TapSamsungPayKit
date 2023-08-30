@@ -20,9 +20,9 @@
 
     <!--     Release mode-->
 
-    <meta-data
-        android:name="debug_mode"
-        android:value="N" /> <!--set to Y if debug mode-->
+<!--    <meta-data-->
+<!--        android:name="debug_mode"-->
+<!--        android:value="N" /> &lt;!&ndash;set to Y if debug mode&ndash;&gt;-->
 
     <!-- uncomment if debug mode-->
     <!--        <meta-data-->

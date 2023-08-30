@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 .setFields(Fields(shipping = true, billing = true))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
-                    TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.LIGHT)
+                    TapInterface(Language.AR.name, Edges.CURVED, ThemeMode.DARK)
 
                 ).setAuthToken(
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
