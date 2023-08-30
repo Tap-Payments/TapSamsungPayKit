@@ -29,7 +29,6 @@ import com.tap.tapsamsungpay.R
 @SuppressLint("ViewConstructor")
 class SamsungPayButton : LinearLayout {
     val mShimmerViewContainer by lazy { findViewById<ShimmerFrameLayout>(R.id.shimmer_view_container) }
-
     val buttonSamsung by lazy { findViewById<MaterialButton>(R.id.btn_samsung) }
 
     /**

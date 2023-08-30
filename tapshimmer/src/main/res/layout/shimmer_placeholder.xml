@@ -8,6 +8,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_40sdp"
         android:layout_gravity="center"
+        android:backgroundTint="@color/background"
         android:background="@drawable/bg_rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
