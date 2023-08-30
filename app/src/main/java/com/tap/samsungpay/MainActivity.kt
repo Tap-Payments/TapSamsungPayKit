@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 .setFields(Fields(shipping = true, billing = true))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
-                    TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.LIGHT)
+                    TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.DARK)
 
                 ).setAuthToken(
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
@@ -63,12 +63,12 @@ class MainActivity : AppCompatActivity() {
             this,
             object : SDKDelegate {
                 override fun onError(error: String?) {
-                    Toast.makeText(this@MainActivity, "$error", Toast.LENGTH_SHORT).show()
+                  //  Toast.makeText(this@MainActivity, "$error", Toast.LENGTH_SHORT).show()
 
                 }
 
                 override fun onSuccess(token: String) {
-                    Toast.makeText(this@MainActivity, "TokenRecieceved", Toast.LENGTH_SHORT).show()
+                 //   Toast.makeText(this@MainActivity, "TokenRecieceved", Toast.LENGTH_SHORT).show()
                 }
 
                 override fun onCancel() {

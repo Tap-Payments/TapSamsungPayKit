@@ -9,11 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="@dimen/padding_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="15dp"
         android:orientation="vertical"
         shimmer:duration="800">
         <include layout="@layout/shimmer_placeholder" />
@@ -23,7 +21,7 @@
 
     <Button
         android:layout_width="0dp"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="@dimen/_40sdp"
         app:backgroundTint="@null"
         android:id="@+id/btn_samsung"
         app:iconTintMode="multiply"
