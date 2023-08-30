@@ -24,7 +24,8 @@ import com.tap.tapsamsungpay.R
 import company.tap.tapcardvalidator_android.CardBrand
 
 
-const val SERVICE_ID = "fff80d901c2849ba8f3641"
+//const val SERVICE_ID = "fff80d901c2849ba8f3641"
+const val SERVICE_ID = "e5369ab0cd5141a88dd821"
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate {
