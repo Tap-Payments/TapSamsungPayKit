@@ -19,6 +19,7 @@ import company.tap.tapnetworkkit.connection.NetworkApp
 
 object DataConfiguration {
     private var sdkDelegate: SDKDelegate? = null
+    private var internalCheckoutProfileDelegate: InternalCheckoutProfileDelegate? = null
 
 
     fun addSDKDelegate(_sdkDelegate: SDKDelegate?) {
@@ -28,10 +29,19 @@ object DataConfiguration {
 
     }
 
+    fun addInternalCheckoutDelegate(internalDelegate: InternalCheckoutProfileDelegate?) {
+        internalCheckoutProfileDelegate = internalDelegate
+
+
+    }
+
     fun getListener(): SDKDelegate? {
         return sdkDelegate
     }
 
+    fun getInternalCheckoutDelegate(): InternalCheckoutProfileDelegate? {
+        return internalCheckoutProfileDelegate
+    }
 
 
     fun initalizeCheckoutProfileAPi(

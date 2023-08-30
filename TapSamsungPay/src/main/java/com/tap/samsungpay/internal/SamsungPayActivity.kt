@@ -1,12 +1,24 @@
 package com.tap.samsungpay.internal
 
+import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
+import com.google.android.material.button.MaterialButton
 import com.samsung.android.sdk.samsungpay.v2.PartnerInfo
 import com.samsung.android.sdk.samsungpay.v2.SamsungPay
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
@@ -20,21 +32,31 @@ import com.tap.samsungpay.internal.api.models.PaymentOption
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
 import com.tap.samsungpay.open.DataConfiguration
+import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
+import com.tap.samsungpay.open.SDKDelegate
+import com.tap.samsungpay.open.SamsungPayButton
 import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.samsungpay.open.enums.ThemeMode.*
+import com.tap.tapsamsungpay.R
 import company.tap.tapcardvalidator_android.CardBrand
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+const val SERVICE_ID = "fff80d901c2849ba8f3641"
+
 @RestrictTo(RestrictTo.Scope.LIBRARY)
-class SamsungPayActivity : AppCompatActivity() {
+class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate {
     private lateinit var partnerInfo: PartnerInfo
     private lateinit var paymentManager: PaymentManager
+    private lateinit var samsungPayButton: SamsungPayButton
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.samsung_pay_acitivity)
+        samsungPayButton = findViewById(R.id.samsung_view)
+        DataConfiguration.addInternalCheckoutDelegate(this)
 
 
         val bundle = Bundle()
@@ -42,51 +64,11 @@ class SamsungPayActivity : AppCompatActivity() {
         /**
          * we need service ID for creating the partner info and service type
          */
-        partnerInfo = PartnerInfo("fff80d901c2849ba8f3641", bundle)
+        partnerInfo = PartnerInfo(SERVICE_ID, bundle)
         updateSamsungPayButton()
-//        GlobalScope.launch {
-//            delay(5000L)
-//            Log.e("resp", PaymentDataSourceImpl.paymentOptionsResponse.toString())
-////            var samsungPayPaymentOption =
-////                PaymentDataSourceImpl.paymentOptionsResponse?.paymentOptions?.firstOrNull { it.brand == CardBrand.SAMSUNG_PAY }
-//
-//           // applyButtonStyleToSamsungPay(samsungPayPaymentOption)
-//        }
-
 
     }
 
-//    fun applyButtonStyleToSamsungPay(samsungPayPaymentOption: PaymentOption?) {
-//        when (TapConfiguration.getTapConfiguration()?.tapInterface?.theme) {
-//            LIGHT -> {
-//                var backgroundDrawable: GradientDrawable = GradientDrawable()
-//                var intArrayColors = intArrayOf(
-//                    Color.parseColor(
-//                        samsungPayPaymentOption?.buttonStyle?.background?.lightModel?.backgroundColors?.get(
-//                            0
-//                        )
-//                    ),
-//                    Color.parseColor(
-//                        samsungPayPaymentOption?.buttonStyle?.background?.lightModel?.backgroundColors?.get(
-//                            1
-//                        )
-//                    )
-//                )
-//
-//                backgroundDrawable.colors = intArrayColors
-//                backgroundDrawable.gradientType = GradientDrawable.LINEAR_GRADIENT
-//                backgroundDrawable = GradientDrawable(
-//                    GradientDrawable.Orientation.RIGHT_LEFT, intArrayColors,
-//                )
-//
-//            }
-//            DARK -> {
-//
-//            }
-//            else -> {}
-//        }
-//
-//    }
 
     private fun updateSamsungPayButton() {
         val samsungPay = SamsungPay(this, partnerInfo)
@@ -231,6 +213,19 @@ class SamsungPayActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "onFailure() ", Toast.LENGTH_SHORT).show()
             }
         }
+
+    override fun onError(error: String?) {
+        samsungPayButton.visibility = View.GONE
+
+    }
+
+    override fun onSuccess() {
+        val samsungPayPaymentOption =
+            PaymentDataSourceImpl.paymentOptionsResponse?.paymentOptions?.firstOrNull { it.brand == CardBrand.SAMSUNG_PAY }
+        samsungPayButton.applyStyleToSamsungButton(samsungPayPaymentOption)
+        samsungPayButton.visibility = View.VISIBLE
+
+    }
 
 
 }

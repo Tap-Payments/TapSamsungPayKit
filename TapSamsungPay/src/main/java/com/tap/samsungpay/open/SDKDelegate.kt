@@ -6,3 +6,9 @@ interface SDKDelegate {
     fun onCancel()
 
 }
+
+interface InternalCheckoutProfileDelegate {
+    fun onError(error: String?)
+    fun onSuccess()
+
+}

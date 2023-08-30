@@ -191,6 +191,7 @@ class Repository : APIRequestCallback {
                             PaymentDataSourceImpl.setInitResponse(initResponseModel)
                             PaymentDataSourceImpl.setTokenConfig(initResponseModel?.session)
                             DataConfiguration.getListener()?.onSuccess("checkout profile success")
+                            DataConfiguration.getInternalCheckoutDelegate()?.onSuccess()
 
 
                         }
