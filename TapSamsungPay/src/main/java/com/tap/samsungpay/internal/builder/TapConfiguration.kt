@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.gson.Gson
 import com.tap.samsungpay.internal.SamsungPayActivity
-import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
@@ -14,9 +14,7 @@ import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.*
 import com.tap.samsungpay.open.DataConfiguration
 import com.tap.samsungpay.open.SDKDelegate
-import com.tap.samsungpay.open.enums.SDKMODE
-import com.tap.samsungpay.open.enums.SupportedFundSource
-import com.tap.samsungpay.open.enums.SupportedPaymentAuthentications
+import com.tap.samsungpay.open.enums.*
 import company.tap.tapcardformkit.open.builder.AuthKey
 
 
@@ -163,6 +161,17 @@ class TapConfiguration private constructor(
             sdkDelegate: SDKDelegate? = null
 
         ) {
+            when (tapConfiguration.tapInterface?.theme){
+                ThemeMode.DARK ->{
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+                }
+                ThemeMode.LIGHT -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+                }
+                else -> {}
+            }
             val intent = Intent(context, SamsungPayActivity::class.java)
             context.startActivity(intent)
             DataConfiguration.addSDKDelegate(sdkDelegate)

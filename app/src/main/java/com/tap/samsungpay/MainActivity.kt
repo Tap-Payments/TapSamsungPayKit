@@ -1,29 +1,14 @@
 package com.tap.samsungpay
 
-import android.content.res.ColorStateList
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
-import com.google.android.material.button.MaterialButton
 import com.tap.samsungpay.internal.api.Shipping
 import com.tap.samsungpay.internal.api.Tax
-import com.tap.samsungpay.internal.api.models.PaymentOption
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
-import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
 import com.tap.samsungpay.internal.models.*
 import com.tap.samsungpay.open.SDKDelegate
 import com.tap.samsungpay.open.enums.*
@@ -65,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 .setFields(Fields(shipping = true, billing = true))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
-                    TapInterface(Language.AR.name, Edges.CURVED, ThemeMode.DARK)
+                    TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.DARK)
 
                 ).setAuthToken(
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
