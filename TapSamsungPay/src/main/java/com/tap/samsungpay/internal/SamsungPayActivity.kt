@@ -266,8 +266,12 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
                 })
         } catch (e: Exception) {
-            Log.e("exception thrown",e.toString())
-            Toast.makeText(this@SamsungPayActivity, "exception thrown ${e.message.toString()}", Toast.LENGTH_LONG).show();
+            Log.e("exception thrown", e.toString())
+            Toast.makeText(
+                this@SamsungPayActivity,
+                "exception thrown ${e.message.toString()}",
+                Toast.LENGTH_LONG
+            ).show();
 
         }
     }
