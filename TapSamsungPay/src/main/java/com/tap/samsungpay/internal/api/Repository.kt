@@ -190,7 +190,8 @@ class Repository : APIRequestCallback {
                             PaymentDataSourceImpl.setMerchantData(merchantDataModel)
                             PaymentDataSourceImpl.setInitResponse(initResponseModel)
                             PaymentDataSourceImpl.setTokenConfig(initResponseModel?.session)
-                            DataConfiguration.getListener()?.onSuccess("token recieved")
+                            DataConfiguration.getListener()?.onSuccess("checkout profile success")
+
 
                         }
 

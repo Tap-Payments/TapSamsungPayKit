@@ -41,7 +41,7 @@ object DataConfiguration {
 
         with(dataConfig) {
             PaymentDataSourceImpl.setTransactionMode(
-                TransactionMode.TOKENIZE_CARD
+                TransactionMode.PURCHASE
             )
             PaymentDataSourceImpl.setSupportedPaymentMethods(this.acceptance?.supportedBrands?.map { it.rawValue }
                 ?.toMutableList())

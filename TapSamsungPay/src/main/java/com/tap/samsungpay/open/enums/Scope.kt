@@ -16,6 +16,11 @@ enum class ThemeMode {
     DARK,
     LIGHT,
 }
+enum class Language {
+    EN,
+    AR,
+}
+
 
 enum class SupportedBrands {
     AMERICAN_EXPRESS,

@@ -1,12 +1,12 @@
 package com.tap.samsungpay.internal
 
-import android.app.Activity
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.samsung.android.sdk.samsungpay.v2.PartnerInfo
 import com.samsung.android.sdk.samsungpay.v2.SamsungPay
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
@@ -16,9 +16,16 @@ import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
 import com.samsung.android.sdk.samsungpay.v2
 .payment.PaymentManager
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
+import com.tap.samsungpay.internal.api.models.PaymentOption
 import com.tap.samsungpay.internal.builder.TapConfiguration
+import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
 import com.tap.samsungpay.open.DataConfiguration
-import company.tap.tapcardformkit.internal.api.models.TapCardDataConfiguration
+import com.tap.samsungpay.open.enums.ThemeMode
+import com.tap.samsungpay.open.enums.ThemeMode.*
+import company.tap.tapcardvalidator_android.CardBrand
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 class SamsungPayActivity : AppCompatActivity() {
@@ -30,7 +37,6 @@ class SamsungPayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-
         val bundle = Bundle()
         bundle.putString(SpaySdk.PARTNER_SERVICE_TYPE, SpaySdk.ServiceType.INAPP_PAYMENT.toString())
         /**
@@ -38,11 +44,49 @@ class SamsungPayActivity : AppCompatActivity() {
          */
         partnerInfo = PartnerInfo("fff80d901c2849ba8f3641", bundle)
         updateSamsungPayButton()
-
-
+//        GlobalScope.launch {
+//            delay(5000L)
+//            Log.e("resp", PaymentDataSourceImpl.paymentOptionsResponse.toString())
+////            var samsungPayPaymentOption =
+////                PaymentDataSourceImpl.paymentOptionsResponse?.paymentOptions?.firstOrNull { it.brand == CardBrand.SAMSUNG_PAY }
+//
+//           // applyButtonStyleToSamsungPay(samsungPayPaymentOption)
+//        }
 
 
     }
+
+//    fun applyButtonStyleToSamsungPay(samsungPayPaymentOption: PaymentOption?) {
+//        when (TapConfiguration.getTapConfiguration()?.tapInterface?.theme) {
+//            LIGHT -> {
+//                var backgroundDrawable: GradientDrawable = GradientDrawable()
+//                var intArrayColors = intArrayOf(
+//                    Color.parseColor(
+//                        samsungPayPaymentOption?.buttonStyle?.background?.lightModel?.backgroundColors?.get(
+//                            0
+//                        )
+//                    ),
+//                    Color.parseColor(
+//                        samsungPayPaymentOption?.buttonStyle?.background?.lightModel?.backgroundColors?.get(
+//                            1
+//                        )
+//                    )
+//                )
+//
+//                backgroundDrawable.colors = intArrayColors
+//                backgroundDrawable.gradientType = GradientDrawable.LINEAR_GRADIENT
+//                backgroundDrawable = GradientDrawable(
+//                    GradientDrawable.Orientation.RIGHT_LEFT, intArrayColors,
+//                )
+//
+//            }
+//            DARK -> {
+//
+//            }
+//            else -> {}
+//        }
+//
+//    }
 
     private fun updateSamsungPayButton() {
         val samsungPay = SamsungPay(this, partnerInfo)
@@ -122,6 +166,8 @@ class SamsungPayActivity : AppCompatActivity() {
                 this!!
             )
         }
+
+
     }
 
     private fun doActivateSamsungPay(serviceType: String) {
@@ -139,7 +185,10 @@ class SamsungPayActivity : AppCompatActivity() {
  */
     fun startInAppPayWithCustomSheet() {
         val samsungPayTransaction = SamsungPayTransaction()
-        paymentManager = PaymentManager(applicationContext, partnerInfo)
+        paymentManager = PaymentManager(
+            applicationContext,
+            partnerInfo
+        )
 
         paymentManager.startInAppPayWithCustomSheet(
             samsungPayTransaction.makeTransactionDetailsWithSheet(),

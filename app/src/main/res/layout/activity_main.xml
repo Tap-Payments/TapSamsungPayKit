@@ -6,13 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/samsung_pay"
+        android:layout_height="@dimen/_50sdp"
+        app:backgroundTint="@null"
+        android:id="@+id/btn_samsung"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/black"
-        android:textColor="@color/white"
+        app:iconTintMode="multiply"
+
+        app:iconGravity="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
