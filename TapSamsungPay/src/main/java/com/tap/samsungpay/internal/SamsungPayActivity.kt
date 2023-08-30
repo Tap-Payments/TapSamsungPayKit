@@ -149,7 +149,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
     private fun doActivateSamsungPay(serviceType: String) {
         val bundle = Bundle()
         bundle.putString(SamsungPay.PARTNER_SERVICE_TYPE, serviceType)
-        val partnerInfo = PartnerInfo("SERVICE_ID", bundle)
+        val partnerInfo = PartnerInfo(SERVICE_ID, bundle)
         val samsungPay = SamsungPay(this, partnerInfo)
         samsungPay.activateSamsungPay()
     }
