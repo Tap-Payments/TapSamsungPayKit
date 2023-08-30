@@ -10,6 +10,11 @@ import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import company.tap.tapcardvalidator_android.CardBrand
 
+private const val AMOUNT_CONTROL_ID = "amountControlId"
+private const val PRODUCT_ITEM_ID = "productItemId"
+private const val PRODUCT_TAX_ID = "productTaxId"
+private const val PRODUCT_SHIPPING_ID = "productShippingId"
+
 class SamsungPayTransaction {
 
     fun makeTransactionDetailsWithSheet(): CustomSheetPaymentInfo? {
@@ -35,49 +40,60 @@ class SamsungPayTransaction {
     }
 
     private fun makeAmountControl(): AmountBoxControl {
-        with(TapConfiguration.getTapConfiguration()) {
-            val amountBoxControl =
-                AmountBoxControl("AMOUNT_CONTROL_ID", this?.transaction?.currency)
 
-            /**
-             * amount product
-             */
-            this?.transaction?.amount?.let {
-                amountBoxControl.addItem(
-                    "PRODUCT_ITEM_ID", "Item",
-                    it, ""
-                )
-            }
-            /**
-             *  product tax name and value cost
-             */
-            this?.transaction?.tax?.amount?.let { taxAmount ->
-                amountBoxControl.addItem(
-                    "PRODUCT_TAX_ID", "Tax", taxAmount,
-                    this.transaction.tax?.name.toString()
-                )
-            }
-            /**
-             *  product shipping name and value cost
-             */
-            this?.transaction?.shipping?.amount?.let { shippingAmount ->
-                amountBoxControl.addItem(
-                    "PRODUCT_SHIPPING_ID", "Shipping",
-                    shippingAmount, this.transaction.shipping?.name.toString()
-                )
-            }
-            /**
-             *  product total cost
-             *  @TODO : need to check if need to add all previous values or not
-             */
-            this?.transaction?.amount?.let {
-                amountBoxControl.setAmountTotal(
-                    it,
-                    AmountConstants.FORMAT_TOTAL_PRICE_ONLY
-                )
-            }
-            return amountBoxControl
-        }
+        /**
+         * amountBox from  integration guide
+         */
+        val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, "USD")
+        amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 990.99, "")
+        amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax", 5.0, "")
+        amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping", 1.0, "")
+        amountBoxControl.setAmountTotal(996.99, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
+        return amountBoxControl
+
+//        with(TapConfiguration.getTapConfiguration()) {
+//            val amountBoxControl =
+//                AmountBoxControl(AMOUNT_CONTROL_ID, this?.transaction?.currency)
+//
+//            /**
+//             * amount product
+//             */
+//            this?.transaction?.amount?.let {
+//                amountBoxControl.addItem(
+//                    PRODUCT_ITEM_ID, "Item",
+//                    it, ""
+//                )
+//            }
+//            /**
+//             *  product tax name and value cost
+//             */
+//            this?.transaction?.tax?.amount?.let { taxAmount ->
+//                amountBoxControl.addItem(
+//                    PRODUCT_TAX_ID, "Tax", taxAmount,
+//                    this.transaction.tax?.name.toString()
+//                )
+//            }
+//            /**
+//             *  product shipping name and value cost
+//             */
+//            this?.transaction?.shipping?.amount?.let { shippingAmount ->
+//                amountBoxControl.addItem(
+//                    PRODUCT_SHIPPING_ID, "Shipping",
+//                    shippingAmount, this.transaction.shipping?.name.toString()
+//                )
+//            }
+//            /**
+//             *  product total cost
+//             *  @TODO : need to check if need to add all previous values or not
+//             */
+//            this?.transaction?.amount?.let {
+//                amountBoxControl.setAmountTotal(
+//                    it,
+//                    AmountConstants.FORMAT_TOTAL_PRICE_ONLY
+//                )
+//            }
+//            return amountBoxControl
+//        }
 
     }
 

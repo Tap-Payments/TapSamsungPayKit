@@ -67,6 +67,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                         ).show()
 //                        startCallForCheckoutProfileAPi()
                         // Perform your operation.
+                        startInAppPayWithCustomSheet()
                     }
                     SpaySdk.SPAY_NOT_READY -> {
 
