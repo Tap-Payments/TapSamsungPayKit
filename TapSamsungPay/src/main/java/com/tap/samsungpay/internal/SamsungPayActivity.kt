@@ -200,7 +200,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                  * You will receive the payloads shown below in paymentCredential parameter
                  * The output paymentCredential structure varies depending on the PG you're using and the integration model (direct, indirect) with Samsung.
                  */
-                Toast.makeText(applicationContext, "onSuccess() ", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "onSuccess() $paymentCredential ", Toast.LENGTH_SHORT).show()
             }
 
             // This callback is received when the online payment transaction has failed.
