@@ -22,8 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
         tapConfiguration =
             TapConfiguration.Builder()
                 .setOperator(
@@ -50,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 .setFields(Fields(shipping = true, billing = true))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
-                    TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.DARK)
+                    TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.LIGHT)
 
                 ).setAuthToken(
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
@@ -79,6 +77,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
+
+        setContentView(R.layout.activity_main)
+
 
 
     }
