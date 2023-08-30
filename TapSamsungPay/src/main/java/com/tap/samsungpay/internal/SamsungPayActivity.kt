@@ -1,18 +1,18 @@
 package com.tap.samsungpay.internal
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.samsung.android.sdk.samsungpay.v2.PartnerInfo
 import com.samsung.android.sdk.samsungpay.v2.SamsungPay
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
 import com.samsung.android.sdk.samsungpay.v2.StatusListener
 import com.samsung.android.sdk.samsungpay.v2.payment.CardInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
+import com.samsung.android.sdk.samsungpay.v2.payment.PaymentInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager
+import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager.CardInfoListener
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
@@ -24,8 +24,8 @@ import com.tap.tapsamsungpay.R
 import company.tap.tapcardvalidator_android.CardBrand
 
 
-//const val SERVICE_ID = "fff80d901c2849ba8f3641"
-const val SERVICE_ID = "e5369ab0cd5141a88dd821"
+const val SERVICE_ID = "fff80d901c2849ba8f3641"
+//const val SERVICE_ID = "e5369ab0cd5141a88dd821"
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate {
@@ -162,17 +162,86 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
  * application with custom payment sheet.
  */
     fun startInAppPayWithCustomSheet() {
-        val samsungPayTransaction = SamsungPayTransaction()
+
+        val bundle = Bundle()
+        bundle.putString(
+            SamsungPay.PARTNER_SERVICE_TYPE,
+            SpaySdk.ServiceType.INAPP_PAYMENT.toString()
+        )
+
+        val partnerInfo = PartnerInfo(SERVICE_ID, bundle)
+        paymentManager = PaymentManager(this, partnerInfo)
+       // paymentManager.requestCardInfo(Bundle(), cardInfoListener)
+
+        /*
+         * PaymentManager.startInAppPay is a method to request online (In-App) payment
+         * with Samsung Pay.
+         * Merchant app can use this method to make In-App purchase using Samsung Pay from their
+         * application with normal payment sheet.
+         */
+  
+
+     /*   val samsungPayTransaction = SamsungPayTransaction()
         paymentManager = PaymentManager(
-            applicationContext,
+            this,
             partnerInfo
         )
 
         paymentManager.startInAppPayWithCustomSheet(
             samsungPayTransaction.makeTransactionDetailsWithSheet(),
             transactionInfoListener
-        )
+        )*/
+
+
+
+
+        //CardInfoListener is for listening requestCardInfo() callback events
+        //CardInfoListener is for listening requestCardInfo() callback events
+
     }
+
+    val cardInfoListener: CardInfoListener = object : CardInfoListener {
+        /*
+     * This callback is received when the card information is received successfully.
+     */
+        override fun onResult(cardResponse: List<CardInfo>) {
+            var visaCount = 0
+            var mcCount = 0
+            var amexCount = 0
+            var dsCount = 0
+            var brandStrings = "- Card Info : "
+            if (cardResponse != null) {
+                var brand: SpaySdk.Brand?
+                for (i in cardResponse.indices) {
+                    brand = cardResponse[i].brand
+                    when (brand) {
+                        SpaySdk.Brand.AMERICANEXPRESS -> amexCount++
+                        SpaySdk.Brand.MASTERCARD -> mcCount++
+                        SpaySdk.Brand.VISA -> visaCount++
+                        SpaySdk.Brand.DISCOVER -> dsCount++
+                        else -> {}
+                    }
+                }
+            }
+            brandStrings += "  VI=$visaCount, MC=$mcCount, AX=$amexCount, DS=$dsCount"
+            Toast.makeText(this@SamsungPayActivity, "cardInfoListener onResult$brandStrings", Toast.LENGTH_LONG)
+                .show()
+        }
+
+        /*
+     * This callback is received when the card information cannot be retrieved.
+     * For example, when SDK service in the Samsung Pay app dies abnormally.
+     */
+        override fun onFailure(errorCode: Int, errorData: Bundle) {
+            //Called when an error occurs during In-App cryptogram generation
+            Toast.makeText(
+                this@SamsungPayActivity,
+                "cardInfoListener onFailure : $errorCode",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+    }
+
 
 
     /*
@@ -206,6 +275,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
             // This callback is received when the online payment transaction has failed.
             override fun onFailure(errorCode: Int, errorData: Bundle?) {
+                println("errorData>>>"+errorData)
                 Toast.makeText(applicationContext, "onFailure() ", Toast.LENGTH_SHORT).show()
             }
         }
