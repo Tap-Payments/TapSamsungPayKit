@@ -4,8 +4,10 @@
     <application>
         <activity
             android:name="com.tap.samsungpay.internal.SamsungPayActivity"
+            android:exported="false"
             android:persistent="true"
-            android:exported="false"  android:theme="@style/Theme.AppCompat.Translucent"/>
+            android:theme="@style/Theme.AppCompat.Translucent" />
+
         <meta-data
             android:name="debug_mode"
             android:value="Y" />
@@ -14,10 +16,7 @@
             android:value="cc6e74a513d24020b2f25bcf37d3a4ed" />
         <meta-data
             android:name="spay_sdk_api_level"
-            android:value="2.17"/>
-<!--        <meta-data-->
-<!--            android:name="debug_mode"-->
-<!--            android:value="N" /> &lt;!&ndash;set to Y if debug mode&ndash;&gt;-->
+            android:value="2.17" />
 
     </application>
 
@@ -25,20 +24,6 @@
         <package android:name="com.samsung.android.spay" />
         <package android:name="com.samsung.android.samsungpay.gear" />
     </queries>
-
-    <!--     Release mode-->
-
-<!--    <meta-data-->
-<!--        android:name="debug_mode"-->
-<!--        android:value="N" /> &lt;!&ndash;set to Y if debug mode&ndash;&gt;-->
-
-    <!-- uncomment if debug mode-->
-    <!--        <meta-data-->
-    <!--            android:name="debug_mode"-->
-    <!--            android:value="Y" />-->
-    <!--        <meta-data-->
-    <!--            android:name="spay_debug_api_key"-->
-    <!--            android:value="asdfggkndkeie17283094858" />-->
 
 
 </manifest>
