@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.button.MaterialButton
 import com.tap.samsungpay.internal.api.models.PaymentOption
 import com.tap.samsungpay.internal.builder.TapConfiguration
@@ -27,6 +28,8 @@ import com.tap.tapsamsungpay.R
 
 @SuppressLint("ViewConstructor")
 class SamsungPayButton : LinearLayout {
+    val mShimmerViewContainer by lazy { findViewById<ShimmerFrameLayout>(R.id.shimmer_view_container) }
+
     val buttonSamsung by lazy { findViewById<MaterialButton>(R.id.btn_samsung) }
 
     /**
@@ -46,6 +49,7 @@ class SamsungPayButton : LinearLayout {
 
     init {
         View.inflate(context, R.layout.samsung_pay_layout, this)
+
     }
 
     fun applyStyleToSamsungButton(samsungPayPaymentOption: PaymentOption?) {
@@ -76,6 +80,20 @@ class SamsungPayButton : LinearLayout {
             }
             else -> {}
         }
+
+    }
+
+
+    fun startShimmer(){
+        mShimmerViewContainer?.startShimmer();
+        mShimmerViewContainer?.visibility = View.VISIBLE;
+        buttonSamsung.visibility = View.GONE
+
+    }
+    fun  stopShimmer(){
+        mShimmerViewContainer?.stopShimmer();
+        mShimmerViewContainer?.visibility = View.GONE;
+        buttonSamsung.visibility = View.VISIBLE
 
     }
 

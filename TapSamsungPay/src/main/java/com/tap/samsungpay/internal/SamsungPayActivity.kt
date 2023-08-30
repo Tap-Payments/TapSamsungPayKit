@@ -1,47 +1,28 @@
 package com.tap.samsungpay.internal
 
-import android.content.res.ColorStateList
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
-import com.google.android.material.button.MaterialButton
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.samsung.android.sdk.samsungpay.v2.PartnerInfo
 import com.samsung.android.sdk.samsungpay.v2.SamsungPay
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
 import com.samsung.android.sdk.samsungpay.v2.StatusListener
 import com.samsung.android.sdk.samsungpay.v2.payment.CardInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
-import com.samsung.android.sdk.samsungpay.v2
-.payment.PaymentManager
+import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
-import com.tap.samsungpay.internal.api.models.PaymentOption
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
 import com.tap.samsungpay.open.DataConfiguration
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
-import com.tap.samsungpay.open.SDKDelegate
 import com.tap.samsungpay.open.SamsungPayButton
-import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.samsungpay.open.enums.ThemeMode.*
 import com.tap.tapsamsungpay.R
 import company.tap.tapcardvalidator_android.CardBrand
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+
 
 const val SERVICE_ID = "fff80d901c2849ba8f3641"
 
@@ -56,6 +37,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.samsung_pay_acitivity)
         samsungPayButton = findViewById(R.id.samsung_view)
+
         DataConfiguration.addInternalCheckoutDelegate(this)
 
 
@@ -152,6 +134,18 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        samsungPayButton.startShimmer();
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        samsungPayButton.stopShimmer();
+
+    }
+
     private fun doActivateSamsungPay(serviceType: String) {
         val bundle = Bundle()
         bundle.putString(SamsungPay.PARTNER_SERVICE_TYPE, serviceType)
@@ -215,15 +209,14 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
         }
 
     override fun onError(error: String?) {
-        samsungPayButton.visibility = View.GONE
+        //samsungPayButton.visibility = View.GONE
 
     }
 
     override fun onSuccess() {
-        val samsungPayPaymentOption =
-            PaymentDataSourceImpl.paymentOptionsResponse?.paymentOptions?.firstOrNull { it.brand == CardBrand.SAMSUNG_PAY }
+        samsungPayButton.stopShimmer();
+        val samsungPayPaymentOption = PaymentDataSourceImpl.paymentOptionsResponse?.paymentOptions?.firstOrNull { it.brand == CardBrand.SAMSUNG_PAY }
         samsungPayButton.applyStyleToSamsungButton(samsungPayPaymentOption)
-        samsungPayButton.visibility = View.VISIBLE
 
     }
 
