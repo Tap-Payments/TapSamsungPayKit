@@ -13,7 +13,6 @@
         tools:targetApi="31">
 
 
-
         <meta-data
             android:name="debug_mode"
             android:value="Y" />
@@ -24,14 +23,6 @@
             android:name="spay_sdk_api_level"
             android:value="2.17"/>
 
-<!--        <meta-data-->
-<!--            android:name="debug_mode"-->
-<!--            android:value="N" /> &lt;!&ndash;set to Y if debug mode&ndash;&gt;-->
-
-
-        <!--        <meta-data-->
-<!--            android:name="debug_mode"-->
-<!--            android:value="N" />-->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -42,5 +33,9 @@
             </intent-filter>
         </activity>
     </application>
+    <queries>
+        <package android:name="com.samsung.android.spay" />
+        <package android:name="com.samsung.android.samsungpay.gear" />
+    </queries>
 
 </manifest>
