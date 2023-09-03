@@ -8,27 +8,28 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.RoundRectShape
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
-import androidx.appcompat.app.AppCompatDelegate
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.button.MaterialButton
 import com.tap.samsungpay.internal.api.models.PaymentOption
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.tapsamsungpay.R
 
+const val packageName = "com.tap.tapsamsungpay"
+const val rawFolderRefrence = "raw"
 
-@SuppressLint("ViewConstructor")
+@SuppressLint("ViewConstructor", "DiscouragedApi")
 class SamsungPayButton : LinearLayout {
-    val mShimmerViewContainer by lazy { findViewById<ShimmerFrameLayout>(R.id.shimmer_view_container) }
+    val mShimmerViewContainer by lazy { findViewById<LottieAnimationView>(R.id.shimmer_view) }
+
+
     val buttonSamsung by lazy { findViewById<MaterialButton>(R.id.btn_samsung) }
 
     /**
@@ -48,7 +49,29 @@ class SamsungPayButton : LinearLayout {
 
     init {
         View.inflate(context, R.layout.samsung_pay_layout, this)
+        with(TapConfiguration.getTapConfiguration()) {
+            when (this?.tapInterface?.theme) {
+                ThemeMode.LIGHT -> mShimmerViewContainer.setAnimation(
+                    getAssetFile("lottie_light")
 
+                )
+                ThemeMode.DARK -> {
+                    mShimmerViewContainer.setAnimation(
+                       getAssetFile("lottie_dark")
+                    )
+                }
+                else -> {}
+            }
+        }
+
+
+    }
+    fun getAssetFile(filename:String) :Int{
+       return resources.getIdentifier(
+           filename,
+           rawFolderRefrence,
+           packageName
+       )
     }
 
     fun applyStyleToSamsungButton(samsungPayPaymentOption: PaymentOption?) {
@@ -83,14 +106,14 @@ class SamsungPayButton : LinearLayout {
     }
 
 
-    fun startShimmer(){
-        mShimmerViewContainer?.startShimmer();
+    fun startShimmer() {
         mShimmerViewContainer?.visibility = View.VISIBLE;
         buttonSamsung.visibility = View.GONE
 
+
     }
-    fun  stopShimmer(){
-        mShimmerViewContainer?.stopShimmer();
+
+    fun stopShimmer() {
         mShimmerViewContainer?.visibility = View.GONE;
         buttonSamsung.visibility = View.VISIBLE
 

@@ -4,20 +4,33 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:shimmer="http://schemas.android.com/tools">
-    <com.facebook.shimmer.ShimmerFrameLayout
-        android:id="@+id/shimmer_view_container"
-        android:layout_width="match_parent"
+<!--    <com.facebook.shimmer.ShimmerFrameLayout-->
+<!--        android:id="@+id/shimmer_view_container"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/_40sdp"-->
+<!--        android:visibility="gone"-->
+<!--        android:layout_gravity="center"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:orientation="vertical"-->
+<!--        shimmer:duration="800">-->
+<!--        <include layout="@layout/shimmer_placeholder" />-->
+
+
+<!--    </com.facebook.shimmer.ShimmerFrameLayout>-->
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/shimmer_view"
+        android:layout_width="0dp"
+        android:background="@drawable/bg_rounded"
         android:layout_height="@dimen/_40sdp"
-        android:layout_gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:orientation="vertical"
-        shimmer:duration="800">
-        <include layout="@layout/shimmer_placeholder" />
-
-
-    </com.facebook.shimmer.ShimmerFrameLayout>
+        app:lottie_rawRes="@raw/lottie_light"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
 
     <Button
         android:layout_width="0dp"

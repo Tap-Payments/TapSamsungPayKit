@@ -76,11 +76,11 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                         /**
                          * start In App Pay for for normal Transaction
                          */
-                        //startInAppPayment()
+                      //  startInAppPayment()
                         /**
                          * start In App Pay for Custom Sheet
                          */
-                         startInAppPayWithCustomSheet()
+                          startInAppPayWithCustomSheet()
                     }
                     SpaySdk.SPAY_NOT_READY -> {
 
