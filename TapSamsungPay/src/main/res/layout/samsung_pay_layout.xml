@@ -21,6 +21,7 @@
 <!--    </com.facebook.shimmer.ShimmerFrameLayout>-->
 
 
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/shimmer_view"
         android:layout_width="0dp"
@@ -38,7 +39,6 @@
         android:layout_height="@dimen/_40sdp"
         app:backgroundTint="@null"
         android:id="@+id/btn_samsung"
-        app:iconTintMode="multiply"
         app:iconTint="@null"
         android:padding="5dp"
         app:cornerRadius="@dimen/_20sdp"
