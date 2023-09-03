@@ -20,6 +20,7 @@
 
 <!--    </com.facebook.shimmer.ShimmerFrameLayout>-->
 
+
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/shimmer_view"
         android:layout_width="0dp"

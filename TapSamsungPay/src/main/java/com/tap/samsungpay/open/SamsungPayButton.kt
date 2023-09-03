@@ -54,6 +54,7 @@ class SamsungPayButton : LinearLayout {
                 ThemeMode.LIGHT -> mShimmerViewContainer.setAnimation(
                     getAssetFile("lottie_light")
 
+
                 )
                 ThemeMode.DARK -> {
                     mShimmerViewContainer.setAnimation(
