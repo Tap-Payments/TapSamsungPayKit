@@ -390,6 +390,10 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                  * You will receive the payloads shown below in paymentCredential parameter
                  * The output paymentCredential structure varies depending on the PG you're using and the integration model (direct, indirect) with Samsung.
                  */
+                println("on success response>"+response)
+                println("on success paymentCredential>"+paymentCredential)
+
+                println("on success extraPaymentData>"+extraPaymentData)
                 Toast.makeText(
                     applicationContext,
                     "onSuccess() $paymentCredential ",

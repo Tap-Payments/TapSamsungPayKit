@@ -45,10 +45,10 @@ class SamsungPayTransaction {
          * amountBox from  integration guide
          */
         val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, "USD")
-        amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 990.99, "")
-        amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax", 5.0, "")
-        amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping", 1.0, "")
-        amountBoxControl.setAmountTotal(996.99, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
+        amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
+        amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax", 0.1, "")
+        amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping", 0.1, "")
+        amountBoxControl.setAmountTotal(0.1, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
         return amountBoxControl
 
 //        with(TapConfiguration.getTapConfiguration()) {

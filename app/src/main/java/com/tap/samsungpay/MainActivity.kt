@@ -32,8 +32,8 @@ class MainActivity : AppCompatActivity() {
                 )
                 .setMerchant(Merchant.Builder().setId("1124340").setGatwayId("tappayments").build())
                 .setTransactions(
-                    Transaction.Builder().setAmount(2.4).setCurrency("USD")
-                        .setShipping(Shipping("test", 1.0)).setTax(Tax("test", 1.0)).build()
+                    Transaction.Builder().setAmount(0.1).setCurrency("USD")
+                        .setShipping(Shipping("test", 0.1)).setTax(Tax("test", 0.1)).build()
                 )
                 .setScope(Scope.TAPTOKEN)
                 .setAcceptance(
@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onSuccess(token: String) {
+                    println("onSuccess the token>>"+token)
                     Toast.makeText(this@MainActivity, "TokenRecieceved", Toast.LENGTH_SHORT).show()
                 }
 
