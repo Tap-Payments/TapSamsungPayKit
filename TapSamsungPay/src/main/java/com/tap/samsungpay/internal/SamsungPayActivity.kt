@@ -127,12 +127,12 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                 // If EXTRA_ERROR_REASON is ERROR_SPAY_SETUP_NOT_COMPLETED,
 // Call activateSamsungPay().
 
-
-                Toast.makeText(
-                    this@SamsungPayActivity,
-                    "Samsung Pay on Failure",
-                    Toast.LENGTH_SHORT
-                ).show()
+//
+//                Toast.makeText(
+//                    this@SamsungPayActivity,
+//                    "Samsung Pay on Failure",
+//                    Toast.LENGTH_SHORT
+//                ).show()
             }
         })
     }
@@ -395,7 +395,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
                 println("on success extraPaymentData>"+extraPaymentData)
                 Toast.makeText(
-                    applicationContext,
+                    this@SamsungPayActivity,
                     "onSuccess() $paymentCredential ",
                     Toast.LENGTH_SHORT
                 ).show()

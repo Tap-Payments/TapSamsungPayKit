@@ -6,12 +6,12 @@
             android:name="com.tap.samsungpay.internal.SamsungPayActivity"
             android:persistent="true"
             android:exported="false"  android:theme="@style/Theme.AppCompat.Translucent"/>
-        <meta-data
-            android:name="debug_mode"
-            android:value="Y" />
-        <meta-data
-            android:name="spay_debug_api_key"
-            android:value="cc6e74a513d24020b2f25bcf37d3a4ed" />
+<!--        <meta-data-->
+<!--            android:name="debug_mode"-->
+<!--            android:value="N" />-->
+<!--        <meta-data-->
+<!--            android:name="spay_debug_api_key"-->
+<!--            android:value="cc6e74a513d24020b2f25bcf37d3a4ed" />-->
         <meta-data
             android:name="spay_sdk_api_level"
             android:value="2.17"/>
