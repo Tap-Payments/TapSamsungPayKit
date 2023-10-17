@@ -23,12 +23,12 @@ class Transaction(
 
 
     class Builder {
-        private var amount: Double? = null
+        private var amount: Double =0.0
         private var currency: String? = null
         private var shipping: Shipping? = null
         private var tax: Tax? = null
 
-        fun setAmount(amount: Double?) = apply {
+        fun setAmount(amount: Double) = apply {
             this.amount = amount
         }
 

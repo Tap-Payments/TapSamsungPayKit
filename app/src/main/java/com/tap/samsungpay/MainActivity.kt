@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         tapConfiguration =
             TapConfiguration.Builder()
                 .setOperator(
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
             })
 
-        setContentView(R.layout.activity_main)
+
 
 
     }

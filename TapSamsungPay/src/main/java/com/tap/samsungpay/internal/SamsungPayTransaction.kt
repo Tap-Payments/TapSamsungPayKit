@@ -25,8 +25,8 @@ class SamsungPayTransaction {
 
         customSheet.addControl(makeAmountControl())
         return CustomSheetPaymentInfo.Builder()
-            .setMerchantId("123456")
-            .setMerchantName("Sample Merchant")
+            .setMerchantId(TapConfiguration.getTapConfiguration()?.merchant?.id)
+            .setMerchantName(TapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
             .setOrderNumber("AMZ007MAR")
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
@@ -108,7 +108,6 @@ class SamsungPayTransaction {
             brandList.add(SpaySdk.Brand.MASTERCARD)
             brandList.add(SpaySdk.Brand.AMERICANEXPRESS)
             brandList.add(SpaySdk.Brand.DISCOVER)
-
             return brandList
         }
 
