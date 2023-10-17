@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <PreferenceCategory
+        app:title="@string/operation">
+
+        <EditTextPreference
+            app:key="publicKey"
+            app:defaultValue="pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
+            app:title="Public Key"
+            app:useSimpleSummaryProvider="true"/>
+
+        <EditTextPreference
+            app:key="hashKey"
+            app:defaultValue="test"
+            app:title="Hash String"
+            app:useSimpleSummaryProvider="true"/>
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory  app:title="@string/scope_title">
+
+        <DropDownPreference
+            app:key="scopeKey"
+            app:entries="@array/ScopeList"
+            app:entryValues="@array/ScopeList"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/acceptance">
+
+
+        <MultiSelectListPreference
+            app:key="supportedFundSourceKey"
+            app:title="@string/supportedFundSource"
+            app:entries="@array/SupportedFundSource"
+            app:entryValues="@array/SupportedFundSource"
+
+            />
+
+
+
+        <MultiSelectListPreference
+            app:key="supportedPaymentAuthenticationKey"
+            app:title="@string/supportedPaymentAuthentications"
+            app:entries="@array/SupportedPaymentAuthentication"
+            app:entryValues="@array/SupportedPaymentAuthentication"
+
+            />
+
+
+
+        <MultiSelectListPreference
+            app:key="selectedBrandsKey"
+            app:title="@string/supported_scheme"
+            app:entries="@array/SupportedSchemes"
+            app:entryValues="@array/SupportedSchemes"
+            />
+
+    </PreferenceCategory>
+
+
+
+
+
+
+    <PreferenceCategory
+        app:title="@string/Transdetails">
+
+
+        <EditTextPreference
+            app:key="amountKey"
+            app:defaultValue=""
+            app:title="@string/amount"
+            app:useSimpleSummaryProvider="true"/>
+        <DropDownPreference
+            app:key="selectedCurrencyKey"
+            app:entries="@array/currencies"
+            app:entryValues="@array/currencies"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"/>
+
+        <EditTextPreference
+            app:key="shipNameKey"
+            app:defaultValue=""
+            app:title="@string/ship_name"
+            app:useSimpleSummaryProvider="true"/>
+
+        <EditTextPreference
+            app:key="taxNameKey"
+            app:defaultValue=""
+            app:title="@string/tax_name"
+            app:useSimpleSummaryProvider="true"/>
+
+
+    </PreferenceCategory>
+
+
+
+
+
+    <PreferenceCategory
+        app:title="@string/merchant_details">
+
+        <EditTextPreference
+            app:key="gatewayIdKey"
+            app:defaultValue="tappayments"
+            app:title="@string/gateway_Id"
+            app:useSimpleSummaryProvider="true"/>
+
+        <EditTextPreference
+            app:key="merchantIdKey"
+            app:defaultValue="1124340"
+            app:title="@string/merchant_id"
+            app:useSimpleSummaryProvider="true"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/fields">
+        <CheckBoxPreference
+            app:key="shippingEnableKey"
+            app:title="Shipping"
+            android:defaultValue="true"
+            />
+
+        <CheckBoxPreference
+            app:key="billingEnableKey"
+            app:title="Billing"
+            android:defaultValue="true"
+            />
+
+
+
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="@string/interface_">
+
+        <DropDownPreference
+            app:key="selectedlangKey"
+            app:title="@string/choose_language"
+            app:entries="@array/Lanugages"
+            app:entryValues="@array/LanugagesValues"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"/>
+
+        <DropDownPreference
+            app:key="selectedthemeKey"
+            app:title="@string/choose_theme"
+            app:entries="@array/Theme"
+            app:entryValues="@array/Theme"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"/>
+
+        <DropDownPreference
+            app:key="selectedcardedgeKey"
+            app:title="Card Edges"
+
+            app:entries="@array/Edges"
+            app:entryValues="@array/Edges"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"/>
+
+
+
+
+
+
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory
+        app:title="@string/KeysFor">
+
+        <EditTextPreference
+            app:key="sandboxKey"
+            app:defaultValue="sk_test_kovrMB0mupFJXfNZWx6Etg5y"
+            app:title="@string/sandbox_key"
+            app:useSimpleSummaryProvider="true"/>
+
+
+        <EditTextPreference
+            app:key="productionKey"
+            app:defaultValue="sk_test_kovrMB0mupFJXfNZWx6Etg5y"
+
+            app:title="@string/production_key"
+            app:useSimpleSummaryProvider="true"/>
+
+
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory
+        app:title="Details">
+
+        <EditTextPreference
+            app:key="packageKey"
+            app:defaultValue="company.tap.samsungpay"
+            app:title="@string/package_name"
+            app:useSimpleSummaryProvider="true"/>
+        <DropDownPreference
+            app:key="deviceTypeKey"
+            app:title="@string/device_type"
+            app:entries="@array/deviceTypeList"
+            app:entryValues="@array/deviceTypeList"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"/>
+
+
+
+    </PreferenceCategory>
+
+    <Preference
+        app:key="dialog_preference"
+        android:title="Done"
+        app:summary="Tap to show Button" />
+
+</PreferenceScreen>

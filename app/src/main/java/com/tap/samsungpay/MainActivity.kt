@@ -3,6 +3,8 @@ package com.tap.samsungpay
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.chillibits.simplesettings.tool.getPrefBooleanValue
+import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.tap.samsungpay.internal.api.Shipping
 import com.tap.samsungpay.internal.api.Tax
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
@@ -26,11 +28,11 @@ class MainActivity : AppCompatActivity() {
             TapConfiguration.Builder()
                 .setOperator(
                     Operator.Builder()
-                        .setPublicKey("pk_test_Vlk842B1EA7tDN5QbrfGjYzh")
-                        .setHashString("test")
+                        .setPublicKey(getPrefStringValue("publicKey","pk_test_Vlk842B1EA7tDN5QbrfGjYzh"))
+                        .setHashString(getPrefStringValue("hashKey","test"))
                         .build()
                 )
-                .setMerchant(Merchant.Builder().setId("1124340").setGatwayId("tappayments").build())
+                .setMerchant(Merchant.Builder().setId(getPrefStringValue("merchantIdKey","1124340")).setGatwayId(getPrefStringValue("gatewayIdKey","tappayments")).build())
                 .setTransactions(
                     Transaction.Builder().setAmount(0.1).setCurrency("USD")
                         .setShipping(Shipping("test", 0.1)).setTax(Tax("test", 0.1)).build()
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                         supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
                     )
                 )
-                .setFields(Fields(shipping = true, billing = true))
+                .setFields(Fields(shipping = getPrefBooleanValue("shippingEnableKey",true), billing = getPrefBooleanValue("billingEnableKey",true)))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
                     TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.DARK)
@@ -54,8 +56,8 @@ class MainActivity : AppCompatActivity() {
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
                         .setProductionLiveKey("sk_test_kovrMB0mupFJXfNZWx6Etg5y").build()
                 )
-                .setPackageName("company.tap.samsungpay")
-                .setDeviceType("Android Native")
+                .setPackageName(getPrefStringValue("packageKey","company.tap.samsungpay"))
+                .setDeviceType(getPrefStringValue("deviceTypeKey","Android Native"))
                 .build()
 
         TapConfiguration.configureSamsungPayWithTapConfiguration(

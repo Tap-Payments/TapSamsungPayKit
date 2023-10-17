@@ -1,4 +1,91 @@
 <resources>
     <string name="app_name">Samsung Pay Demo</string>
     <string name="samsung_pay">Samsung Pay</string>
+    <string name="gateway_Id">Gateway Id</string>
+    <string name="merchant_id">Merchant Id</string>
+    <string name="Transdetails">Transactions Details</string>
+    <string name="tax_name">Tax Name</string>
+    <string name="ship_name">Ship Name</string>
+    <string name="package_name">Package Name</string>
+    <string name="device_type">Device Type</string>
+    <string name="production_key">Production Key</string>
+    <string name="sandbox_key">SandBox Key</string>
+    <string name="operation">Operation</string>
+    <string name="scope_title">Scope</string>
+    <string name="acceptance">Acceptance</string>
+    <string name="supportedFundSource">Supported Fund Source</string>
+    <string name="supportedPaymentAuthentications">supportedPaymentAuthentications</string>
+    <string name="supported_scheme">Supported scheme</string>
+    <string name="amount">Amount</string>
+    <string name="choose_language">Choose Language</string>
+    <string name="KeysFor">Keys</string>
+    <string name="interface_">Interface</string>
+    <string name="fields">FieldVisibility</string>
+    <string name="merchant_details">Merchant Details</string>
+    <string name="choose_theme">Choose Theme</string>
+
+    <string-array name="ScopeList">
+        <item>Token</item>
+        <item>SamsungPayToken</item>
+    </string-array>
+
+    <string-array name="ScopeList_default_values">
+        <item>1</item>
+    </string-array>
+
+    <string-array name="SupportedFundSource">
+        <item>CREDIT</item>
+        <item>DEBIT</item>
+    </string-array>
+
+
+    <string-array name="SupportedFundSourceValues">
+        <item>1</item>
+    </string-array>
+
+    <string-array name="SupportedPaymentAuthentication">
+        <item>3DS</item>
+    </string-array>
+
+    <string-array name="SupportedPaymentAuthenticationValues">
+        <item>1</item>
+    </string-array>
+
+    <string-array name="SupportedSchemes">
+        <item>SAMSUNG_PAY</item>
+
+    </string-array>
+
+    <string-array name="Lanugages">
+        <item>English</item>
+        <item>Arabic</item>
+    </string-array>
+    <string-array name="LanugagesValues">
+        <item>en</item>
+        <item>ar</item>
+    </string-array>
+
+    <string-array name="Theme">
+        <item>light</item>
+        <item>dark</item>
+    </string-array>
+
+    <string-array name="Edges">
+        <item>flat</item>
+        <item>curved</item>
+    </string-array>
+    <string-array name="deviceTypeList">
+        <item>Android Native</item>
+
+    </string-array>
+
+
+    <string-array name="currencies">
+        <item>USD</item>
+        <item>KWD</item>
+        <item>AED</item>
+        <item>SAR</item>
+        <item>BHD</item>
+
+    </string-array>
 </resources>
