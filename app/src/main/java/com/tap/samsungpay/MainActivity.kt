@@ -1,8 +1,13 @@
 package com.tap.samsungpay
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.Preference
+import com.chillibits.simplesettings.core.SimpleSettings
+import com.chillibits.simplesettings.core.SimpleSettingsConfig
 import com.chillibits.simplesettings.tool.getPrefBooleanValue
 import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.tap.samsungpay.internal.api.Shipping
@@ -18,13 +23,14 @@ import company.tap.tapcardformkit.open.builder.AuthKey
 import company.tap.tapcardvalidator_android.CardBrand
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallback {
 
     lateinit var tapConfiguration: TapConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         tapConfiguration =
             TapConfiguration.Builder()
                 .setOperator(
@@ -59,31 +65,32 @@ class MainActivity : AppCompatActivity() {
                 )
                 .setPackageName(getPrefStringValue("packageKey","company.tap.samsungpay"))
                 .setDeviceType(getPrefStringValue("deviceTypeKey","Android Native"))
-                .build()
+                .build()!!
+
+
+
 
         TapConfiguration.configureSamsungPayWithTapConfiguration(
             tapConfiguration,
             this,
             object : SDKDelegate {
                 override fun onError(error: String?) {
-                //    Toast.makeText(this@MainActivity, "$error", Toast.LENGTH_SHORT).show()
+                    //    Toast.makeText(this@MainActivity, "$error", Toast.LENGTH_SHORT).show()
 
                 }
 
                 override fun onSuccess(token: String) {
                     println("onSuccess the token>>"+token)
                     Toast.makeText(this@MainActivity, "TokenRecieceved", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
 
                 override fun onCancel() {
-                //    Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+                    //    Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
 
                 }
 
             })
-
-
-
 
     }
 
@@ -98,6 +105,17 @@ class MainActivity : AppCompatActivity() {
             middleName = "middlename",
             lastName = "lastname"
         )
+
+    override fun onPreferenceClick(context: Context, key: String): Preference.OnPreferenceClickListener? {
+        return when(key) {
+            "dialog_preference" -> Preference.OnPreferenceClickListener {
+
+                true
+            }
+
+            else -> super.onPreferenceClick(context, key)
+        }
+    }
 
 
 }

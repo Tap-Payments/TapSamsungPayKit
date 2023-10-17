@@ -122,22 +122,28 @@ class TapConfiguration private constructor(
         }
 
 
-        fun build(): TapConfiguration {
-            return TapConfiguration(
-                operator,
-                environment,
-                scope,
-                transaction!!,
-                merchant!!,
-                tapCustomer,
-                acceptance,
-                fields!!,
-                addOns,
-                tapInterface,
-                authTokenn,
-                packageName,
-                typeDevice
-            )
+        fun build(): TapConfiguration? {
+            return transaction?.let {
+                merchant?.let { it1 ->
+                    fields?.let { it2 ->
+                        TapConfiguration(
+                            operator,
+                            environment,
+                            scope,
+                            it,
+                            it1,
+                            tapCustomer,
+                            acceptance,
+                            it2,
+                            addOns,
+                            tapInterface,
+                            authTokenn,
+                            packageName,
+                            typeDevice
+                        )
+                    }
+                }
+            }
         }
     }
 

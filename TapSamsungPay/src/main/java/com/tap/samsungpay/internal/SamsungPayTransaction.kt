@@ -16,17 +16,18 @@ private const val PRODUCT_TAX_ID = "productTaxId"
 private const val PRODUCT_SHIPPING_ID = "productShippingId"
 
 class SamsungPayTransaction {
-
+    val tapConfiguration = TapConfiguration
     fun makeTransactionDetailsWithSheet(): CustomSheetPaymentInfo? {
         val brandList = brandList
 
         val extraPaymentInfo = Bundle()
         val customSheet = CustomSheet()
 
+        println("tapConfiguration>>>"+tapConfiguration.tapConfigurationS)
         customSheet.addControl(makeAmountControl())
         return CustomSheetPaymentInfo.Builder()
-            .setMerchantId(TapConfiguration.getTapConfiguration()?.merchant?.id)
-            .setMerchantName(TapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
+            .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.id)
+            .setMerchantName(tapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
             .setOrderNumber("AMZ007MAR")
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
@@ -44,11 +45,14 @@ class SamsungPayTransaction {
         /**
          * amountBox from  integration guide
          */
-        val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, "USD")
+        val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.tapConfigurationS?.transaction?.currency)
         amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
         amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax", 0.1, "")
         amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping", 0.1, "")
-        amountBoxControl.setAmountTotal(0.1, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
+        tapConfiguration.tapConfigurationS?.transaction?.amount?.let {
+            amountBoxControl.setAmountTotal(
+                it, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
+        }
         return amountBoxControl
 
 //        with(TapConfiguration.getTapConfiguration()) {

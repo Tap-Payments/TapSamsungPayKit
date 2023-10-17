@@ -115,7 +115,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                         // guide user to disconnect it.
                     }
                     SpaySdk.SPAY_NOT_SUPPORTED -> {
-                        startCallForCheckoutProfileAPi()
+                      //  startCallForCheckoutProfileAPi()
 
                         DataConfiguration.getListener()?.onError("SPAY_NOT_SUPPORTED")
                     }
@@ -138,6 +138,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
     }
 
     private fun startCallForCheckoutProfileAPi() {
+        println("TapConfiguration.getTapConfiguration()"+TapConfiguration.getTapConfiguration())
         with(TapConfiguration.getTapConfiguration()) {
             DataConfiguration.initalizeCheckoutProfileAPi(
                 context = this@SamsungPayActivity,

@@ -14,10 +14,11 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import com.chillibits.simplesettings.core.SimpleSettings
 import com.chillibits.simplesettings.core.SimpleSettingsConfig
+import com.tap.samsungpay.internal.builder.TapConfiguration
 
 class Settings : AppCompatActivity() , SimpleSettingsConfig.PreferenceCallback {
     lateinit var settings:FrameLayout
-
+    lateinit var tapConfiguration: TapConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -35,7 +36,9 @@ class Settings : AppCompatActivity() , SimpleSettingsConfig.PreferenceCallback {
         return when(key) {
             "dialog_preference" ->Preference.OnPreferenceClickListener {
                 val intent = Intent(this@Settings, MainActivity::class.java)
+                finish()
                 startActivity(intent)
+
                 true
             }
 
