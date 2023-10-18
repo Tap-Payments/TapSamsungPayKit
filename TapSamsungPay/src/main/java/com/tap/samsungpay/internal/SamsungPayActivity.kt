@@ -26,7 +26,7 @@ import com.tap.tapsamsungpay.R
 import company.tap.tapcardvalidator_android.CardBrand
 
 
-const val SERVICE_ID = "fff80d901c2849ba8f3641"
+// var SERVICE_ID = "fff80d901c2849ba8f3641"
 //const val SERVICE_ID = "e5369ab0cd5141a88dd821"
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
@@ -34,6 +34,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
     private lateinit var partnerInfo: PartnerInfo
     private lateinit var paymentManager: PaymentManager
     private lateinit var samsungPayButton: SamsungPayButton
+    private lateinit var SERVICE_ID:String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,8 +50,13 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
         /**
          * we need service ID for creating the partner info and service type
          */
+        SERVICE_ID = TapConfiguration.getTapConfiguration()?.serviceId ?:""
+        Log.e("serviceID",SERVICE_ID.toString())
         partnerInfo = PartnerInfo(SERVICE_ID, bundle)
         updateSamsungPayButton()
+        samsungPayButton.buttonSamsung.setOnClickListener {
+              startInAppPayWithCustomSheet()
+        }
 
     }
 
@@ -71,7 +77,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                         /**
                          * start Checkout transaction
                          */
-                        // startCallForCheckoutProfileAPi()
+                         startCallForCheckoutProfileAPi()
                         // Perform your operation. of inApp Payment
                         /**
                          * start In App Pay for for normal Transaction
@@ -80,7 +86,9 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                         /**
                          * start In App Pay for Custom Sheet
                          */
-                          startInAppPayWithCustomSheet()
+                        //  startInAppPayWithCustomSheet()
+                     //   samsungPayButton.stopShimmer();
+
                     }
                     SpaySdk.SPAY_NOT_READY -> {
 
@@ -400,6 +408,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                     "onSuccess() $paymentCredential ",
                     Toast.LENGTH_SHORT
                 ).show()
+
             }
 
             // This callback is received when the online payment transaction has failed.

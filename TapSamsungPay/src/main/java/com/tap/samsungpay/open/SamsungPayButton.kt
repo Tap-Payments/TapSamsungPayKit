@@ -75,6 +75,16 @@ class SamsungPayButton : LinearLayout {
            packageName
        )
     }
+//    fun getAssetFile(filename:String) : String {
+//        webview.loadUrl("file:///android_asset/folder_in_a_libary_project/$filename", null);
+//
+//        return resources.getIdentifier(
+//           filename,
+//           rawFolderRefrence,
+//           packageName
+//       )
+//        return  "file:///android_asset/$filename"
+//    }
 
     fun applyStyleToSamsungButton(samsungPayPaymentOption: PaymentOption?) {
 

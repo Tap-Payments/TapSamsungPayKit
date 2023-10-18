@@ -35,6 +35,7 @@ class TapConfiguration private constructor(
     val authToken: AuthKey?,
     val packageName: String?,
     val typeDevice: String?,
+    val serviceId:String?
 ) {
 
 
@@ -121,29 +122,29 @@ class TapConfiguration private constructor(
             this.typeDevice = deviceType
         }
 
+        var serviceId: String? = null
+        fun setServiceId(serviceId: String) = apply {
+            this.serviceId = serviceId
+        }
 
-        fun build(): TapConfiguration? {
-            return transaction?.let {
-                merchant?.let { it1 ->
-                    fields?.let { it2 ->
-                        TapConfiguration(
-                            operator,
-                            environment,
-                            scope,
-                            it,
-                            it1,
-                            tapCustomer,
-                            acceptance,
-                            it2,
-                            addOns,
-                            tapInterface,
-                            authTokenn,
-                            packageName,
-                            typeDevice
-                        )
-                    }
-                }
-            }
+
+
+        fun build(): TapConfiguration {
+            return TapConfiguration(
+                operator,
+                environment,
+                scope,
+                transaction!!,
+                merchant!!,
+                tapCustomer,
+                acceptance,
+                fields!!,
+                addOns,
+                tapInterface,
+                authTokenn,
+                packageName,
+                typeDevice,serviceId
+            )
         }
     }
 
@@ -160,7 +161,7 @@ class TapConfiguration private constructor(
     }
 
     companion object {
-        var tapConfigurationS: TapConfiguration? = null
+        private var tapConfigurationS: TapConfiguration? = null
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,

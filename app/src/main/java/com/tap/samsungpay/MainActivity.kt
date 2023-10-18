@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                 .setFields(Fields(shipping = getPrefBooleanValue("shippingEnableKey",true), billing = getPrefBooleanValue("billingEnableKey",true)))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
-                    TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.DARK)
+                    TapInterface(Language.EN.name, Edges.CURVED,ThemeMode.LIGHT)
 
                 ).setAuthToken(
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
@@ -65,10 +65,9 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                 )
                 .setPackageName(getPrefStringValue("packageKey","company.tap.samsungpay"))
                 .setDeviceType(getPrefStringValue("deviceTypeKey","Android Native"))
-                .build()!!
-
-
-
+            
+                .setServiceId("fff80d901c2849ba8f3641")
+                .build()
 
         TapConfiguration.configureSamsungPayWithTapConfiguration(
             tapConfiguration,
