@@ -4,5 +4,5 @@ import androidx.annotation.RestrictTo
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 sealed class APIViewEvent {
-    object CreateTokenEvent : APIViewEvent()
+    object CreateTokenEvent :   APIViewEvent()
 }
