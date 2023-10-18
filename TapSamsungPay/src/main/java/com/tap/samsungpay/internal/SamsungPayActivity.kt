@@ -51,6 +51,9 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
          */
         partnerInfo = PartnerInfo(SERVICE_ID, bundle)
         updateSamsungPayButton()
+        samsungPayButton.buttonSamsung.setOnClickListener {
+              startInAppPayWithCustomSheet()
+        }
 
     }
 
@@ -71,7 +74,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                         /**
                          * start Checkout transaction
                          */
-                        // startCallForCheckoutProfileAPi()
+                         startCallForCheckoutProfileAPi()
                         // Perform your operation. of inApp Payment
                         /**
                          * start In App Pay for for normal Transaction
@@ -80,7 +83,9 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                         /**
                          * start In App Pay for Custom Sheet
                          */
-                          startInAppPayWithCustomSheet()
+                        //  startInAppPayWithCustomSheet()
+                     //   samsungPayButton.stopShimmer();
+
                     }
                     SpaySdk.SPAY_NOT_READY -> {
 
@@ -399,6 +404,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                     "onSuccess() $paymentCredential ",
                     Toast.LENGTH_SHORT
                 ).show()
+
             }
 
             // This callback is received when the online payment transaction has failed.

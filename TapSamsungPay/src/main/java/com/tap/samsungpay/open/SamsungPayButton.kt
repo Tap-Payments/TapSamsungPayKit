@@ -50,15 +50,15 @@ class SamsungPayButton : LinearLayout {
     init {
         View.inflate(context, R.layout.samsung_pay_layout, this)
         with(TapConfiguration.getTapConfiguration()) {
-            when (this?.tapInterface?.theme) {
+            when (this?.tapInterface?.theme ?: ThemeMode.LIGHT) {
                 ThemeMode.LIGHT -> mShimmerViewContainer.setAnimation(
-                    getAssetFile("lottie_light")
+                    R.raw.lottie_light
 
 
                 )
                 ThemeMode.DARK -> {
                     mShimmerViewContainer.setAnimation(
-                       getAssetFile("lottie_dark")
+                       R.raw.lottie_dark
                     )
                 }
                 else -> {}
@@ -67,13 +67,16 @@ class SamsungPayButton : LinearLayout {
 
 
     }
-    fun getAssetFile(filename:String) :Int{
-       return resources.getIdentifier(
-           filename,
-           rawFolderRefrence,
-           packageName
-       )
-    }
+//    fun getAssetFile(filename:String) : String {
+//        webview.loadUrl("file:///android_asset/folder_in_a_libary_project/$filename", null);
+//
+//        return resources.getIdentifier(
+//           filename,
+//           rawFolderRefrence,
+//           packageName
+//       )
+//        return  "file:///android_asset/$filename"
+//    }
 
     fun applyStyleToSamsungButton(samsungPayPaymentOption: PaymentOption?) {
 
