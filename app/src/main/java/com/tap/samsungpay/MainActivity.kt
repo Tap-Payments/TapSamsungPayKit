@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 .setFields(Fields(shipping = true, billing = true))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
-                    TapInterface(Language.EN.name, Edges.CURVED,null)
+                    TapInterface(Language.EN.name, Edges.CURVED,ThemeMode.LIGHT)
 
                 ).setAuthToken(
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
@@ -56,6 +56,7 @@ class MainActivity : AppCompatActivity() {
                 )
                 .setPackageName("company.tap.samsungpay")
                 .setDeviceType("Android Native")
+                .setServiceId("fff80d901c2849ba8f3641")
                 .build()
 
         TapConfiguration.configureSamsungPayWithTapConfiguration(

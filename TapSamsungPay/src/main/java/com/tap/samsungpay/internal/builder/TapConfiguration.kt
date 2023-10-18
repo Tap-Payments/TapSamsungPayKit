@@ -35,6 +35,7 @@ class TapConfiguration private constructor(
     val authToken: AuthKey?,
     val packageName: String?,
     val typeDevice: String?,
+    val serviceId:String?
 ) {
 
 
@@ -121,6 +122,12 @@ class TapConfiguration private constructor(
             this.typeDevice = deviceType
         }
 
+        var serviceId: String? = null
+        fun setServiceId(serviceId: String) = apply {
+            this.serviceId = serviceId
+        }
+
+
 
         fun build(): TapConfiguration {
             return TapConfiguration(
@@ -136,7 +143,7 @@ class TapConfiguration private constructor(
                 tapInterface,
                 authTokenn,
                 packageName,
-                typeDevice
+                typeDevice,serviceId
             )
         }
     }
@@ -154,7 +161,7 @@ class TapConfiguration private constructor(
     }
 
     companion object {
-        var tapConfigurationS: TapConfiguration? = null
+        private var tapConfigurationS: TapConfiguration? = null
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,
