@@ -215,6 +215,11 @@
             app:entryValues="@array/deviceTypeList"
             app:defaultValue="1"
             app:useSimpleSummaryProvider="true"/>
+        <EditTextPreference
+            app:key="serviceIdKey"
+            app:defaultValue="fff80d901c2849ba8f3641"
+            app:title="@string/service_id"
+            app:useSimpleSummaryProvider="true"/>
 
 
 

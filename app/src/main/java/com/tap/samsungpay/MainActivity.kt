@@ -1,16 +1,17 @@
 package com.tap.samsungpay
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
-import com.chillibits.simplesettings.core.SimpleSettings
 import com.chillibits.simplesettings.core.SimpleSettingsConfig
 import com.chillibits.simplesettings.tool.getPrefBooleanValue
 import com.chillibits.simplesettings.tool.getPrefStringValue
+import com.chillibits.simplesettings.tool.getPrefs
 import com.tap.samsungpay.internal.api.Shipping
+import com.tap.samsungpay.internal.api.TapCurrency
 import com.tap.samsungpay.internal.api.Tax
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TapConfiguration
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         tapConfiguration =
             TapConfiguration.Builder()
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                 .setFields(Fields(shipping = getPrefBooleanValue("shippingEnableKey",true), billing = getPrefBooleanValue("billingEnableKey",true)))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
-                    TapInterface(Language.EN.name, Edges.CURVED,ThemeMode.DARK)
+                    TapInterface(getLanguageMode("selectedlangKey"), Edges.CURVED,getThemeMode("selectedthemeKey"))
 
                 ).setAuthToken(
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
@@ -66,7 +68,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                 .setPackageName(getPrefStringValue("packageKey","company.tap.samsungpay"))
                 .setDeviceType(getPrefStringValue("deviceTypeKey","Android Native"))
             
-                .setServiceId("fff80d901c2849ba8f3641")
+                .setServiceId(getPrefStringValue("serviceIdKey","fff80d901c2849ba8f3641"))
                 .build()
 
         TapConfiguration.configureSamsungPayWithTapConfiguration(
@@ -124,5 +126,20 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
         }
     }
 
+    fun getThemeMode(key: String): ThemeMode? {
+        val selecetdTheme: String = getPrefStringValue(key,ThemeMode.DARK.name)
 
-}
+        if(selecetdTheme == ThemeMode.DARK.name) return ThemeMode.DARK
+        else if (selecetdTheme == ThemeMode.LIGHT.name) return ThemeMode.LIGHT
+        else return ThemeMode.DARK
+    }
+    fun getLanguageMode(key: String): String {
+        val selectedlangKey: String = getPrefStringValue(key, Language.EN.name)
+
+        if (selectedlangKey == Language.EN.name) return Language.EN.name
+        else if (selectedlangKey == Language.AR.name) return Language.AR.name
+        else return Language.EN.name
+    }
+
+
+    }

@@ -8,6 +8,7 @@
     <string name="ship_name">Ship Name</string>
     <string name="package_name">Package Name</string>
     <string name="device_type">Device Type</string>
+    <string name="service_id">Service Id</string>
     <string name="production_key">Production Key</string>
     <string name="sandbox_key">SandBox Key</string>
     <string name="operation">Operation</string>
