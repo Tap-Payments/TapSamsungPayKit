@@ -22,6 +22,7 @@ import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.tapsamsungpay.R
 
+
 const val packageName = "com.tap.tapsamsungpay"
 const val rawFolderRefrence = "raw"
 
@@ -51,14 +52,14 @@ class SamsungPayButton : LinearLayout {
         View.inflate(context, R.layout.samsung_pay_layout, this)
         with(TapConfiguration.getTapConfiguration()) {
             when (this?.tapInterface?.theme) {
-                ThemeMode.LIGHT -> mShimmerViewContainer.setAnimation(
-                    getAssetFile("lottie_light")
+                ThemeMode.LIGHT -> mShimmerViewContainer.setAnimation(R.raw.lottie_light
+
 
 
                 )
                 ThemeMode.DARK -> {
                     mShimmerViewContainer.setAnimation(
-                       getAssetFile("lottie_dark")
+                      R.raw.lottie_dark
                     )
                 }
                 else -> {}
@@ -68,7 +69,7 @@ class SamsungPayButton : LinearLayout {
 
     }
     fun getAssetFile(filename:String) :Int{
-       return resources.getIdentifier(
+       return context.resources.getIdentifier(
            filename,
            rawFolderRefrence,
            packageName
