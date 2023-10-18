@@ -43,7 +43,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation files('libs/SamsungPaySDK_2.18.00_release.jar')
    // api 'com.github.Tap-Payments:TapUIKit-Android:2.0.8'
-    implementation project(path: ':Tapshimmer')
+
     implementation 'com.github.Tap-Payments:TapCardValidator-Android:2.1.15'
    
 

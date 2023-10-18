@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                 override fun onSamsungPayToken(token: String) {
                     println("onSamsungPayToken the token>>"+token)
                     Toast.makeText(this@MainActivity, "onSamsungPayToken", Toast.LENGTH_SHORT).show()
-                    finish()
+
                 }
 
                 override fun onReady(readyStatus: String) {

@@ -20,6 +20,7 @@ import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
 import com.tap.samsungpay.open.DataConfiguration
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
+import com.tap.samsungpay.open.SDKDelegate
 import com.tap.samsungpay.open.SamsungPayButton
 import com.tap.samsungpay.open.enums.ThemeMode.*
 import com.tap.tapsamsungpay.R
@@ -403,11 +404,12 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                 println("on success paymentCredential>"+paymentCredential)
 
                 println("on success extraPaymentData>"+extraPaymentData)
-                Toast.makeText(
+                DataConfiguration.getListener()?.onSamsungPayToken(paymentCredential)
+               /* Toast.makeText(
                     this@SamsungPayActivity,
                     "onSamsungPayToken() $paymentCredential ",
                     Toast.LENGTH_SHORT
-                ).show()
+                ).show()*/
 
             }
 
