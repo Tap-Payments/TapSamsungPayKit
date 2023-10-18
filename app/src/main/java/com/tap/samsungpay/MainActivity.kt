@@ -78,10 +78,18 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
 
                 }
 
-                override fun onSuccess(token: String) {
-                    println("onSuccess the token>>"+token)
-                    Toast.makeText(this@MainActivity, "TokenRecieceved", Toast.LENGTH_SHORT).show()
+                override fun onSamsungPayToken(token: String) {
+                    println("onSamsungPayToken the token>>"+token)
+                    Toast.makeText(this@MainActivity, "onSamsungPayToken", Toast.LENGTH_SHORT).show()
                     finish()
+                }
+
+                override fun onReady(readyStatus: String) {
+                    println("onReady>>"+readyStatus)
+                }
+
+                override fun onTapToken(token: String) {
+                    println("onTapToken the token>>"+token)
                 }
 
                 override fun onCancel() {

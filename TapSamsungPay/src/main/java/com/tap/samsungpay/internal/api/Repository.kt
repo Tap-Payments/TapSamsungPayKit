@@ -2,7 +2,6 @@ package com.tap.samsungpay.internal.api
 
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.annotation.RestrictTo
@@ -21,12 +20,10 @@ import company.tap.tapcardformkit.internal.api.enums.TransactionMode
 import company.tap.tapcardformkit.internal.api.models.*
 import company.tap.tapcardformkit.internal.api.responses.*
 import company.tap.tapcardformkit.open.*
-import company.tap.tapnetworkkit.connection.NetworkApp
 import company.tap.tapnetworkkit.controller.NetworkController
 import company.tap.tapnetworkkit.enums.TapMethodType
 import company.tap.tapnetworkkit.exception.GoSellError
 import company.tap.tapnetworkkit.interfaces.APIRequestCallback
-import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.subjects.BehaviorSubject
 import retrofit2.Response
 import java.math.BigDecimal
@@ -190,7 +187,7 @@ class Repository : APIRequestCallback {
                             PaymentDataSourceImpl.setMerchantData(merchantDataModel)
                             PaymentDataSourceImpl.setInitResponse(initResponseModel)
                             PaymentDataSourceImpl.setTokenConfig(initResponseModel?.session)
-                            DataConfiguration.getListener()?.onSuccess("checkout profile success")
+                            DataConfiguration.getListener()?.onReady("checkout profile success")
                             DataConfiguration.getInternalCheckoutDelegate()?.onSuccess()
 
 

@@ -405,7 +405,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                 println("on success extraPaymentData>"+extraPaymentData)
                 Toast.makeText(
                     this@SamsungPayActivity,
-                    "onSuccess() $paymentCredential ",
+                    "onSamsungPayToken() $paymentCredential ",
                     Toast.LENGTH_SHORT
                 ).show()
 
