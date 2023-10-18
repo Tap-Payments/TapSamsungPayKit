@@ -5,6 +5,7 @@ plugins {
 
 android {
     namespace 'com.tap.samsungpay'
+
     compileSdk 33
 
     defaultConfig {
