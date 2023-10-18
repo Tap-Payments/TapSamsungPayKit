@@ -6,7 +6,7 @@ A standalone kit for handling SamsungPay
 [![SDK Version](https://img.shields.io/badge/minSdkVersion-21-blue.svg)](https://stuff.mit.edu/afs/sipb/project/android/docs/reference/packages.html)
 [![SDK Version](https://img.shields.io/badge/targetSdkVersion-30-informational.svg)](https://stuff.mit.edu/afs/sipb/project/android/docs/reference/packages.html)
 
-https://user-images.githubusercontent.com/57221514/217261036-33b3367c-2d60-49f2-987e-776bc0b7e660.mov
+
 
 # Table of Contents
 ---
