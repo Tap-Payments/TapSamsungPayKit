@@ -60,7 +60,7 @@ class TapConfiguration private constructor(
         }
 
 
-        var scope: Scope? = null
+        var scope: Scope? =null
         fun setScope(scope: Scope) = apply {
             this.scope = scope
         }

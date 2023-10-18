@@ -5,6 +5,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.samsung.android.sdk.samsungpay.v2.PartnerInfo
 import com.samsung.android.sdk.samsungpay.v2.SamsungPay
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
@@ -22,9 +24,11 @@ import com.tap.samsungpay.open.DataConfiguration
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
 import com.tap.samsungpay.open.SDKDelegate
 import com.tap.samsungpay.open.SamsungPayButton
+import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.open.enums.ThemeMode.*
 import com.tap.tapsamsungpay.R
 import company.tap.tapcardvalidator_android.CardBrand
+import org.json.JSONException
 
 
 // var SERVICE_ID = "fff80d901c2849ba8f3641"
@@ -402,10 +406,16 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                  */
                 println("on success response>"+response)
                 println("on success paymentCredential>"+paymentCredential)
+                println("on success TapConfiguration.getTapConfiguration()?.scope>"+TapConfiguration.getTapConfiguration()?.scope)
 
                // println("on success extraPaymentData>"+extraPaymentData)
-                DataConfiguration.getListener()?.onSamsungPayToken(paymentCredential)
-                finish()
+                if(TapConfiguration.getTapConfiguration()?.scope==Scope.SAMSUNG_TOKEN) {
+                    DataConfiguration.getListener()?.onSamsungPayToken(paymentCredential)
+                    finish()
+                }else {
+                    //Todo
+                    handleSuccessCallBack(paymentCredential)
+                }
                /* Toast.makeText(
                     this@SamsungPayActivity,
                     "onSamsungPayToken() $paymentCredential ",
@@ -432,6 +442,13 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
         val samsungPayPaymentOption =
             PaymentDataSourceImpl.paymentOptionsResponse?.paymentOptions?.firstOrNull { it.brand == CardBrand.SAMSUNG_PAY }
         samsungPayButton.applyStyleToSamsungButton(samsungPayPaymentOption)
+
+    }
+
+    private fun handleSuccessCallBack(paymentData: String) {
+        // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
+
+
 
     }
 

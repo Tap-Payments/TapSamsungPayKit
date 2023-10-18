@@ -26,8 +26,8 @@
     <string name="choose_theme">Choose Theme</string>
 
     <string-array name="ScopeList">
-        <item>Token</item>
         <item>SamsungPayToken</item>
+        <item>Token</item>
     </string-array>
 
     <string-array name="ScopeList_default_values">

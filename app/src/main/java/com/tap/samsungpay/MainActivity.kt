@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                     Transaction.Builder().setAmount(0.1).setCurrency("USD")
                         .setShipping(Shipping("test", 0.1)).setTax(Tax("test", 0.1)).build()
                 )
-                .setScope(Scope.TAPTOKEN)
+                .setScope(getScope("scopeKey"))
                 .setAcceptance(
                     Acceptance(
                         supportedFundSource = SupportedFundSource.DEBIT,
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                 )
                 .setPackageName(getPrefStringValue("packageKey","company.tap.samsungpay"))
                 .setDeviceType(getPrefStringValue("deviceTypeKey","Android Native"))
-            
+
                 .setServiceId(getPrefStringValue("serviceIdKey","fff80d901c2849ba8f3641"))
                 .build()
 
@@ -139,6 +139,14 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
         if (selectedlangKey == Language.EN.name) return Language.EN.name
         else if (selectedlangKey == Language.AR.name) return Language.AR.name
         else return Language.EN.name
+    }
+
+    fun getScope(key: String): Scope {
+        val scopeKey: String = getPrefStringValue(key,Scope.SAMSUNG_TOKEN.name)
+
+        if(scopeKey == Scope.SAMSUNG_TOKEN.name) return Scope.SAMSUNG_TOKEN
+        else if (scopeKey == Scope.TAPTOKEN.name) return Scope.TAPTOKEN
+        else return Scope.SAMSUNG_TOKEN
     }
 
 
