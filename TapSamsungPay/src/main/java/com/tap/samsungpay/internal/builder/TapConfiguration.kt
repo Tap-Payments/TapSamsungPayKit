@@ -161,7 +161,7 @@ class TapConfiguration private constructor(
     }
 
     companion object {
-        private var tapConfigurationS: TapConfiguration? = null
+        var tapConfigurationS: TapConfiguration? = null
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,

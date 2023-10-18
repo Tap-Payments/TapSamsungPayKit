@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                 .setFields(Fields(shipping = getPrefBooleanValue("shippingEnableKey",true), billing = getPrefBooleanValue("billingEnableKey",true)))
                 .setTapCustomer(getTapCustomer())
                 .setTapInterface(
-                    TapInterface(Language.EN.name, Edges.CURVED,ThemeMode.LIGHT)
+                    TapInterface(Language.EN.name, Edges.CURVED,ThemeMode.DARK)
 
                 ).setAuthToken(
                     AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
