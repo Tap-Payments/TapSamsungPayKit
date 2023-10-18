@@ -327,11 +327,11 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             var mcCount = 0
             var amexCount = 0
             var dsCount = 0
-            var brandStrings = "- Card Info : "
+             var brandStrings = "- Card Info : "
             if (cardResponse != null) {
-                var brand: SpaySdk.Brand?
+                 var brand: SpaySdk.Brand?
                 for (i in cardResponse.indices) {
-                    brand = cardResponse[i].brand
+                     brand = cardResponse[i].brand
                     when (brand) {
                         SpaySdk.Brand.AMERICANEXPRESS -> amexCount++
                         SpaySdk.Brand.MASTERCARD -> mcCount++
