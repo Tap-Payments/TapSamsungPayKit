@@ -24,7 +24,7 @@ class SamsungPayTransaction {
         val customSheet = CustomSheet()
 
         println("tapConfiguration>>>"+tapConfiguration.tapConfigurationS)
-        println("extraPaymentInfo>>>"+extraPaymentInfo)
+      //  println("extraPaymentInfo>>>"+extraPaymentInfo)
         customSheet.addControl(makeAmountControl())
         return CustomSheetPaymentInfo.Builder()
             .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.id)
@@ -47,9 +47,9 @@ class SamsungPayTransaction {
          * amountBox from  integration guide
          */
         val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.tapConfigurationS?.transaction?.currency)
-        amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
-        amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax", 0.1, "")
-        amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping", 0.1, "")
+         amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
+         amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax", 0.1, "")
+         amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping", 0.1, "")
         tapConfiguration.tapConfigurationS?.transaction?.amount?.let {
             amountBoxControl.setAmountTotal(
                 it, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
