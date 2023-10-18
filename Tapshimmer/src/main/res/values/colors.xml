@@ -2,5 +2,5 @@
 <resources>
 
     <color name="background">#dddddd</color>
-
+    <color name="white">#ffffff</color>
 </resources>

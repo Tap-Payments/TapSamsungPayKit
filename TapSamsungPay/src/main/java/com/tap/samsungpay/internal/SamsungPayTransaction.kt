@@ -24,6 +24,7 @@ class SamsungPayTransaction {
         val customSheet = CustomSheet()
 
         println("tapConfiguration>>>"+tapConfiguration.tapConfigurationS)
+        println("extraPaymentInfo>>>"+extraPaymentInfo)
         customSheet.addControl(makeAmountControl())
         return CustomSheetPaymentInfo.Builder()
             .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.id)
@@ -103,9 +104,9 @@ class SamsungPayTransaction {
 
     private val brandList: ArrayList<SpaySdk.Brand>
         get() {
-            with(TapConfiguration.getTapConfiguration()) {
+          /*  with(TapConfiguration.getTapConfiguration()) {
             var tapBrands = this?.acceptance?.supportedBrands?.map { it.rawValue.replace("_","") }
-            }
+            }*/
 
             val brandList = ArrayList<SpaySdk.Brand>()
             brandList.add(SpaySdk.Brand.VISA)
