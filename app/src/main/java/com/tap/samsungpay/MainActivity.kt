@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
             this,
             object : SDKDelegate {
                 override fun onError(error: String?) {
-                    //    Toast.makeText(this@MainActivity, "$error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "$error", Toast.LENGTH_SHORT).show()
 
                 }
 

@@ -403,7 +403,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                 println("on success response>"+response)
                 println("on success paymentCredential>"+paymentCredential)
 
-                println("on success extraPaymentData>"+extraPaymentData)
+               // println("on success extraPaymentData>"+extraPaymentData)
                 DataConfiguration.getListener()?.onSamsungPayToken(paymentCredential)
                 finish()
                /* Toast.makeText(
@@ -417,7 +417,8 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             // This callback is received when the online payment transaction has failed.
             override fun onFailure(errorCode: Int, errorData: Bundle?) {
                 println("errorData>>>" + errorData)
-                Toast.makeText(applicationContext, "onFailure() ", Toast.LENGTH_SHORT).show()
+                DataConfiguration.getListener()?.onError("Failed to show"+errorData.toString())
+               // Toast.makeText(applicationContext, "onFailure() ", Toast.LENGTH_SHORT).show()
             }
         }
 
