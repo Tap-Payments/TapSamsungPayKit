@@ -1,3 +1,11 @@
+/**
+ *   Created by AhlaamK on 10/19/23, 10:56 AM
+ *   Copyright (c) 2023 .
+ *   Tap Payments All rights reserved.
+ *
+ *
+ **/
+
 package com.tap.samsungpay.internal
 
 import android.os.Bundle
@@ -6,7 +14,7 @@ import android.widget.Toast
 import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
-import com.google.gson.JsonObject
+import com.google.gson.JsonElement
 import com.samsung.android.sdk.samsungpay.v2.PartnerInfo
 import com.samsung.android.sdk.samsungpay.v2.SamsungPay
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
@@ -18,17 +26,20 @@ import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager
 import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager.CardInfoListener
 import com.samsung.android.sdk.samsungpay.v2.payment.PaymentManager.TransactionInfoListener
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
+import com.tap.samsungpay.internal.api.Repository
+import com.tap.samsungpay.internal.api.requests.CreateTokenSamsungPayRequest
+import com.tap.samsungpay.internal.api.requests.TokenData
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
 import com.tap.samsungpay.open.DataConfiguration
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
-import com.tap.samsungpay.open.SDKDelegate
 import com.tap.samsungpay.open.SamsungPayButton
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.open.enums.ThemeMode.*
 import com.tap.tapsamsungpay.R
 import company.tap.tapcardvalidator_android.CardBrand
 import org.json.JSONException
+import org.json.JSONObject
 
 
 // var SERVICE_ID = "fff80d901c2849ba8f3641"
@@ -73,12 +84,8 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             override fun onSuccess(status: Int, bundle: Bundle) {
                 when (status) {
                     SpaySdk.SPAY_READY -> {
-                        DataConfiguration.getListener()?.onError("SPAY_READY")
-                        Toast.makeText(
-                            this@SamsungPayActivity,
-                            "Samsung Pay Ready",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        DataConfiguration.getListener()?.onReady("SPAY_READY")
+
                         /**
                          * start Checkout transaction
                          */
@@ -119,11 +126,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                     SpaySdk.SPAY_NOT_ALLOWED_TEMPORALLY -> {
                         DataConfiguration.getListener()?.onError("SPAY_NOT_ALLOWED_TEMPORALLY")
 
-                        Toast.makeText(
-                            this@SamsungPayActivity,
-                            "Samsung Pay SPAY_NOT_ALLOWED_TEMPORALLY",
-                            Toast.LENGTH_SHORT
-                        ).show()
+
                         // If EXTRA_ERROR_REASON is ERROR_SPAY_CONNECTED_WITH_EXTERNAL_DISPLAY,
                         // guide user to disconnect it.
                     }
@@ -355,12 +358,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                 }
             }
             brandStrings += "  VI=$visaCount, MC=$mcCount, AX=$amexCount, DS=$dsCount"
-            Toast.makeText(
-                this@SamsungPayActivity,
-                "cardInfoListener onResult$brandStrings",
-                Toast.LENGTH_LONG
-            )
-                .show()
+
         }
 
         /*
@@ -416,11 +414,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                     //Todo
                     handleSuccessCallBack(paymentCredential)
                 }
-               /* Toast.makeText(
-                    this@SamsungPayActivity,
-                    "onSamsungPayToken() $paymentCredential ",
-                    Toast.LENGTH_SHORT
-                ).show()*/
+
 
             }
 
@@ -428,7 +422,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             override fun onFailure(errorCode: Int, errorData: Bundle?) {
                 println("errorData>>>" + errorData)
                 DataConfiguration.getListener()?.onError("Failed to show"+errorData.toString())
-               // Toast.makeText(applicationContext, "onFailure() ", Toast.LENGTH_SHORT).show()
+
             }
         }
 
@@ -447,7 +441,35 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
     private fun handleSuccessCallBack(paymentData: String) {
         // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
+        try {
+            val paymentData = JSONObject(paymentData).getJSONObject("3DS")
+            println("paymentData$paymentData")
+            // If the gateway is set to "example", no payment information is returned - instead, the
+            // token will only consist of "examplePaymentMethodToken".
+          //  val tokenizationData = paymentData.getJSONObject("data")
+           // println("tokenizationData>>>$tokenizationData")
+            // final String tokenizationType = tokenizationData.getString("type");
+            val token = paymentData.getString("data")
 
+
+                // DataConfiguration.getListener()?.onGooglePayToken(token)
+                //  System.out.println("token is"+token);
+                val gson = Gson()
+                val jsonToken = gson.fromJson(token, JsonElement::class.java)
+
+            println("jsonToken"+jsonToken)
+                /**
+                 * At this stage, Passing the googlePaylaod to Tap Backend TokenAPI call followed by chargeAPI.
+                 */
+                val createTokenSamsungPayRequest =
+                    CreateTokenSamsungPayRequest(
+                        TokenData(jsonToken),"samsungpay"
+                    )
+          Repository().getSPayTokenRequest(this,createTokenSamsungPayRequest)
+
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
 
 
     }

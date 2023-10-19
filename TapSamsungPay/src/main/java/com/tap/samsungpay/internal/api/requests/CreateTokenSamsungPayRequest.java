@@ -1,33 +1,38 @@
+/**
+ *   Created by AhlaamK on 10/19/23, 10:56 AM
+ *   Copyright (c) 2023 .
+ *   Tap Payments All rights reserved.
+ *
+ **/
+
 package com.tap.samsungpay.internal.api.requests;
 
-import androidx.annotation.RestrictTo;
 
-import com.google.gson.JsonObject;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-@RestrictTo(RestrictTo.Scope.LIBRARY)
-public final class CreateTokenGPayRequest implements Serializable {
+public class CreateTokenSamsungPayRequest implements Serializable {
     @SerializedName("type")
     @Expose
     private String type;
 
     @SerializedName("token_data")
     @Expose
-    private JsonObject tokenData;
+    private  TokenData tokenData;
 
-    public CreateTokenGPayRequest(String type, JsonObject tokenData) {
-        this.type = type;
+    public CreateTokenSamsungPayRequest( TokenData tokenData , String type) {
         this.tokenData = tokenData;
+        this.type = type;
     }
 
     /**
      * The type Builder.
      */
     public final static class Builder {
-        private CreateTokenGPayRequest createTokenGPayRequest;
+        private CreateTokenSamsungPayRequest createTokenSamsungPayRequest;
 
         /**
          * Instantiates a new Builder.
@@ -35,8 +40,8 @@ public final class CreateTokenGPayRequest implements Serializable {
          * @param type  the type
          * @param tokenData the tokenData
          */
-        public Builder(String type, JsonObject tokenData) {
-            createTokenGPayRequest = new CreateTokenGPayRequest(type, tokenData);
+        public Builder( TokenData tokenData, String type) {
+            createTokenSamsungPayRequest = new CreateTokenSamsungPayRequest(tokenData,type);
         }
 
         /**
@@ -44,10 +49,14 @@ public final class CreateTokenGPayRequest implements Serializable {
          *
          * @return the createTokenGPayRequest request
          */
-        public CreateTokenGPayRequest build() {
-            return createTokenGPayRequest;
+        public CreateTokenSamsungPayRequest build() {
+            return createTokenSamsungPayRequest;
         }
     }
+
+
+
+
 
 
 

@@ -11,5 +11,5 @@ All rights reserved.
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 sealed class CardViewEvent {
     object InitEvent : CardViewEvent()
-    object CreateTokenEvent :CardViewEvent()
+    object CreateSamsungPayTokenEvent :CardViewEvent()
 }

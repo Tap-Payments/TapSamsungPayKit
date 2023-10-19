@@ -48,7 +48,7 @@ object ApiService {
     /**
      * The Token.
      */
-    const val TOKEN = "tokens"
+    const val TOKEN = "token/"
 
     /**
      * The Payment types.

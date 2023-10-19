@@ -64,30 +64,16 @@ class SmsungPayViewModel : ViewModel() {
     ) {
         when (event) {
             CardViewEvent.InitEvent -> getInitData(this, context)
-            CardViewEvent.CreateTokenEvent -> createTokenWithEncryptedCard(
+            /*CardViewEvent.CreateTokenEvent -> createTokenWithEncryptedCard(
                 cardDataRequest,
                 activity
-            )
+            )*/
             else -> {}
         }
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun createTokenWithEncryptedCard(
-        createTokenWithEncryptedDataRequest: CreateTokenCard?,
-        activity: AppCompatActivity?,
-    ) {
-        //  println("createTokenWithEncryptedDataRequest>>."+createTokenWithEncryptedDataRequest)
-        if (createTokenWithEncryptedDataRequest != null) {
-//            repository.createTokenWithEncryptedCard(
-//                createTokenWithEncryptedDataRequest,
-//                tapCardInputView,
-//                activity
-//            )
-        }
 
-    }
 
     override fun onCleared() {
         super.onCleared()

@@ -13,6 +13,7 @@ import com.chillibits.simplesettings.tool.getPrefs
 import com.tap.samsungpay.internal.api.Shipping
 import com.tap.samsungpay.internal.api.TapCurrency
 import com.tap.samsungpay.internal.api.Tax
+import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
@@ -90,8 +91,8 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                     println("onReady>>"+readyStatus)
                 }
 
-                override fun onTapToken(token: String) {
-                    println("onTapToken the token>>"+token)
+                override fun onTapToken(token: Token) {
+                    println("onTapToken the token>>"+token.id)
                 }
 
                 override fun onCancel() {
@@ -109,8 +110,8 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
             identifier = "cus_TS012520211349Za012907577",
             editable = true,
             emailAddress = "abcd@gmail.com",
-            phoneNumber = PhoneNumber("+20", "1066490871"),
-            firstName = "Aslm",
+            phoneNumber = PhoneNumber("965", "66175090"),
+            firstName = "FirstName",
             middleName = "middlename",
             lastName = "lastname"
         )
@@ -146,7 +147,7 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
 
         if(scopeKey == Scope.SAMSUNG_TOKEN.name) return Scope.SAMSUNG_TOKEN
         else if (scopeKey == Scope.TAPTOKEN.name) return Scope.TAPTOKEN
-        else return Scope.SAMSUNG_TOKEN
+        else return Scope.TAPTOKEN
     }
 
 

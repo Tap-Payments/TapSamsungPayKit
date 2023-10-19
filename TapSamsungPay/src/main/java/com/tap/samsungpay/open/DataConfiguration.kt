@@ -1,3 +1,11 @@
+/**
+ *   Created by AhlaamK on 10/19/23, 10:55 AM
+ *   Copyright (c) 2023 .
+ *   Tap Payments All rights reserved.
+ *
+ *
+ **/
+
 package com.tap.samsungpay.open
 
 import android.app.Activity

@@ -1,5 +1,6 @@
 package com.tap.samsungpay.internal.api
 
+import android.app.Activity
 import android.content.Context
 import android.os.Build
 import androidx.annotation.Nullable
@@ -10,14 +11,18 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.tap.samsungpay.internal.api.requests.CreateTokenSamsungPayRequest
 import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
+import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
 import com.tap.samsungpay.open.DataConfiguration
 import company.tap.checkout.open.models.Destinations
 import company.tap.tapcardformkit.internal.api.SmsungPayViewModel
 import company.tap.tapcardformkit.internal.api.CardViewState
 import company.tap.tapcardformkit.internal.api.enums.TransactionMode
-import company.tap.tapcardformkit.internal.api.models.*
+import company.tap.tapcardformkit.internal.api.models.AssetsModel
+import company.tap.tapcardformkit.internal.api.models.TopUp
+
 import company.tap.tapcardformkit.internal.api.responses.*
 import company.tap.tapcardformkit.open.*
 import company.tap.tapnetworkkit.controller.NetworkController
@@ -94,26 +99,22 @@ class Repository : APIRequestCallback {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun createTokenWithEncryptedCard(
 
-        createTokenWithCardDataRequest: CreateTokenCard?, activity: AppCompatActivity?
-    ) {
-        this.activity = activity
-        val createTokenWithCardDataReq = createTokenWithCardDataRequest?.let {
 
+
+        @RequiresApi(Build.VERSION_CODES.N)
+        fun getSPayTokenRequest(
+            _activity: AppCompatActivity,
+            createTokenSamsungPayRequest: CreateTokenSamsungPayRequest
+        ) {
+           this.activity =_activity
+            val jsonString = Gson().toJson(createTokenSamsungPayRequest)
+            NetworkController.getInstance().processRequest(
+                TapMethodType.POST, ApiService.TOKEN, jsonString,
+                this, CREATE_SPAY_TOKEN_CODE
+            )
         }
-//        val jsonString = Gson().toJson(createTokenWithCardDataReq)
-//        Log.e("crypteddataToBeSend", jsonString)
-//        NetworkController.getInstance().processRequest(
-//            TapMethodType.POST, ApiService.TOKEN, jsonString,
-//            this, CREATE_TOKEN_CODE
-//        )
-//        if (tapCardInputView != null) {
-//            this._tapCardInputView = tapCardInputView
-//        }
 
-    }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onSuccess(responseCode: Int, requestCode: Int, response: Response<JsonElement>?) {
@@ -204,17 +205,13 @@ class Repository : APIRequestCallback {
 
             }
 
-        } else if (requestCode == CREATE_TOKEN_CODE) {
-//            response?.body().let {
-//                tokenResponse = Gson().fromJson(it, Token::class.java)
-//                if (PaymentDataSource.getTransactionMode() == TransactionMode.SAVE_CARD) {
-//                    createSaveCard(null, tokenResponse.id)
-//                } else {
-//                    tokenizeParams.getListener()?.cardTokenizedSuccessfully(tokenResponse)
-//                    _tapCardInputView.showSuccess()
-//
-//                }
-//            }
+        } else if (requestCode == CREATE_SPAY_TOKEN_CODE) {
+            response?.body().let {
+                println("response is"+response)
+                tokenResponse = Gson().fromJson(it, Token::class.java)
+                DataConfiguration.getListener()?.onTapToken(tokenResponse)
+                activity?.finish()
+            }
 
 
         }
@@ -222,13 +219,26 @@ class Repository : APIRequestCallback {
 
 
     override fun onFailure(requestCode: Int, errorDetails: GoSellError?) {
-        DataConfiguration.getListener()?.onError(errorDetails?.errorBody)
+        if (requestCode == INIT_CODE) {
+            errorDetails?.errorBody.let {
+
+                DataConfiguration.getListener()?.onError(errorDetails?.errorBody)
+                activity?.finish()
+            }
+        }
+        if (requestCode == CREATE_SPAY_TOKEN_CODE) {
+            errorDetails?.errorBody.let {
+
+                errorDetails?.errorBody?.let { it1 -> DataConfiguration.getListener()?.onError(it1) }
+                activity?.finish()
+            }
+        }
     }
 
 
     companion object {
-        private const val INIT_CODE = 2
-        private const val CREATE_TOKEN_CODE = 3
+        private const val INIT_CODE = 1
+        private const val CREATE_SPAY_TOKEN_CODE =2
     }
 
 
