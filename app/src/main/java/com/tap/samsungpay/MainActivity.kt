@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.chillibits.simplesettings.tool.getPrefBooleanValue
 import com.chillibits.simplesettings.tool.getPrefStringValue
+import com.chillibits.simplesettings.tool.getPrefs
 import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
@@ -23,8 +24,8 @@ import com.tap.samsungpay.internal.models.Shipping
 import com.tap.samsungpay.internal.models.TapCustomer
 import com.tap.samsungpay.internal.models.TapInterface
 import com.tap.samsungpay.internal.models.Tax
-import com.tap.samsungpay.open.TapSamsunPayDelegate
 import com.tap.samsungpay.open.TapConfiguration
+import com.tap.samsungpay.open.TapSamsunPayDelegate
 import com.tap.samsungpay.open.enums.Edges
 import com.tap.samsungpay.open.enums.Language
 import com.tap.samsungpay.open.enums.Scope
@@ -32,7 +33,6 @@ import com.tap.samsungpay.open.enums.SupportedFundSource
 import com.tap.samsungpay.open.enums.SupportedPaymentAuthentications
 import com.tap.samsungpay.open.enums.ThemeMode
 import company.tap.tapcardformkit.open.builder.AuthKey
-import company.tap.tapcardvalidator_android.CardBrand
 
 
 class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
     }
 
     private fun initConfigurations() {
+
         tapConfiguration =
             TapConfiguration.Builder()
                 .setOperator(
@@ -70,17 +71,15 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                         .setGatwayId(getPrefStringValue("gatewayIdKey", "tappayments")).build()
                 )
                 .setTransactions(
-                    Transaction.Builder().setAmount(0.1).setCurrency("USD")
-                        .setShipping(Shipping("test", 0.1)).setTax(Tax("test", 0.1)) //Optional
+                    Transaction.Builder().setAmount((getPrefStringValue("amountKey", "0.1")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
+                        .setShipping(Shipping((getPrefStringValue("shipNameKey", "test")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
                         .build()
                 )
                 .setScope(getScope("scopeKey"))
                 .setAcceptance(
                     Acceptance(
                         supportedFundSource = SupportedFundSource.DEBIT,
-                        supportedBrands = arrayListOf<CardBrand>(
-                            CardBrand.SAMSUNG_PAY
-                        ),
+                        supportedBrands = getPrefs().getStringSet("selectedBrandsKey", emptySet<String>())!!.toMutableList(),
                         supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
                     )
                 )
@@ -99,13 +98,15 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                     ) //Optional
 
                 ).setAuthToken(AuthKey.Builder()
-                    .setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
-                     .setProductionLiveKey("sk_test_kovrMB0mupFJXfNZWx6Etg5y").build()
+                    .setSandBox(getPrefStringValue("sandboxKey","sk_test_kovrMB0mupFJXfNZWx6Etg5y"))
+                     .setProductionLiveKey(getPrefStringValue("productionKey","sk_test_kovrMB0mupFJXfNZWx6Etg5y")).build()
                 )
                 .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))
                 .setDeviceType(getPrefStringValue("deviceTypeKey", "Android Native"))
 
                 .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))
+                .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))
+                .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
                 .build()
 
     }
@@ -142,6 +143,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
     private fun getScope(key: String): Scope {
         val scopeKey: String = getPrefStringValue(key, Scope.SAMSUNG_TOKEN.name)
 
+        println("Scope.TAP_TOKEN.name"+Scope.TAP_TOKEN.name)
         if (scopeKey == Scope.SAMSUNG_TOKEN.name) return Scope.SAMSUNG_TOKEN
         else if (scopeKey == Scope.TAP_TOKEN.name) return Scope.TAP_TOKEN
         else return Scope.SAMSUNG_TOKEN
@@ -165,7 +167,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
             // When the user click yes button then app will close
                 dialog, which ->
             dialog.dismiss()
-            finish()
+
         }
 
         // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.

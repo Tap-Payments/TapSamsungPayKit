@@ -30,7 +30,7 @@ data class PhoneNumber(var isdNumber: String, var phoneNumber: String)
  * 3- attribute to send card Brands is :supported_payment_methods
  */
 data class Acceptance(
-    val supportedBrands: ArrayList<CardBrand> = arrayListOf(),
+    val supportedBrands: MutableList<String> = arrayListOf(),
     val supportedFundSource: SupportedFundSource = SupportedFundSource.CREDIT,
     val supportedPaymentAuthentications: SupportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS,
 )

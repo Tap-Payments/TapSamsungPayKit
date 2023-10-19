@@ -42,7 +42,8 @@ class TapConfiguration private constructor(
     val authToken: AuthKey?,
     val packageName: String?,
     val typeDevice: String?,
-    val serviceId:String?
+    val serviceId:String?,
+    val orderNumber:String?
 ) {
 
 
@@ -133,7 +134,10 @@ class TapConfiguration private constructor(
         fun setServiceId(serviceId: String) = apply {
             this.serviceId = serviceId
         }
-
+        var orderNumber: String? = null
+        fun setOrderNumber(orderNumber: String) = apply {
+            this.orderNumber = orderNumber
+        }
 
 
         fun build(): TapConfiguration {
@@ -150,7 +154,7 @@ class TapConfiguration private constructor(
                 tapInterface,
                 authTokenn,
                 packageName,
-                typeDevice,serviceId
+                typeDevice,serviceId, orderNumber
             )
         }
     }

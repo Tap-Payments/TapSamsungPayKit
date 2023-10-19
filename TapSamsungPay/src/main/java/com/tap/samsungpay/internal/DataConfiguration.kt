@@ -61,8 +61,9 @@ object DataConfiguration {
             PaymentDataSourceImpl.setTransactionMode(
                 TransactionMode.PURCHASE
             )
-            PaymentDataSourceImpl.setSupportedPaymentMethods(this.acceptance?.supportedBrands?.map { it.rawValue }
-                ?.toMutableList())
+           /* PaymentDataSourceImpl.setSupportedPaymentMethods(this.acceptance?.supportedBrands?.map { it.rawValue }
+                ?.toMutableList())*/
+            PaymentDataSourceImpl.setSupportedPaymentMethods(this.acceptance?.supportedBrands)
             PaymentDataSourceImpl.setSupportedCurrencies(
                 arrayListOf(
                     this.transaction.currency!!

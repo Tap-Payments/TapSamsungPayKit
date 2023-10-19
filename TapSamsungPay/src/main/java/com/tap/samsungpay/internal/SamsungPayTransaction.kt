@@ -16,19 +16,20 @@ private const val PRODUCT_SHIPPING_ID = "productShippingId"
 class SamsungPayTransaction {
     val tapConfiguration = TapConfiguration
     fun makeTransactionDetailsWithSheet(): CustomSheetPaymentInfo? {
-        val brandList = brandList
+
 
         val extraPaymentInfo = Bundle()
         val customSheet = CustomSheet()
 
       //  println("tapConfiguration>>>"+tapConfiguration.tapConfigurationS)
       //  println("extraPaymentInfo>>>"+extraPaymentInfo)
+        println("brandList>>>"+brandList)
         customSheet.addControl(makeAmountControl())
         return CustomSheetPaymentInfo.Builder()
             .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.id)
             .setMerchantName(tapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
            // .setOrderNumber("AMZ007MAR")
-            .setOrderNumber("sds")
+            .setOrderNumber(TapConfiguration.getTapConfiguration()?.orderNumber ?:"")
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
             .setAddressInPaymentSheet(CustomSheetPaymentInfo.AddressInPaymentSheet.DO_NOT_SHOW)
@@ -46,9 +47,15 @@ class SamsungPayTransaction {
          * amountBox from  integration guide
          */
         val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.getTapConfiguration()?.transaction?.currency)
-         amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
-         amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax", 0.1, "")
-         amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping", 0.1, "")
+        // amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
+        tapConfiguration.getTapConfiguration()?.transaction?.tax?.amount?.let {
+            amountBoxControl.addItem(tapConfiguration.getTapConfiguration()?.transaction?.tax?.name, "Tax",
+                it, "")
+        }
+        tapConfiguration.getTapConfiguration()?.transaction?.shipping?.amount?.let {
+            amountBoxControl.addItem(tapConfiguration.getTapConfiguration()?.transaction?.shipping?.name, "Shipping",
+                it, "")
+        }
         tapConfiguration.getTapConfiguration()?.transaction?.amount?.let {
             amountBoxControl.setAmountTotal(
                 it, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
@@ -103,16 +110,32 @@ class SamsungPayTransaction {
 
     private val brandList: ArrayList<SpaySdk.Brand>
         get() {
-          /*  with(TapConfiguration.getTapConfiguration()) {
-            var tapBrands = this?.acceptance?.supportedBrands?.map { it.rawValue.replace("_","") }
-            }*/
+           // val spayBrandList = ArrayList<SpaySdk.Brand>()
+            val _brandList :  ArrayList<SpaySdk.Brand> =  ArrayList<SpaySdk.Brand>()
+          //  with(TapConfiguration.getTapConfiguration()) {
+                // var tapBrands = this?.acceptance?.supportedBrands?.map { it.rawValue.replace("_","") }
+                val tapBrands = TapConfiguration.getTapConfiguration()?.acceptance?.supportedBrands
+                println("tapBrands are" + tapBrands)
 
-            val brandList = ArrayList<SpaySdk.Brand>()
-            brandList.add(SpaySdk.Brand.VISA)
+
+                for (i in tapBrands?.indices!!) {
+                    //Added temp until we get this from BE
+                    if(tapBrands.contains("SAMSUNG_PAY")){
+                        tapBrands.remove("SAMSUNG_PAY")
+                        tapBrands.add("UNKNOWN_CARD")
+                    }
+                   if(_brandList.contains(SpaySdk.Brand.valueOf(tapBrands[i]))){
+                       _brandList.add(SpaySdk.Brand.valueOf(tapBrands[i]))
+
+                   }
+                }
+           // }
+           /* brandList.add(SpaySdk.Brand.VISA)
             brandList.add(SpaySdk.Brand.MASTERCARD)
             brandList.add(SpaySdk.Brand.AMERICANEXPRESS)
-            brandList.add(SpaySdk.Brand.DISCOVER)
-            return brandList
+            brandList.add(SpaySdk.Brand.DISCOVER)*/
+            println("_brandList new"+_brandList)
+            return _brandList
         }
 
 }

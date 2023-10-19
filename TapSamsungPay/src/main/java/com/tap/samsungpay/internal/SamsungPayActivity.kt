@@ -11,6 +11,7 @@ package com.tap.samsungpay.internal
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
 import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
@@ -399,7 +400,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                  * You will receive the payloads shown below in paymentCredential parameter
                  * The output paymentCredential structure varies depending on the PG you're using and the integration model (direct, indirect) with Samsung.
                  */
-                println("on success response>"+response)
+                println("on success response>"+TapConfiguration.getTapConfiguration()?.scope)
               //  println("on success paymentCredential>"+paymentCredential)
               ///  println("on success TapConfiguration.getTapConfiguration()?.scope>"+ TapConfiguration.getTapConfiguration()?.scope)
 
@@ -465,6 +466,12 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
         }
 
 
+    }
+
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
 

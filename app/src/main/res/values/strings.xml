@@ -24,10 +24,13 @@
     <string name="fields">FieldVisibility</string>
     <string name="merchant_details">Merchant Details</string>
     <string name="choose_theme">Choose Theme</string>
+    <string name="order_name">Order Number</string>
+    <string name="ship_amount">Shipment Amount</string>
+    <string name="tax_amount">Tax Amount</string>
 
     <string-array name="ScopeList">
-        <item>SamsungPayToken</item>
-        <item>Token</item>
+        <item>SAMSUNG_TOKEN</item>
+        <item>TAP_TOKEN</item>
     </string-array>
 
     <string-array name="ScopeList_default_values">
@@ -54,8 +57,12 @@
 
     <string-array name="SupportedSchemes">
         <item>SAMSUNG_PAY</item>
-
+        <item>AMERICANEXPRESS</item>
+        <item>VISA</item>
+        <item>MASTERCARD</item>
+        <item>DISCOVER</item>
     </string-array>
+
 
     <string-array name="Lanugages">
         <item>English</item>

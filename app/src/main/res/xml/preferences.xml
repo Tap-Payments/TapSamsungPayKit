@@ -75,26 +75,43 @@
 
         <EditTextPreference
             app:key="amountKey"
-            app:defaultValue=""
+            app:defaultValue="0.1"
             app:title="@string/amount"
             app:useSimpleSummaryProvider="true"/>
         <DropDownPreference
             app:key="selectedCurrencyKey"
             app:entries="@array/currencies"
             app:entryValues="@array/currencies"
-            app:defaultValue="1"
+            app:defaultValue="USD"
             app:useSimpleSummaryProvider="true"/>
 
         <EditTextPreference
             app:key="shipNameKey"
-            app:defaultValue=""
+            app:defaultValue="test"
             app:title="@string/ship_name"
             app:useSimpleSummaryProvider="true"/>
 
         <EditTextPreference
+            app:key="shipAmntKey"
+            app:defaultValue="0.1"
+            app:title="@string/ship_amount"
+            app:useSimpleSummaryProvider="true"/>
+
+        <EditTextPreference
             app:key="taxNameKey"
-            app:defaultValue=""
+            app:defaultValue="test"
             app:title="@string/tax_name"
+            app:useSimpleSummaryProvider="true"/>
+        <EditTextPreference
+            app:key="taxAmntKey"
+            app:defaultValue="0.1"
+            app:title="@string/tax_amount"
+            app:useSimpleSummaryProvider="true"/>
+
+        <EditTextPreference
+            app:key="orderNoKey"
+            app:defaultValue="AMZ333"
+            app:title="@string/order_name"
             app:useSimpleSummaryProvider="true"/>
 
 

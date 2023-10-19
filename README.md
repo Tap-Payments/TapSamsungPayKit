@@ -124,9 +124,9 @@ Here we need to make a Top level declaration
        
         initConfigurations()
 
-private fun initConfigurations() {
-   tapConfiguration =
-      TapConfiguration.Builder()
+   private fun initConfigurations() {
+      tapConfiguration =
+          TapConfiguration.Builder()
          .setOperator(
             Operator.Builder()
                .setPublicKey(
@@ -145,7 +145,7 @@ private fun initConfigurations() {
                .setShipping(Shipping("test", 0.1)).setTax(Tax("test", 0.1)) //Optional
                .build()
          )
-         .setScope(Scope.SAMSUNG_TOKEN)//**Required to know what you prefer only samsung token  / tap token  Scope.TAP_TOKEN**//
+         .setScope(Scope.SAMSUNG_TOKEN)//**Required to know what you prefer only samsung token  / tap token  Scope.TAP_TOKEN select from enum**//
          .setAcceptance(
             Acceptance(
                supportedFundSource = SupportedFundSource.DEBIT,

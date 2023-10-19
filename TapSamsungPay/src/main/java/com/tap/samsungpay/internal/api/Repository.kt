@@ -122,6 +122,7 @@ class Repository : APIRequestCallback {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onSuccess(responseCode: Int, requestCode: Int, response: Response<JsonElement>?) {
         if (requestCode == INIT_CODE) {
+            println("response?.body()"+response?.body())
             if (response?.body() != null) {
                 response.body().let {
 
