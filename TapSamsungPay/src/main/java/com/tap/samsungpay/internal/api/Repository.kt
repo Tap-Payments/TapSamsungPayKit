@@ -219,7 +219,7 @@ class Repository : APIRequestCallback {
 
         } else if (requestCode == CREATE_SPAY_TOKEN_CODE) {
             response?.body().let {
-                println("response is"+response)
+               // println("response is"+response)
                 tokenResponse = Gson().fromJson(it, Token::class.java)
                 DataConfiguration.getListener()?.onTapToken(tokenResponse)
                 activity?.finish()

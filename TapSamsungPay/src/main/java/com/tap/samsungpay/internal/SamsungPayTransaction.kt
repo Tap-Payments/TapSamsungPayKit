@@ -21,13 +21,14 @@ class SamsungPayTransaction {
         val extraPaymentInfo = Bundle()
         val customSheet = CustomSheet()
 
-        println("tapConfiguration>>>"+tapConfiguration.tapConfigurationS)
+      //  println("tapConfiguration>>>"+tapConfiguration.tapConfigurationS)
       //  println("extraPaymentInfo>>>"+extraPaymentInfo)
         customSheet.addControl(makeAmountControl())
         return CustomSheetPaymentInfo.Builder()
             .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.id)
             .setMerchantName(tapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
-            .setOrderNumber("AMZ007MAR")
+           // .setOrderNumber("AMZ007MAR")
+            .setOrderNumber("sds")
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
             .setAddressInPaymentSheet(CustomSheetPaymentInfo.AddressInPaymentSheet.DO_NOT_SHOW)

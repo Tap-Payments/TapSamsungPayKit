@@ -65,7 +65,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
          * we need service ID for creating the partner info and service type
          */
         SERVICE_ID = TapConfiguration.getTapConfiguration()?.serviceId ?:""
-        Log.e("serviceID",SERVICE_ID.toString())
+       // Log.e("serviceID",SERVICE_ID.toString())
         partnerInfo = PartnerInfo(SERVICE_ID, bundle)
         updateSamsungPayButton()
         samsungPayButton.buttonSamsung.setOnClickListener {
@@ -147,12 +147,14 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 //                    "Samsung Pay on Failure",
 //                    Toast.LENGTH_SHORT
 //                ).show()
+
+                DataConfiguration.getListener()?.onError(errorCode.toString())
             }
         })
     }
 
     private fun startCallForCheckoutProfileAPi() {
-        println("TapConfiguration.getTapConfiguration()"+ TapConfiguration.getTapConfiguration())
+       // println("TapConfiguration.getTapConfiguration()"+ TapConfiguration.getTapConfiguration())
         with(TapConfiguration.getTapConfiguration()) {
             DataConfiguration.initalizeCheckoutProfileAPi(
                 context = this@SamsungPayActivity,
@@ -222,6 +224,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
     }
 
+    //Not used for now
     private fun startInAppPayment() {
 
         try {
@@ -397,15 +400,18 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                  * The output paymentCredential structure varies depending on the PG you're using and the integration model (direct, indirect) with Samsung.
                  */
                 println("on success response>"+response)
-                println("on success paymentCredential>"+paymentCredential)
-                println("on success TapConfiguration.getTapConfiguration()?.scope>"+ TapConfiguration.getTapConfiguration()?.scope)
+              //  println("on success paymentCredential>"+paymentCredential)
+              ///  println("on success TapConfiguration.getTapConfiguration()?.scope>"+ TapConfiguration.getTapConfiguration()?.scope)
 
                // println("on success extraPaymentData>"+extraPaymentData)
                 if(TapConfiguration.getTapConfiguration()?.scope==Scope.SAMSUNG_TOKEN) {
                     DataConfiguration.getListener()?.onSamsungPayToken(paymentCredential)
                     finish()
-                }else {
-                    //Todo
+                }else if( TapConfiguration.getTapConfiguration()?.scope==Scope.TAP_TOKEN ){
+
+                    /*
+                     *You will now be  passing samsung token to tap api
+                     * **/
                     handleSuccessCallBack(paymentCredential)
                 }
 
@@ -414,7 +420,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
             // This callback is received when the online payment transaction has failed.
             override fun onFailure(errorCode: Int, errorData: Bundle?) {
-                println("errorData>>>" + errorData)
+               // println("errorData>>>" + errorData)
                 DataConfiguration.getListener()?.onError("Failed to show"+errorData.toString())
 
             }
@@ -444,9 +450,9 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                 val gson = Gson()
                 val jsonToken = gson.fromJson(token, JsonElement::class.java)
 
-            println("jsonToken"+jsonToken)
+           // println("jsonToken"+jsonToken)
                 /**
-                 * At this stage, Passing the googlePaylaod to Tap Backend TokenAPI call followed by chargeAPI.
+                 * At this stage, Passing the samsungPaylaod to Tap Backend TokenAPI call followed by chargeAPI.
                  */
                 val createTokenSamsungPayRequest =
                     CreateTokenSamsungPayRequest(

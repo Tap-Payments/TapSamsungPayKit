@@ -28,7 +28,7 @@ import company.tap.tapcardformkit.open.builder.AuthKey
 class TapConfiguration private constructor(
     val publicKey: Operator?,
     val environment: SDKMODE?,
-    val scope: Scope? = Scope.TAPTOKEN,
+    val scope: Scope? = Scope.TAP_TOKEN,
     val transaction: Transaction,
     val merchant: Merchant,
     val tapCustomer: TapCustomer?,
