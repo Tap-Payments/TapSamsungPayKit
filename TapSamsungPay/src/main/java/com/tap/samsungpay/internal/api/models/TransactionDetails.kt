@@ -1,7 +1,9 @@
-package company.tap.tapcardformkit.internal.api.models
+package com.tap.samsungpay.internal.api.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import company.tap.tapcardformkit.internal.api.models.Expiry
+import company.tap.tapcardformkit.internal.api.models.Order
 import java.io.Serializable
 
 /**

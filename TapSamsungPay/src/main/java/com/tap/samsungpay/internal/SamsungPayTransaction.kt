@@ -2,13 +2,11 @@ package com.tap.samsungpay.internal
 
 import android.os.Bundle
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
-import com.samsung.android.sdk.samsungpay.v2.card.Card
 import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.AmountBoxControl
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.AmountConstants
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
-import com.tap.samsungpay.internal.builder.TapConfiguration
-import company.tap.tapcardvalidator_android.CardBrand
+import com.tap.samsungpay.open.TapConfiguration
 
 private const val AMOUNT_CONTROL_ID = "amountControlId"
 private const val PRODUCT_ITEM_ID = "productItemId"
@@ -46,11 +44,11 @@ class SamsungPayTransaction {
         /**
          * amountBox from  integration guide
          */
-        val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.tapConfigurationS?.transaction?.currency)
+        val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.getTapConfiguration()?.transaction?.currency)
          amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
          amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax", 0.1, "")
          amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping", 0.1, "")
-        tapConfiguration.tapConfigurationS?.transaction?.amount?.let {
+        tapConfiguration.getTapConfiguration()?.transaction?.amount?.let {
             amountBoxControl.setAmountTotal(
                 it, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
         }

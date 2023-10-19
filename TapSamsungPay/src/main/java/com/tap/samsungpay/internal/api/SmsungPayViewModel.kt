@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.internal.api
+package com.tap.samsungpay.internal.api
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,7 +8,6 @@ import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.tap.samsungpay.internal.api.Repository
 import company.tap.tapcardformkit.internal.api.models.CreateTokenCard
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

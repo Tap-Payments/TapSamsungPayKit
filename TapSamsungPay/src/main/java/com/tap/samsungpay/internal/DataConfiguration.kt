@@ -1,26 +1,27 @@
-/**
- *   Created by AhlaamK on 10/19/23, 10:55 AM
- *   Copyright (c) 2023 .
- *   Tap Payments All rights reserved.
- *
- *
- **/
+/*
+ * *
+ *  * Created by $AhlaamK on 10/19/23, 11:37 AM
+ *  * Copyright (c) 2023 .
+ *  * Tap Payments All rights reserved.
+ *  *
+ *  *
+ */
 
-package com.tap.samsungpay.open
+package com.tap.samsungpay.internal
 
 import android.app.Activity
-import android.content.Context
-import android.os.Environment
 import androidx.appcompat.app.AppCompatActivity
 import com.tap.samsungpay.internal.api.ApiService
 import com.tap.samsungpay.internal.api.ItemsModel
 import com.tap.samsungpay.internal.api.OrderObject
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
-import company.tap.tapcardformkit.internal.api.CardViewEvent
-import company.tap.tapcardformkit.internal.api.SmsungPayViewModel
+import com.tap.samsungpay.internal.api.CardViewEvent
+import com.tap.samsungpay.internal.api.SmsungPayViewModel
+import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
+import com.tap.samsungpay.open.SDKDelegate
+import com.tap.samsungpay.open.TapConfiguration
 import company.tap.tapcardformkit.internal.api.enums.PaymentType
-import company.tap.tapcardformkit.internal.api.enums.TransactionMode
-import com.tap.samsungpay.internal.builder.TapConfiguration
+import com.tap.samsungpay.internal.api.enums.TransactionMode
 import com.tap.samsungpay.open.enums.SDKMODE
 import company.tap.tapnetworkkit.connection.NetworkApp
 

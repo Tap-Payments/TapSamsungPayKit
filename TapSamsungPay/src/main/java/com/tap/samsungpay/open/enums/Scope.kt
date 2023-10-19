@@ -48,10 +48,6 @@ enum class SDKMODE {
     PRODUCTION,
 }
 
-enum class Directions {
-    LTR,
-    DYNAMIC
-}
 
 enum class Edges {
     CURVED,

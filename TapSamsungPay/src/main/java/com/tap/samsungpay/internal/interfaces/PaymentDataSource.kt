@@ -4,11 +4,12 @@ package com.tap.samsungpay.internal.interfaces
 import androidx.annotation.RestrictTo
 import com.tap.samsungpay.internal.*
 import com.tap.samsungpay.internal.api.*
+import com.tap.samsungpay.internal.api.models.BINLookupResponse
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import company.tap.checkout.open.models.Destinations
-import company.tap.tapcardformkit.internal.api.responses.InitResponseModel
-import company.tap.tapcardformkit.internal.api.responses.MerchantData
-import company.tap.tapcardformkit.internal.api.enums.TransactionMode
+import com.tap.samsungpay.internal.api.responses.InitResponseModel
+import com.tap.samsungpay.internal.api.responses.MerchantData
+import com.tap.samsungpay.internal.api.enums.TransactionMode
 import company.tap.tapcardformkit.internal.api.models.*
 import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
 import com.tap.samsungpay.internal.models.TapCustomer

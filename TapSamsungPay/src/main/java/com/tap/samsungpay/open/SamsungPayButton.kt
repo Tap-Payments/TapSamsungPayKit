@@ -18,7 +18,6 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.button.MaterialButton
 import com.tap.samsungpay.internal.api.models.PaymentOption
-import com.tap.samsungpay.internal.builder.TapConfiguration
 import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.tapsamsungpay.R
 

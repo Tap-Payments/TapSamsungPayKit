@@ -14,7 +14,7 @@ import android.os.Bundle
 import android.widget.FrameLayout
 import com.chillibits.simplesettings.core.SimpleSettings
 import com.chillibits.simplesettings.core.SimpleSettingsConfig
-import com.tap.samsungpay.internal.builder.TapConfiguration
+import com.tap.samsungpay.open.TapConfiguration
 
 class Settings : AppCompatActivity() , SimpleSettingsConfig.PreferenceCallback {
     lateinit var settings:FrameLayout

@@ -24,8 +24,7 @@ import company.tap.tapcardformkit.internal.api.models.GatewayResponse;
 import company.tap.tapcardformkit.internal.api.models.Response;
 import company.tap.tapcardformkit.internal.api.models.Source;
 import company.tap.tapcardformkit.internal.api.models.TopUp;
-import company.tap.tapcardformkit.internal.api.models.TrackingURL;
-import company.tap.tapcardformkit.internal.api.models.TransactionDetails;
+
 import com.tap.samsungpay.internal.models.TapCustomer;
 
 

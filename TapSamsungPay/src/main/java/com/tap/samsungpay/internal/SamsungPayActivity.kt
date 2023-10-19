@@ -29,9 +29,8 @@ import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
 import com.tap.samsungpay.internal.api.Repository
 import com.tap.samsungpay.internal.api.requests.CreateTokenSamsungPayRequest
 import com.tap.samsungpay.internal.api.requests.TokenData
-import com.tap.samsungpay.internal.builder.TapConfiguration
+import com.tap.samsungpay.open.TapConfiguration
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
-import com.tap.samsungpay.open.DataConfiguration
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
 import com.tap.samsungpay.open.SamsungPayButton
 import com.tap.samsungpay.open.enums.Scope
@@ -154,7 +153,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
     }
 
     private fun startCallForCheckoutProfileAPi() {
-        println("TapConfiguration.getTapConfiguration()"+TapConfiguration.getTapConfiguration())
+        println("TapConfiguration.getTapConfiguration()"+ TapConfiguration.getTapConfiguration())
         with(TapConfiguration.getTapConfiguration()) {
             DataConfiguration.initalizeCheckoutProfileAPi(
                 context = this@SamsungPayActivity,
@@ -367,11 +366,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
      */
         override fun onFailure(errorCode: Int, errorData: Bundle) {
             //Called when an error occurs during In-App cryptogram generation
-            Toast.makeText(
-                this@SamsungPayActivity,
-                "cardInfoListener onFailure : $errorCode",
-                Toast.LENGTH_LONG
-            ).show()
+            DataConfiguration.getListener()?.onError("Failed to retrieved"+errorData.toString())
         }
     }
 
@@ -404,7 +399,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                  */
                 println("on success response>"+response)
                 println("on success paymentCredential>"+paymentCredential)
-                println("on success TapConfiguration.getTapConfiguration()?.scope>"+TapConfiguration.getTapConfiguration()?.scope)
+                println("on success TapConfiguration.getTapConfiguration()?.scope>"+ TapConfiguration.getTapConfiguration()?.scope)
 
                // println("on success extraPaymentData>"+extraPaymentData)
                 if(TapConfiguration.getTapConfiguration()?.scope==Scope.SAMSUNG_TOKEN) {
@@ -442,18 +437,11 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
     private fun handleSuccessCallBack(paymentData: String) {
         // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
         try {
-            val paymentData = JSONObject(paymentData).getJSONObject("3DS")
-            println("paymentData$paymentData")
-            // If the gateway is set to "example", no payment information is returned - instead, the
-            // token will only consist of "examplePaymentMethodToken".
-          //  val tokenizationData = paymentData.getJSONObject("data")
-           // println("tokenizationData>>>$tokenizationData")
-            // final String tokenizationType = tokenizationData.getString("type");
-            val token = paymentData.getString("data")
+            val _paymentData = JSONObject(paymentData).getJSONObject("3DS")
+            println("paymentData$_paymentData")
 
+            val token = _paymentData.getString("data")
 
-                // DataConfiguration.getListener()?.onGooglePayToken(token)
-                //  System.out.println("token is"+token);
                 val gson = Gson()
                 val jsonToken = gson.fromJson(token, JsonElement::class.java)
 

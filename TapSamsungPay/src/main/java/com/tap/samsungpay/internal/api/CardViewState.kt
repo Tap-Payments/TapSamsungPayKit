@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.internal.api
+package com.tap.samsungpay.internal.api
 
 import com.tap.samsungpay.internal.api.responses.SDKSettings
 

@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.internal.api
+package com.tap.samsungpay.internal.api
 
 import androidx.annotation.RestrictTo
 
@@ -11,5 +11,5 @@ All rights reserved.
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 sealed class CardViewEvent {
     object InitEvent : CardViewEvent()
-    object CreateSamsungPayTokenEvent :CardViewEvent()
+    object CreateSamsungPayTokenEvent : CardViewEvent()
 }

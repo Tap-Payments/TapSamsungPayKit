@@ -1,10 +1,9 @@
-package company.tap.tapcardformkit.internal.api.responses
+package com.tap.samsungpay.internal.api.responses
 
 import androidx.annotation.NonNull
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
 import company.tap.tapcardformkit.internal.api.enums.LogsModel
 import company.tap.tapcardformkit.internal.api.enums.Permission
 import company.tap.tapcardformkit.internal.api.models.AssetsModel
@@ -106,7 +105,7 @@ data class BackgroundModel(
 data class ColorModel(
     @SerializedName("dark")
     @Expose
-    var dark:DarkModel,
+    var dark: DarkModel,
 
     @SerializedName("light")
     @Expose

@@ -2,20 +2,17 @@ package com.tap.samsungpay
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.Preference
 import com.chillibits.simplesettings.core.SimpleSettingsConfig
 import com.chillibits.simplesettings.tool.getPrefBooleanValue
 import com.chillibits.simplesettings.tool.getPrefStringValue
-import com.chillibits.simplesettings.tool.getPrefs
 import com.tap.samsungpay.internal.api.Shipping
-import com.tap.samsungpay.internal.api.TapCurrency
 import com.tap.samsungpay.internal.api.Tax
 import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
-import com.tap.samsungpay.internal.builder.TapConfiguration
+import com.tap.samsungpay.open.TapConfiguration
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.*

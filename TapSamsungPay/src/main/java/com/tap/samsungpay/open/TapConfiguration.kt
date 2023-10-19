@@ -1,19 +1,26 @@
-package com.tap.samsungpay.internal.builder
+/*
+ * *
+ *  * Created by $AhlaamK on 10/19/23, 11:36 AM
+ *  * Copyright (c) 2023 .
+ *  * Tap Payments All rights reserved.
+ *  *
+ *  *
+ */
 
-import android.app.Activity
+package com.tap.samsungpay.open
+
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.gson.Gson
+import com.tap.samsungpay.internal.DataConfiguration
 import com.tap.samsungpay.internal.SamsungPayActivity
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
 import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.*
-import com.tap.samsungpay.open.DataConfiguration
-import com.tap.samsungpay.open.SDKDelegate
 import com.tap.samsungpay.open.enums.*
 import company.tap.tapcardformkit.open.builder.AuthKey
 
@@ -188,7 +195,7 @@ class TapConfiguration private constructor(
         }
 
         fun setTapConfiguration(tapConfiguration: TapConfiguration) {
-            this.tapConfigurationS = tapConfiguration
+            tapConfigurationS = tapConfiguration
         }
 
         fun getTapConfiguration(): TapConfiguration? {

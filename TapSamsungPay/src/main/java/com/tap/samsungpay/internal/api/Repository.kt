@@ -1,6 +1,5 @@
 package com.tap.samsungpay.internal.api
 
-import android.app.Activity
 import android.content.Context
 import android.os.Build
 import androidx.annotation.Nullable
@@ -12,14 +11,14 @@ import com.google.gson.JsonElement
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.requests.CreateTokenSamsungPayRequest
+import com.tap.samsungpay.internal.api.responses.InitResponseModel
+import com.tap.samsungpay.internal.api.responses.MerchantData
 import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
 import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
-import com.tap.samsungpay.open.DataConfiguration
+import com.tap.samsungpay.internal.DataConfiguration
 import company.tap.checkout.open.models.Destinations
-import company.tap.tapcardformkit.internal.api.SmsungPayViewModel
-import company.tap.tapcardformkit.internal.api.CardViewState
-import company.tap.tapcardformkit.internal.api.enums.TransactionMode
+import com.tap.samsungpay.internal.api.enums.TransactionMode
 import company.tap.tapcardformkit.internal.api.models.AssetsModel
 import company.tap.tapcardformkit.internal.api.models.TopUp
 
