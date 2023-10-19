@@ -1,10 +1,18 @@
-package com.tap.samsungpay.internal.api
+/*
+ * *
+ *  * Created by $AhlaamK on 10/19/23, 12:01 PM
+ *  * Copyright (c) 2023 .
+ *  * Tap Payments All rights reserved.
+ *  *
+ *  *
+ */
+
+package com.tap.samsungpay.internal.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.*
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
-import com.tap.samsungpay.internal.models.TapCustomer
 import company.tap.tapcardformkit.internal.api.enums.AmountModificatorType
 import company.tap.tapcardformkit.internal.api.models.AmountModificator
 import company.tap.tapcardformkit.internal.api.models.MetaData

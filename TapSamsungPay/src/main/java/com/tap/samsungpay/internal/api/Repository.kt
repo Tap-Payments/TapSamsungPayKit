@@ -15,15 +15,19 @@ import com.tap.samsungpay.internal.api.responses.InitResponseModel
 import com.tap.samsungpay.internal.api.responses.MerchantData
 import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
 import com.tap.samsungpay.internal.api.responses.Token
-import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
+import com.tap.samsungpay.internal.PaymentDataSourceImpl
 import com.tap.samsungpay.internal.DataConfiguration
 import company.tap.checkout.open.models.Destinations
 import com.tap.samsungpay.internal.api.enums.TransactionMode
+import com.tap.samsungpay.internal.models.AmountModificator
+import com.tap.samsungpay.internal.models.OrderObject
+import com.tap.samsungpay.internal.models.Shipping
+import com.tap.samsungpay.internal.models.Tax
 import company.tap.tapcardformkit.internal.api.models.AssetsModel
 import company.tap.tapcardformkit.internal.api.models.TopUp
 
-import company.tap.tapcardformkit.internal.api.responses.*
 import company.tap.tapcardformkit.open.*
+import company.tap.tapnetworkkit.connection.NetworkApp
 import company.tap.tapnetworkkit.controller.NetworkController
 import company.tap.tapnetworkkit.enums.TapMethodType
 import company.tap.tapnetworkkit.exception.GoSellError
@@ -184,10 +188,19 @@ class Repository : APIRequestCallback {
                             PaymentDataSourceImpl.setPaymentOptionsResponseNew(
                                 paymentOptionsResponse
                             )
+
+                            NetworkApp.initNetworkToken(
+                                initResponseModel?.session,
+                                cardRepositoryContext,
+                                ApiService.BASE_URL,
+                                true,
+                                activity
+                            )
+
                             PaymentDataSourceImpl.setMerchantData(merchantDataModel)
                             PaymentDataSourceImpl.setInitResponse(initResponseModel)
                             PaymentDataSourceImpl.setTokenConfig(initResponseModel?.session)
-                            DataConfiguration.getListener()?.onReady("checkout profile success")
+
                             DataConfiguration.getInternalCheckoutDelegate()?.onSuccess()
 
 

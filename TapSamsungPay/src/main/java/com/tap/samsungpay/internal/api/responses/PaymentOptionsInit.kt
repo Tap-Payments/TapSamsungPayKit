@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.internal.api.responses
+package com.tap.samsungpay.internal.api.responses
 
 import androidx.annotation.NonNull
 import androidx.annotation.RestrictTo

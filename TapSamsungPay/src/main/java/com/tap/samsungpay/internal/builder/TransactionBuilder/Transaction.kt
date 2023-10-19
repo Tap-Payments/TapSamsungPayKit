@@ -1,7 +1,7 @@
 package com.tap.samsungpay.internal.builder.TransactionBuilder
 
-import com.tap.samsungpay.internal.api.Shipping
-import com.tap.samsungpay.internal.api.Tax
+import com.tap.samsungpay.internal.models.Shipping
+import com.tap.samsungpay.internal.models.Tax
 
 
 class Transaction(

@@ -5,9 +5,7 @@ import androidx.annotation.RestrictTo
 import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import com.tap.samsungpay.internal.PaymentDataSource
-import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
-import company.tap.tapnetworkkit.utils.CryptoUtil
+import com.tap.samsungpay.internal.PaymentDataSourceImpl
 
 import java.io.Serializable
 

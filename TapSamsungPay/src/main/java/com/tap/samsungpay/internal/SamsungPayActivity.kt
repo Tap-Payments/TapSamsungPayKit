@@ -30,7 +30,6 @@ import com.tap.samsungpay.internal.api.Repository
 import com.tap.samsungpay.internal.api.requests.CreateTokenSamsungPayRequest
 import com.tap.samsungpay.internal.api.requests.TokenData
 import com.tap.samsungpay.open.TapConfiguration
-import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
 import com.tap.samsungpay.open.SamsungPayButton
 import com.tap.samsungpay.open.enums.Scope

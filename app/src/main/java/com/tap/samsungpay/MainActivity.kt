@@ -8,8 +8,8 @@ import androidx.preference.Preference
 import com.chillibits.simplesettings.core.SimpleSettingsConfig
 import com.chillibits.simplesettings.tool.getPrefBooleanValue
 import com.chillibits.simplesettings.tool.getPrefStringValue
-import com.tap.samsungpay.internal.api.Shipping
-import com.tap.samsungpay.internal.api.Tax
+import com.tap.samsungpay.internal.models.Shipping
+import com.tap.samsungpay.internal.models.Tax
 import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.open.TapConfiguration

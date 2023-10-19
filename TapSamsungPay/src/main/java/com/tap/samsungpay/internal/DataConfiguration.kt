@@ -12,9 +12,8 @@ package com.tap.samsungpay.internal
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import com.tap.samsungpay.internal.api.ApiService
-import com.tap.samsungpay.internal.api.ItemsModel
-import com.tap.samsungpay.internal.api.OrderObject
-import com.tap.samsungpay.internal.interfaces.PaymentDataSourceImpl
+import com.tap.samsungpay.internal.models.ItemsModel
+import com.tap.samsungpay.internal.models.OrderObject
 import com.tap.samsungpay.internal.api.CardViewEvent
 import com.tap.samsungpay.internal.api.SmsungPayViewModel
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
