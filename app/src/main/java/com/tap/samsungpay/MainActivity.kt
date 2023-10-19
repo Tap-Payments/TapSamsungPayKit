@@ -23,7 +23,7 @@ import com.tap.samsungpay.internal.models.Shipping
 import com.tap.samsungpay.internal.models.TapCustomer
 import com.tap.samsungpay.internal.models.TapInterface
 import com.tap.samsungpay.internal.models.Tax
-import com.tap.samsungpay.open.SDKDelegate
+import com.tap.samsungpay.open.TapSamsunPayDelegate
 import com.tap.samsungpay.open.TapConfiguration
 import com.tap.samsungpay.open.enums.Edges
 import com.tap.samsungpay.open.enums.Language
@@ -35,7 +35,7 @@ import company.tap.tapcardformkit.open.builder.AuthKey
 import company.tap.tapcardvalidator_android.CardBrand
 
 
-class MainActivity : AppCompatActivity() , SDKDelegate{
+class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
 
     private lateinit var tapConfiguration: TapConfiguration
 

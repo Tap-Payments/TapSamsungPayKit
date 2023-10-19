@@ -172,7 +172,7 @@ class TapConfiguration private constructor(
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,
-            sdkDelegate: SDKDelegate? = null
+            tapSamsunPayDelegate: TapSamsunPayDelegate? = null
 
         ) {
             when (tapConfiguration.tapInterface?.theme){
@@ -188,7 +188,7 @@ class TapConfiguration private constructor(
             }
             val intent = Intent(context, SamsungPayActivity::class.java)
             context.startActivity(intent)
-            DataConfiguration.addSDKDelegate(sdkDelegate)
+            DataConfiguration.addSDKDelegate(tapSamsunPayDelegate)
             setTapConfiguration(tapConfiguration)
 
 

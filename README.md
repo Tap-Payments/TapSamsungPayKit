@@ -27,7 +27,7 @@ https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/459d5389-dde1-4
     2. [Configure SDK Look and Feel](#configure_sdk_look_and_feel)
 
 
-5. [SDKSession Delegate](#sdk_delegate)
+5. [TapSamsungPay_Delegate](#sdk_delegate)
     1. [OnTapToken Success Callback](#payment_success_callback)
     2. [OnFailure Callback](#payment_failure_callback)
     3. [OnSamsungPay_Token_Success Callback](#authorization_success_callback)
@@ -199,7 +199,7 @@ Pass the above data to TapConfigurations as below:
 
 
    <tr>
-	<td> sdkDelegate  </td>
+	<td> tapSamsunPayDelegate  </td>
 	<td> Activity </td>
 	<td> Activity. it is used to notify Merchant application with all SDK Events </td>
    <tr>
