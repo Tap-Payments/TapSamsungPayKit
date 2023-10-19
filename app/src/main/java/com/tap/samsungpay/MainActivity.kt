@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                 )
                 .setTransactions(
                     Transaction.Builder().setAmount((getPrefStringValue("amountKey", "0.1")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
-                        .setShipping(Shipping((getPrefStringValue("shipNameKey", "test")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
+                        .setShipping(Shipping((getPrefStringValue("shipNameKey", "tester")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
                         .build()
                 )
                 .setScope(getScope("scopeKey"))

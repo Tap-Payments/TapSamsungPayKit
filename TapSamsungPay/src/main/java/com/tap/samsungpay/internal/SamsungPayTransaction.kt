@@ -26,8 +26,8 @@ class SamsungPayTransaction {
         println("brandList>>>"+brandList)
         customSheet.addControl(makeAmountControl())
         return CustomSheetPaymentInfo.Builder()
-            .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.id)
-            .setMerchantName(tapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
+            .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
+            .setMerchantName(tapConfiguration.getTapConfiguration()?.merchant?.id)
            // .setOrderNumber("AMZ007MAR")
             .setOrderNumber(TapConfiguration.getTapConfiguration()?.orderNumber ?:"")
             // If you want to enter address, please refer to the javaDoc :
@@ -49,11 +49,11 @@ class SamsungPayTransaction {
         val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.getTapConfiguration()?.transaction?.currency)
         // amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
         tapConfiguration.getTapConfiguration()?.transaction?.tax?.amount?.let {
-            amountBoxControl.addItem(tapConfiguration.getTapConfiguration()?.transaction?.tax?.name, "Tax",
+            amountBoxControl.addItem(PRODUCT_TAX_ID, "Tax",
                 it, "")
         }
         tapConfiguration.getTapConfiguration()?.transaction?.shipping?.amount?.let {
-            amountBoxControl.addItem(tapConfiguration.getTapConfiguration()?.transaction?.shipping?.name, "Shipping",
+            amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Shipping",
                 it, "")
         }
         tapConfiguration.getTapConfiguration()?.transaction?.amount?.let {
