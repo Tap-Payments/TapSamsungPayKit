@@ -164,14 +164,14 @@ private fun initConfigurations() {
          .setTapCustomer(getTapCustomer()) //**Required**//
          .setTapInterface(
             TapInterface(
-               getLanguageMode("selectedlangKey"),
+               Language.EN.name,
                Edges.CURVED,
-               getThemeMode("selectedthemeKey")
+               ThemeMode.DARK
             ) //Optional if not set it will take sdk defaults
 
          ).setAuthToken(AuthKey.Builder()
-            .setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
-            .setProductionLiveKey("sk_test_kovrMB0mupFJXfNZWx6Etg5y").build() //**Required by tap**//
+            .setSandBox("sk_test_XXXXXXXXXXXX")
+            .setProductionLiveKey("sk_live_XXXXXXXXXXXXXXXXXX").build() //**Required by tap**//
          )
          .setPackageName("Pass package id of your app registered with samsung") //**Required**//
          .setDeviceType("Android Native")//**Required**//
@@ -186,4 +186,118 @@ Pass the above data to TapConfigurations as below:
 
 ```kotlin
  TapConfiguration.configureSamsungPayWithTapConfiguration(tapConfiguration, this)
+```
+<a name="configure_sdk_Session"></a>
+## Configure SDK Data
+**TapConfiguration** is the main interface for  library from you application
+### Properties
+
+<table style="text-align:center">
+    <th colspan=1>Property</th>
+    <th colspan=1>Type</th>
+    <th rowspan=1>Description</th>
+
+
+   <tr>
+	<td> sdkDelegate  </td>
+	<td> Activity </td>
+	<td> Activity. it is used to notify Merchant application with all SDK Events </td>
+   <tr>
+
+
+</table>
+
+### Methods
+
+<table style="text-align:center">
+    <th colspan=1>Property</th>
+    <th colspan=1>Type</th>
+      <tr>
+   	 <td> setCurrency  </td>
+   	 <td> Set the transaction currency associated to your account.  currency must be of type TapCurrency("currency_iso_code"). i.e new TapCurrency("USD") </td>
+    </tr>
+    <tr>
+	 <td> setEnvironmentMode  </td>
+	 <td> SDK offers different environment modes such as [ TEST - PRODUCTION]   </td>
+    </tr>
+    <tr>
+	 <td> setAmount </td>
+	 <td> Set Total Amount. Amount value must be of type BigDecimal i.e new BigDecimal(40) </td>
+    </tr>
+    <tr>
+	 <td> setGatewayId </td>
+	 <td> Gateway id required to use TAP as PSP . Here it is tappayments</td>
+    </tr>
+    <tr>
+  	 <td> setGatewayMerchantID </td>
+  	 <td> MerchantID available with TAP</td>
+ </tr>
+
+</table>
+<a name="sdk_open_interfaces"></a>
+## SDK Open Interfaces
+ SDK open Interfaces available for implementation through Merchant Project:
+
+1. SDKDelegate
+```kotlin
+     fun onError(error: String?)
+    fun onSamsungPayToken(token: String)
+    fun onReady(readyStatus: String)
+    fun onTapToken(token: Token)
+    fun onCancel()
+```
+<a name="sdk_open_enums"></a>
+## SDK Open ENUMs
+SDK open Enums available for implementation through Merchant Project:
+
+```kotlin
+enum class Scope {
+    TAP_TOKEN,
+    SAMSUNG_TOKEN
+}
+
+
+
+
+enum class ThemeMode {
+    DARK,
+    LIGHT,
+}
+enum class Language {
+    EN,
+    AR,
+}
+
+
+enum class SupportedBrands {
+    AMERICAN_EXPRESS,
+    MADA,
+    MASTERCARD,
+    OMANNET,
+    VISA,
+    MEEZA,
+    ALL
+}
+
+enum class SupportedFundSource {
+    ALL,
+    DEBIT,
+    CREDIT
+}
+
+enum class SupportedPaymentAuthentications {
+    ThreeDS,
+    EMV,
+}
+
+enum class SDKMODE {
+    SANDBOX,
+    PRODUCTION,
+}
+
+
+enum class Edges {
+    CURVED,
+    STRAIGHT
+}
 ```

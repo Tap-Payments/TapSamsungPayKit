@@ -6,11 +6,7 @@ enum class Scope {
 }
 
 
-enum class CardType {
-    CREDIT,
-    DEBIT,
-    ALL
-}
+
 
 enum class ThemeMode {
     DARK,
