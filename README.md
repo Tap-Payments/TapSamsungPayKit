@@ -90,7 +90,9 @@ For those, who would like to use PayButton.
 1. Ask for the CSR from Tap team.
 2. From your SamsungPay Developer account:
    a. Go to ServiceManagement
-   <img width="1484" alt="Screen Shot 2023-10-19 at 4 40 17 PM" src="https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/899a604e-29ad-4d35-86b5-b4c029fea3a9">
+   <img width="1484" alt="Screen Shot 2023-10-19 at 4 37 43 PM" src="https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/0c937781-c05e-4f62-a8df-eb7352599774">
+ 
+    <img width="1484" alt="Screen Shot 2023-10-19 at 4 40 17 PM" src="https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/899a604e-29ad-4d35-86b5-b4c029fea3a9">
 
    b. Click on create Service , fill up the details
    <img width="1116" alt="Screen Shot 2023-10-19 at 4 40 28 PM" src="https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/a3822cad-10b9-49d1-8c66-27603abd7538">
