@@ -35,15 +35,23 @@ import company.tap.tapcardformkit.open.builder.AuthKey
 import company.tap.tapcardvalidator_android.CardBrand
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , SDKDelegate{
 
     private lateinit var tapConfiguration: TapConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        /**
+         * Required step.
+         * Configure SDK with your choice from the given list.
+         */
+        initConfigurations()
+        TapConfiguration.configureSamsungPayWithTapConfiguration(tapConfiguration, this)
 
+    }
 
+    private fun initConfigurations() {
         tapConfiguration =
             TapConfiguration.Builder()
                 .setOperator(
@@ -63,7 +71,8 @@ class MainActivity : AppCompatActivity() {
                 )
                 .setTransactions(
                     Transaction.Builder().setAmount(0.1).setCurrency("USD")
-                        .setShipping(Shipping("test", 0.1)).setTax(Tax("test", 0.1)).build()
+                        .setShipping(Shipping("test", 0.1)).setTax(Tax("test", 0.1)) //Optional
+                        .build()
                 )
                 .setScope(getScope("scopeKey"))
                 .setAcceptance(
@@ -77,60 +86,27 @@ class MainActivity : AppCompatActivity() {
                 )
                 .setFields(
                     Fields(
-                        shipping = getPrefBooleanValue("shippingEnableKey", true),
-                        billing = getPrefBooleanValue("billingEnableKey", true)
+                        shipping = getPrefBooleanValue("shippingEnableKey", true),//Optional
+                        billing = getPrefBooleanValue("billingEnableKey", true)//Optional
                     )
                 )
-                .setTapCustomer(getTapCustomer())
+                .setTapCustomer(getTapCustomer()) //Required
                 .setTapInterface(
                     TapInterface(
                         getLanguageMode("selectedlangKey"),
                         Edges.CURVED,
                         getThemeMode("selectedthemeKey")
-                    )
+                    ) //Optional
 
-                ).setAuthToken(
-                    AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
-                        .setProductionLiveKey("sk_test_kovrMB0mupFJXfNZWx6Etg5y").build()
+                ).setAuthToken(AuthKey.Builder()
+                    .setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
+                     .setProductionLiveKey("sk_test_kovrMB0mupFJXfNZWx6Etg5y").build()
                 )
                 .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))
                 .setDeviceType(getPrefStringValue("deviceTypeKey", "Android Native"))
 
                 .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))
                 .build()
-
-        TapConfiguration.configureSamsungPayWithTapConfiguration(
-            tapConfiguration,
-            this,
-            object : SDKDelegate {
-                override fun onError(error: String?) {
-                    if (error != null) {
-                        customAlertBox("error", error)
-                    }
-
-                }
-
-                override fun onSamsungPayToken(token: String) {
-                    println("onSamsungPayToken the token>>" + token)
-                    customAlertBox("onSamsungPayToken", token)
-
-
-                }
-
-                override fun onReady(readyStatus: String) {
-                    println("onReady>>" + readyStatus)
-                }
-
-                override fun onTapToken(token: Token) {
-                    customAlertBox("onTapToken", token.id.toString())
-                }
-
-                override fun onCancel() {
-                    //    Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
-
-                }
-
-            })
 
     }
 
@@ -204,6 +180,34 @@ class MainActivity : AppCompatActivity() {
         // Show the Alert Dialog box
         alertDialog.show()
     }
+
+    override fun onError(error: String?) {
+        if (error != null) {
+            customAlertBox("error", error)
+        }
+
+    }
+
+    override fun onSamsungPayToken(token: String) {
+        println("onSamsungPayToken the token>>" + token)
+        customAlertBox("onSamsungPayToken", token)
+
+
+    }
+
+    override fun onReady(readyStatus: String) {
+        println("onReady>>" + readyStatus)
+    }
+
+    override fun onTapToken(token: Token) {
+        customAlertBox("onTapToken", token.id.toString())
+    }
+
+    override fun onCancel() {
+        //    Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
+
+    }
+
 
 
 }
