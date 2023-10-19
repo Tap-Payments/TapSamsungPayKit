@@ -3,7 +3,7 @@ A standalone kit for handling SamsungPay
 
 [![Platform](https://img.shields.io/badge/platform-Android-inactive.svg?style=flat)](https://github.com/Tap-Payments/TapSamsungPayKit/)
 [![Documentation](https://img.shields.io/badge/documentation-100%25-bright%20green.svg)](https://github.com/Tap-Payments/TapSamsungPayKit/)
-[![SDK Version](https://img.shields.io/badge/minSdkVersion-21-blue.svg)](https://stuff.mit.edu/afs/sipb/project/android/docs/reference/packages.html)
+[![SDK Version](https://img.shields.io/badge/minSdkVersion-24-blue.svg)](https://stuff.mit.edu/afs/sipb/project/android/docs/reference/packages.html)
 [![SDK Version](https://img.shields.io/badge/targetSdkVersion-30-informational.svg)](https://stuff.mit.edu/afs/sipb/project/android/docs/reference/packages.html)
 
 
@@ -16,21 +16,15 @@ https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/459d5389-dde1-4
 ---
 1. [Requirements](#requirements)
 2. [Installation](#installation)
-    1. [Include TapSamsungPayKit library as a dependency module in your project](#include_library_to_code_locally)
-    2. [Installation with jitpack](#installation_with_jitpack)
-
 3. [Setup](#setup)
     1. [TapSamsungPayKit Class Properties](#setup_tapsamsung_pay_sdk_class_properties_secret_key)
-    2. [TapSamsungPayKit Button](#setup_tapsamsung_pay_button)
+    2. [Setup Steps](#setup_steps)
 4. [Usage](#usage)
-    1. [Configure SDK with Required Data](#configure_sdk_with_required_data)
-    2. [Configure SDK Look and Feel](#configure_sdk_look_and_feel)
-
-
+   [Configure SDK with Required Data](#configure_sdk_with_required_data)
 5. [TapSamsungPay_Delegate](#sdk_delegate)
-    1. [OnTapToken Success Callback](#payment_success_callback)
-    2. [OnFailure Callback](#payment_failure_callback)
-    3. [OnSamsungPay_Token_Success Callback](#authorization_success_callback)
+    1. [OnTapToken Success Callback](#tap_token_success_callback)
+    2. [OnFailure Callback](#failed_callback)
+    3. [OnSamsungPay_Token_Success Callback](#samsung_pay_success_callback)
    4.  [OnReady Callback](#onready_success_callback)
 
 6. [Additional_Configuration_ GooglePay](#additional_config_googlepay)
@@ -48,28 +42,12 @@ To use the SDK the following requirements must be met:
 4. **Android targetSdkVersion: 33
 
 <a name="installation"></a>
-<a name="include_library_to_code_locally"></a>
-### Include TapSamsungPay library as a dependency module in your project
----
-1. Clone checkoutSDK library from Tap repository
-   ```
-       https://github.com/Tap-Payments/TapSamsungPayKit
-    ```
-2. Add goSellSDK library to your project settings.gradle file as following
-    ```java
-        include ':library', ':YourAppName'
-    ```
-3. Setup your project to include checkout as a dependency Module.
-    1. File -> Project Structure -> Modules -> << your project name >>
-    2. Dependencies -> click on **+** icon in the screen bottom -> add Module Dependency
-    3. select checkout library
 
-<a name="installation_with_jitpack"></a>
 ### Installation with JitPack
 ---
 [JitPack](https://jitpack.io/) is a novel package repository for JVM and Android projects. It builds Git projects on demand and provides you with ready-to-use artifacts (jar, aar).
 
-To integrate tapGooglePay™SDK into your project add it in your **root** `build.gradle` at the end of repositories:
+To integrate TapSamsungPaySDK into your project add it in your **root** `build.gradle` at the end of repositories:
 ```java
 	allprojects {
 		repositories {
@@ -88,18 +66,44 @@ Step 2. Add the dependency
 <a name="setup"></a>
 # Setup
 ---
-First of all, `TapSamsungPaySDK` should be set up. In this section secret key and application ID are required.
-
-<a name="setup_gosellsdk_class_properties"></a>
-## TapSamsungPaySDK Class Properties
-First of all, `TapSamsungPaySDK` should be set up. To set it up, add the following lines of code somewhere in your project and make sure they will be called before any usage of `tapGoooglePaySDK`.
-
-Below is the list of properties in tapGooglePaySDK class you can manipulate. Make sure you do the setup before any usage of the SDK.
-
-<a name="setup_tapgoogle_pay_sdk_class_properties_secret_key"></a>
+# Get your Tap keys
+You can always use the example keys within our example app, but we do recommend you to head to our [onboarding](https://register.tap.company/sell)  page. You will need to register your `package name` to get your `Tap Key` that you will need to activate our `TapSamsungPaySDK`.
+<a name="setup_tapsamsung_pay_sdk_class_properties_secret_ke"></a>
 ### Secret Key and Application ID
 
 To set it up, add the following line of code somewhere in your project and make sure it will be called before any usage of `TapSamsungPaySDK`, otherwise an exception will be thrown. **Required**.
+
+<a name="setup_steps"></a>
+
+## Setup Steps
+
+### With PayButton
+
+For those, who would like to use PayButton.
+
+1. Place *PayButton*.
+2. Assign its *TapDataConfiguration* and *TapSamsungPayDelegate*.
+3. Implement *TapDataConfiguration* and *TapSamsungPayDelegate*.
+
+### SamsungPay
+
+1. Ask for the CSR from Tap team.
+2. From your SamsungPay Developer account:
+   a. Go to ServiceManagement 
+   
+   b. Click on create Service , fill up the details
+
+   c. Once everything is done service will appear as below
+
+   d. Now you will find the service id generated use this to pass to the TapSDK
+
+
+<a name="setup_tapsamsung_pay_sdk_class_properties_secret_key"></a>
+## TapSamsungPaySDK Class Properties
+First of all, `TapSamsungPaySDK` should be set up. To set it up, add the following lines of code somewhere in your project and make sure they will be called before any usage of `TapSamsungPaySDK`.
+
+Below is the list of properties in tapGooglePaySDK class you can manipulate. Make sure you do the setup before any usage of the SDK.
+
 
 *Kotlin:*
 Here we need to make a Top level declaration
@@ -235,16 +239,17 @@ Pass the above data to TapConfigurations as below:
 
 </table>
 <a name="sdk_open_interfaces"></a>
-## SDK Open Interfaces
- SDK open Interfaces available for implementation through Merchant Project:
+### SDK Open Interfaces
+ 
+SDK open Interfaces available for implementation through Merchant Project:
 
-1. SDKDelegate
+1. TapSamsunPayDelegate
 ```kotlin
      fun onError(error: String?)
-    fun onSamsungPayToken(token: String)
-    fun onReady(readyStatus: String)
-    fun onTapToken(token: Token)
-    fun onCancel()
+     fun onSamsungPayToken(token: String)
+     fun onReady(readyStatus: String)
+     fun onTapToken(token: Token)
+     fun onCancel()
 ```
 <a name="sdk_open_enums"></a>
 ## SDK Open ENUMs
@@ -336,7 +341,7 @@ Notifies the receiver that token generated for TAP .
 **token**: Token object from TAP.
 
 <a name=failed_callback"></a>
-### Failure Callback
+### Error Callback
 
 Notifies the receiver that failed.
 #### Declaration
@@ -349,3 +354,15 @@ Notifies the receiver that failed.
 
 #### Arguments
 **error**: Failure object.
+
+<a name="onready_success_callback"></a>
+### Ready Callback
+
+Notifies the receiver that failed.
+#### Declaration
+
+*Kotlin:*
+
+```kotlin
+-   fun onReady(readyStatus: String)
+```
