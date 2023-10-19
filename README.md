@@ -301,3 +301,51 @@ enum class Edges {
     STRAIGHT
 }
 ```
+## SDK Delegate
+
+**SDK Delegate** is an interface which you may want to implement to receive payment/authorization/card saving status updates and update your user interface accordingly when payment window closes.
+Below are listed down all available callbacks:
+
+<a name="samsung_pay_success_callback"></a>
+### SamsungPay Token Success Callback
+
+Notifies the receiver that samsungpay token has succeed.
+
+#### Declaration
+*Kotlin:*
+```kotlin
+-  fun onSamsungPayToken(token:String)
+```
+#### Arguments
+
+**token**: Successful Token object.
+
+<a name="tap_token_success_callback"></a>
+### TAP Token Success Callback
+
+Notifies the receiver that token generated for TAP .
+#### Declaration
+
+*Kotlin:*
+```kotlin
+-  fun onTapToken(token: Token)
+```
+
+#### Arguments
+
+**token**: Token object from TAP.
+
+<a name=failed_callback"></a>
+### Failure Callback
+
+Notifies the receiver that failed.
+#### Declaration
+
+*Kotlin:*
+
+```kotlin
+-   fun onError(error: String?)
+```
+
+#### Arguments
+**error**: Failure object.
