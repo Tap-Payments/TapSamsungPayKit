@@ -361,7 +361,7 @@ Notifies the receiver that failed.
 <a name="onready_success_callback"></a>
 ### Ready Callback
 
-Notifies the receiver that failed.
+Notifies the receiver is ready.
 #### Declaration
 
 *Kotlin:*
