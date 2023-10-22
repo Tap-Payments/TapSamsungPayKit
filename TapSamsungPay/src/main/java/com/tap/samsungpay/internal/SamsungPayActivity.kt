@@ -105,11 +105,11 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
                         DataConfiguration.getListener()?.onError("SPAY_NOT_READY")
 
-                        Toast.makeText(
+                       /* Toast.makeText(
                             this@SamsungPayActivity,
                             "Samsung Pay is supported but not fully ready",
                             Toast.LENGTH_SHORT
-                        ).show()
+                        ).show()*/
                         // Samsung Pay is supported but not fully ready.
 
                         // If EXTRA_ERROR_REASON is ERROR_SPAY_APP_NEED_TO_UPDATE,
@@ -336,7 +336,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             .build()
     }
 
-    val cardInfoListener: CardInfoListener = object : CardInfoListener {
+    private val cardInfoListener: CardInfoListener = object : CardInfoListener {
         /*
      * This callback is received when the card information is received successfully.
      */

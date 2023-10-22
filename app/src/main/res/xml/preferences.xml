@@ -76,7 +76,7 @@
 
         <EditTextPreference
             app:key="amountKey"
-            app:defaultValue="0.1"
+            app:defaultValue="0.2"
             app:title="@string/amount"
             app:useSimpleSummaryProvider="true"/>
         <DropDownPreference
@@ -140,7 +140,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:title="@string/fields">
+        app:title="@string/fields"
+        app:isPreferenceVisible="false">
         <CheckBoxPreference
             app:key="shippingEnableKey"
             app:title="Shipping"

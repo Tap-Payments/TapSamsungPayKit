@@ -6,7 +6,10 @@ enum class Scope {
 }
 
 
-
+enum class ColorStyle {
+    colored,
+    monochrome
+}
 
 enum class ThemeMode {
     DARK,
@@ -20,9 +23,7 @@ enum class Language {
 
 enum class SupportedSchemes {
     AMERICAN_EXPRESS,
-
     MASTERCARD,
-
     VISA,
 
     ALL
@@ -46,6 +47,6 @@ enum class SDKMODE {
 
 
 enum class Edges {
-    CURVED,
-    STRAIGHT
+    flat,
+    curved
 }

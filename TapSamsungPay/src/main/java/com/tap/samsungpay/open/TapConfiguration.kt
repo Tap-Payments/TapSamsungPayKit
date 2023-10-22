@@ -11,6 +11,7 @@ package com.tap.samsungpay.open
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.gson.Gson
@@ -34,12 +35,12 @@ class TapConfiguration private constructor(
     val merchant: Merchant,
     val tapCustomer: TapCustomer?,
     val acceptance: Acceptance?,
-    val fields: Fields = Fields(shipping = true, billing = true),
+  //  val fields: Fields = Fields(shipping = true, billing = true),
     val addOns: AddOns?,
     val tapInterface: TapInterface?,
    // val authToken: AuthKey?,
     val packageName: String?,
-    val typeDevice: String?,
+    var typeDevice: String? = "Native Android",
     val serviceId:String?,
     val orderNumber:String?
 ) {
@@ -48,9 +49,9 @@ class TapConfiguration private constructor(
     init {
         if (packageName.isNullOrBlank())
             throw IllegalArgumentException("packageName must not be null or blank.")
-
-        if (typeDevice.isNullOrBlank())
-            throw IllegalArgumentException("device Type must not be null or blank.")
+       // typeDevice ="Native Android"
+       /* if (typeDevice.isNullOrBlank())
+            throw IllegalArgumentException("device Type must not be null or blank.")*/
 
     }
 
@@ -97,10 +98,10 @@ class TapConfiguration private constructor(
             this.acceptance = acceptance
         }
 
-        var fields: Fields? = null
+      /*  var fields: Fields? = null
         fun setFieldsVisibility(fields: Fields?) = apply {
             this.fields = fields
-        }
+        }*/
 
         var addOns: AddOns? = null
         fun setAddOns(addOns: AddOns?) = apply {
@@ -147,7 +148,7 @@ class TapConfiguration private constructor(
                 merchant!!,
                 tapCustomer,
                 acceptance,
-                fields!!,
+               // fields!!,
                 addOns,
                 tapInterface,
                // authTokenn,
@@ -178,20 +179,25 @@ class TapConfiguration private constructor(
 
         ) {
             when (tapConfiguration.tapInterface?.theme){
+
                 ThemeMode.DARK ->{
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                  // if(context.resources.configuration.uiMode==Configuration.UI_MODE_NIGHT_YES ){
+                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                   //    }
 
                 }
                 ThemeMode.LIGHT -> {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
+                   // if(context.resources.configuration.uiMode==Configuration.UI_MODE_NIGHT_NO ) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                   // }
                 }
                 else -> {}
             }
-            val intent = Intent(context, SamsungPayActivity::class.java)
-            context.startActivity(intent)
+
             DataConfiguration.addSDKDelegate(tapSamsunPayDelegate)
             setTapConfiguration(tapConfiguration)
+            val intent = Intent(context, SamsungPayActivity::class.java)
+            context.startActivity(intent)
 
 
         }

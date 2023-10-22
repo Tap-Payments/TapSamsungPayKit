@@ -51,11 +51,7 @@ class SamsungPayButton : LinearLayout {
         View.inflate(context, R.layout.samsung_pay_layout, this)
         with(TapConfiguration.getTapConfiguration()) {
             when (this?.tapInterface?.theme) {
-                ThemeMode.LIGHT -> mShimmerViewContainer.setAnimation(R.raw.lottie_light
-
-
-
-                )
+                ThemeMode.LIGHT -> mShimmerViewContainer.setAnimation(R.raw.lottie_light)
                 ThemeMode.DARK -> {
                     mShimmerViewContainer.setAnimation(
                       R.raw.lottie_dark

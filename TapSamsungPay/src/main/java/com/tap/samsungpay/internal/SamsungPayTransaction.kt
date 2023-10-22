@@ -3,9 +3,12 @@ package com.tap.samsungpay.internal
 import android.os.Bundle
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
 import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
+import com.samsung.android.sdk.samsungpay.v2.payment.PaymentInfo
+import com.samsung.android.sdk.samsungpay.v2.payment.sheet.AddressControl
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.AmountBoxControl
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.AmountConstants
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
+import com.samsung.android.sdk.samsungpay.v2.payment.sheet.SheetItemType
 import com.tap.samsungpay.open.TapConfiguration
 
 private const val AMOUNT_CONTROL_ID = "amountControlId"
@@ -25,10 +28,10 @@ class SamsungPayTransaction {
       //  println("extraPaymentInfo>>>"+extraPaymentInfo)
         println("brandList>>>"+brandList)
         customSheet.addControl(makeAmountControl())
+
         return CustomSheetPaymentInfo.Builder()
             .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
             .setMerchantName(tapConfiguration.getTapConfiguration()?.merchant?.id)
-           // .setOrderNumber("AMZ007MAR")
             .setOrderNumber(TapConfiguration.getTapConfiguration()?.orderNumber ?:"")
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
@@ -108,9 +111,11 @@ class SamsungPayTransaction {
 
     }
 
+
+
+
     private val brandList: ArrayList<SpaySdk.Brand>
         get() {
-           // val spayBrandList = ArrayList<SpaySdk.Brand>()
             val _brandList :  ArrayList<SpaySdk.Brand> =  ArrayList<SpaySdk.Brand>()
           //  with(TapConfiguration.getTapConfiguration()) {
                 // var tapBrands = this?.acceptance?.supportedBrands?.map { it.rawValue.replace("_","") }
@@ -131,7 +136,6 @@ class SamsungPayTransaction {
                 }
            // }
 
-            println("_brandList new"+_brandList)
             return _brandList
         }
 

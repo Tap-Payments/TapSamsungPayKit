@@ -104,7 +104,7 @@ object DataConfiguration {
             context, dataConfig.publicKey?.publicKey,
             dataConfig.packageName,
             if (dataConfig.environment == SDKMODE.SANDBOX) ApiService.BASE_URL else ApiService.PRODUCTION_URL,
-            dataConfig.typeDevice,
+            if(dataConfig.typeDevice == null || dataConfig.typeDevice == "") "Native Android" else dataConfig.typeDevice,
             true,
             context.resources.getString(company.tap.tapnetworkkit_android.R.string.enryptkey),
             null

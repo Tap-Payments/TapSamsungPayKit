@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                         .setGatwayId(getPrefStringValue("gatewayIdKey", "tappayments")).build()
                 )
                 .setOrders(
-                    OrderDetail.Builder().setAmount((getPrefStringValue("amountKey", "0.1")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
+                    OrderDetail.Builder().setAmount((getPrefStringValue("amountKey", "0.2")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
                         .setShipping(Shipping((getPrefStringValue("shipNameKey", "tester")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
                         .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
                         .build()
@@ -83,12 +83,6 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                         supportedSchemes = getPrefs().getStringSet("selectedSchemesKey", emptySet<String>())!!.toMutableList(),
                     )
                 )
-                .setFieldsVisibility(
-                    Fields(
-                        shipping = getPrefBooleanValue("shippingEnableKey", true),//Optional
-                        billing = getPrefBooleanValue("billingEnableKey", true)//Optional
-                    )
-                )//Optional
                 .setTapCustomer(getTapCustomer()) //Required
                 .setTapInterface(
                     TapInterface(
