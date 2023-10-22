@@ -113,7 +113,7 @@ Here we need to make a Top level declaration
  private lateinit var tapConfiguration: TapConfiguration
 ```
    
-### Usage
+##  Usage
 ---
 <a name="configure_sdk_with_required_data"></a>
 ### Configure SDK With Required Data
@@ -128,23 +128,22 @@ Here we need to make a Top level declaration
          * Configure SDK with your choice from the given list.
          */
        
-        initConfigurations()
 
-       private fun initConfigurations() {
+private fun initConfigurations() {
 
    tapConfiguration =
       TapConfiguration.Builder()
          .setOperator(
             Operator.Builder()
                .setPublicKey("pk_test_XXXXXXXXXX")
-               .setHashString(getPrefStringValue("XXXXXXX"))
+               .setHashString("XXXXXXX")
                .build()
          )
          .setMerchant(
             Merchant.Builder().setId("Merchant Id associated with Tap ")
                .setGatwayId("tappayments").build())
          .setOrders(
-            OrderDetail.Builder().setAmount( "0.2".toDouble()).setCurrency( "USD")
+            OrderDetail.Builder().setAmount( "0.2".toDouble()).setCurrency( "USD")//**Required**//
                .setShipping(Shipping("tester"),  "0.1").toDouble().setTax(Tax( "test"),  "0.1".toDouble()) //Optional
                .setOrderNumber( "AMZ333") //**Optional**//
                .build()
@@ -153,7 +152,7 @@ Here we need to make a Top level declaration
           Acceptance(
              supportedSchemes = mutableListOf(SupportedSchemes.VISA.name,SupportedSchemes.MASTERCARD.name,SupportedSchemes.AMERICAN_EXPRESS.name),
           )
-         .setTapCustomer(getTapCustomer()) //Required
+         .setTapCustomer(getTapCustomer()) //**Required**//
          .setTapInterface(
             TapInterface(
                Language.EN.name,
