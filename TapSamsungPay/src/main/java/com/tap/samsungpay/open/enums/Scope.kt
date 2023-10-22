@@ -18,13 +18,13 @@ enum class Language {
 }
 
 
-enum class SupportedBrands {
+enum class SupportedSchemes {
     AMERICAN_EXPRESS,
-    MADA,
+
     MASTERCARD,
-    OMANNET,
+
     VISA,
-    MEEZA,
+
     ALL
 }
 

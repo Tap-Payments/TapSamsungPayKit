@@ -56,7 +56,7 @@
 
 
         <MultiSelectListPreference
-            app:key="selectedBrandsKey"
+            app:key="selectedSchemesKey"
             app:title="@string/supported_scheme"
             app:entries="@array/SupportedSchemes"
             app:entryValues="@array/SupportedSchemes"

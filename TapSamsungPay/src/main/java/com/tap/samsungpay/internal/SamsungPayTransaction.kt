@@ -114,7 +114,7 @@ class SamsungPayTransaction {
             val _brandList :  ArrayList<SpaySdk.Brand> =  ArrayList<SpaySdk.Brand>()
           //  with(TapConfiguration.getTapConfiguration()) {
                 // var tapBrands = this?.acceptance?.supportedBrands?.map { it.rawValue.replace("_","") }
-                val tapBrands = TapConfiguration.getTapConfiguration()?.acceptance?.supportedBrands
+                val tapBrands = TapConfiguration.getTapConfiguration()?.acceptance?.supportedSchemes
                 println("tapBrands are" + tapBrands)
 
 

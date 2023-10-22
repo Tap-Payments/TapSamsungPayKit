@@ -78,8 +78,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                 .setScope(getScope("scopeKey"))
                 .setAcceptance(
                     Acceptance(
-                        supportedFundSource = SupportedFundSource.DEBIT,
-                        supportedBrands = getPrefs().getStringSet("selectedBrandsKey", emptySet<String>())!!.toMutableList(),
+                        supportedSchemes = getPrefs().getStringSet("selectedSchemesKey", emptySet<String>())!!.toMutableList(),
                         supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
                     )
                 )
