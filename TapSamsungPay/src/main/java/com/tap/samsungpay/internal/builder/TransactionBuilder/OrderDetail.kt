@@ -4,11 +4,12 @@ import com.tap.samsungpay.internal.models.Shipping
 import com.tap.samsungpay.internal.models.Tax
 
 
-class Transaction(
+class OrderDetail(
     var amount: Double?,
     var currency: String?,
     var shipping: Shipping? = null,
-    var tax: Tax? = null
+    var tax: Tax? = null,
+    var orderNumber: String? = null
 ) {
     init {
 
@@ -27,6 +28,7 @@ class Transaction(
         private var currency: String? = null
         private var shipping: Shipping? = null
         private var tax: Tax? = null
+        private var orderNumber: String? = null
 
         fun setAmount(amount: Double) = apply {
             this.amount = amount
@@ -44,9 +46,12 @@ class Transaction(
         fun setCurrency(currency: String?) = apply {
             this.currency = currency
         }
+        fun setOrderNumber(orderNumber: String?) = apply {
+            this.orderNumber = orderNumber
+        }
 
-        fun build(): Transaction {
-            return Transaction(amount, currency, shipping, tax)
+        fun build(): OrderDetail {
+            return OrderDetail(amount, currency, shipping, tax)
         }
     }
 }

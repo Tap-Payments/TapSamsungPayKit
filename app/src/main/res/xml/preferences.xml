@@ -197,7 +197,8 @@
 
 
     <PreferenceCategory
-        app:title="@string/KeysFor">
+        app:title="@string/KeysFor"
+        app:isPreferenceVisible="false">
 
         <EditTextPreference
             app:key="sandboxKey"

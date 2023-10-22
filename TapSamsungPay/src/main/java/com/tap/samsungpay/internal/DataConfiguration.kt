@@ -67,11 +67,11 @@ object DataConfiguration {
             PaymentDataSourceImpl.setSupportedPaymentMethods(listOf(CardBrand.SAMSUNG_PAY.name))
             PaymentDataSourceImpl.setSupportedCurrencies(
                 arrayListOf(
-                    this.transaction.currency!!
+                    this.orderDetail.currency!!
                 )
             )
 
-            PaymentDataSourceImpl.setSelectedAmount(this.transaction.amount?.toBigDecimal()!!)
+            PaymentDataSourceImpl.setSelectedAmount(this.orderDetail.amount?.toBigDecimal()!!)
             PaymentDataSourceImpl.setTaxes(null)
             PaymentDataSourceImpl.setDestination(null)
             PaymentDataSourceImpl.setCustomer(this.tapCustomer!!)
@@ -80,14 +80,14 @@ object DataConfiguration {
            // PaymentDataSourceImpl.setCardType(this.acceptance?.supportedFundSource?.name)
             PaymentDataSourceImpl.setOrder(
                 OrderObject(
-                    amount = this.transaction.amount!!.toBigDecimal(),
-                    currency = this.transaction.currency!!,
+                    amount = this.orderDetail.amount!!.toBigDecimal(),
+                    currency = this.orderDetail.currency!!,
                     customer = this.tapCustomer,
                     items = arrayListOf(
                         ItemsModel(
-                            amount = this.transaction.amount?.toBigDecimal(),
-                            totalAmount = this.transaction.amount?.toBigDecimal(),
-                            currency = this.transaction.currency
+                            amount = this.orderDetail.amount?.toBigDecimal(),
+                            totalAmount = this.orderDetail.amount?.toBigDecimal(),
+                            currency = this.orderDetail.currency
                         )
                     ),
                     tax = null,
@@ -97,7 +97,7 @@ object DataConfiguration {
             )
 
         }
-        PaymentDataSourceImpl.setSelectedCurrency(dataConfig.transaction.currency)
+        PaymentDataSourceImpl.setSelectedCurrency(dataConfig.orderDetail.currency)
         PaymentDataSourceImpl.setDefaultCardHolderName("")
 
         NetworkApp.initNetwork(

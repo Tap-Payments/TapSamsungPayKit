@@ -17,7 +17,8 @@ import com.google.gson.Gson
 import com.tap.samsungpay.internal.DataConfiguration
 import com.tap.samsungpay.internal.SamsungPayActivity
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
-import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
+import com.tap.samsungpay.internal.builder.TransactionBuilder.OrderDetail
+
 import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.*
@@ -29,14 +30,14 @@ class TapConfiguration private constructor(
     val publicKey: Operator?,
     val environment: SDKMODE?,
     val scope: Scope? = Scope.TAP_TOKEN,
-    val transaction: Transaction,
+    val orderDetail: OrderDetail,
     val merchant: Merchant,
     val tapCustomer: TapCustomer?,
     val acceptance: Acceptance?,
     val fields: Fields = Fields(shipping = true, billing = true),
     val addOns: AddOns?,
     val tapInterface: TapInterface?,
-    val authToken: AuthKey?,
+   // val authToken: AuthKey?,
     val packageName: String?,
     val typeDevice: String?,
     val serviceId:String?,
@@ -70,9 +71,9 @@ class TapConfiguration private constructor(
             this.scope = scope
         }
 
-        var transaction: Transaction? = null
-        fun setTransactions(transaction: Transaction) = apply {
-            this.transaction = transaction
+        var orderDetail: OrderDetail? = null
+        fun setOrders(orderDetail: OrderDetail) = apply {
+            this.orderDetail = orderDetail
         }
 
         var features: Features? = null
@@ -112,10 +113,10 @@ class TapConfiguration private constructor(
         }
 
 
-        var authTokenn: AuthKey? = null
+       /* var authTokenn: AuthKey? = null
         fun setAuthToken(authToken: AuthKey) = apply {
             this.authTokenn = authToken
-        }
+        }*/
 
         var packageName: String? = null
         fun setPackageName(packageName: String) = apply {
@@ -142,14 +143,14 @@ class TapConfiguration private constructor(
                 operator,
                 environment,
                 scope,
-                transaction!!,
+                orderDetail!!,
                 merchant!!,
                 tapCustomer,
                 acceptance,
                 fields!!,
                 addOns,
                 tapInterface,
-                authTokenn,
+               // authTokenn,
                 packageName,
                 typeDevice,serviceId, orderNumber
             )

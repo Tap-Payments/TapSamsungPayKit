@@ -35,6 +35,8 @@ data class Acceptance(
 )
 
 
+
+
 data class AddOns(
     var loader: Boolean = true,
     var displayCardScanning: Boolean = true,

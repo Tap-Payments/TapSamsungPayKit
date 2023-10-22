@@ -15,7 +15,7 @@ import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.chillibits.simplesettings.tool.getPrefs
 import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
-import com.tap.samsungpay.internal.builder.TransactionBuilder.Transaction
+import com.tap.samsungpay.internal.builder.TransactionBuilder.OrderDetail
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.Acceptance
 import com.tap.samsungpay.internal.models.Fields
@@ -70,9 +70,10 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                     Merchant.Builder().setId(getPrefStringValue("merchantIdKey", "1124340"))
                         .setGatwayId(getPrefStringValue("gatewayIdKey", "tappayments")).build()
                 )
-                .setTransactions(
-                    Transaction.Builder().setAmount((getPrefStringValue("amountKey", "0.1")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
+                .setOrders(
+                    OrderDetail.Builder().setAmount((getPrefStringValue("amountKey", "0.1")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
                         .setShipping(Shipping((getPrefStringValue("shipNameKey", "tester")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
+                        .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
                         .build()
                 )
                 .setScope(getScope("scopeKey"))
@@ -95,16 +96,10 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                         getThemeMode("selectedthemeKey")
                     ) //Optional
 
-                ).setAuthToken(AuthKey.Builder()
-                    .setSandBox(getPrefStringValue("sandboxKey","sk_test_kovrMB0mupFJXfNZWx6Etg5y"))
-                     .setProductionLiveKey(getPrefStringValue("productionKey","sk_test_kovrMB0mupFJXfNZWx6Etg5y")).build()
                 )
                 .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))
                 .setDeviceType(getPrefStringValue("deviceTypeKey", "Android Native"))
-
-                .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))
-                .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))
-                .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
+                .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))//**Required**//
                 .build()
 
     }
