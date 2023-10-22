@@ -407,7 +407,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                // println("on success extraPaymentData>"+extraPaymentData)
                 if(TapConfiguration.getTapConfiguration()?.scope==Scope.SAMSUNG_TOKEN) {
                     DataConfiguration.getListener()?.onSamsungPayToken(paymentCredential)
-                    finish()
+                    this@SamsungPayActivity.finish()
                 }else if( TapConfiguration.getTapConfiguration()?.scope==Scope.TAP_TOKEN ){
 
                     /*
@@ -424,7 +424,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                // println("errorData>>>" + errorData)
                 Log.e("onFailure >>>>>", errorCode.toString() )
                 if(errorCode.toString()!=null && errorCode==-7){
-                    DataConfiguration.getListener()?.onError("Payment cancelled")
+                    DataConfiguration.getListener()?.onCancel("Payment cancelled")
                     finish()
 
                 }else DataConfiguration.getListener()?.onError("Failed to show"+errorData.toString())

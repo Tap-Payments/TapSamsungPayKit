@@ -150,11 +150,9 @@ Here we need to make a Top level declaration
                .build()
          )
          .setScope(Scope.SAMSUNG_TOKEN or Scope.TAP_TOKEN)
-         .setAcceptance(
-            Acceptance(
-               supportedSchemes = getPrefs().getStringSet("selectedSchemesKey", emptySet<String>())!!.toMutableList(),
-            )
-         )
+          Acceptance(
+             supportedSchemes = mutableListOf(SupportedSchemes.VISA.name,SupportedSchemes.MASTERCARD.name,SupportedSchemes.AMERICAN_EXPRESS.name),
+          )
          .setTapCustomer(getTapCustomer()) //Required
          .setTapInterface(
             TapInterface(

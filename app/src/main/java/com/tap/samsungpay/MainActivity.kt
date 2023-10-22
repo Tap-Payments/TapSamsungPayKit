@@ -8,6 +8,7 @@
 package com.tap.samsungpay
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.chillibits.simplesettings.tool.getPrefBooleanValue
@@ -30,10 +31,9 @@ import com.tap.samsungpay.open.enums.ColorStyle
 import com.tap.samsungpay.open.enums.Edges
 import com.tap.samsungpay.open.enums.Language
 import com.tap.samsungpay.open.enums.Scope
-import com.tap.samsungpay.open.enums.SupportedFundSource
-import com.tap.samsungpay.open.enums.SupportedPaymentAuthentications
+
 import com.tap.samsungpay.open.enums.ThemeMode
-import company.tap.tapcardformkit.open.builder.AuthKey
+
 
 
 class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
          * Configure SDK with your choice from the given list.
          */
         initConfigurations()
-        TapConfiguration.configureSamsungPayWithTapConfiguration(tapConfiguration, this)
+        TapConfiguration.configureSamsungPayWithTapConfiguration(tapConfiguration, this, this)
 
     }
 
@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                 )
                 .setOrders(
                     OrderDetail.Builder().setAmount((getPrefStringValue("amountKey", "0.2")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
-                        .setShipping(Shipping((getPrefStringValue("shipNameKey", "tester")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
+                        .setShipping(Shipping((getPrefStringValue("shipNameKey", "Shipping Test")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "Tax Test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
                         .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
                         .build()
                 )
@@ -170,6 +170,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
             // When the user click yes button then app will close
                 dialog, which ->
             dialog.dismiss()
+            finish()
 
         }
 
@@ -207,12 +208,14 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
 
     override fun onTapToken(token: Token) {
         customAlertBox("onTapToken", token.id.toString())
-    }
-
-    override fun onCancel() {
-        //    Toast.makeText(this@MainActivity, "Cancelled", Toast.LENGTH_SHORT).show()
 
     }
+
+    override fun onCancel(cancel: String) {
+        customAlertBox("onCancel",cancel)
+    }
+
+
 
 
 

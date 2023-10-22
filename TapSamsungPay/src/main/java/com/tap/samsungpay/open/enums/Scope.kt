@@ -27,7 +27,10 @@ enum class SupportedSchemes {
     VISA,
 
 }
-
+enum class SDKMODE {
+    SANDBOX,
+    PRODUCTION,
+}
 
 enum class Edges {
     flat,

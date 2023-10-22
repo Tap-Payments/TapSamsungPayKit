@@ -22,6 +22,7 @@ import com.tap.samsungpay.open.TapConfiguration
 import company.tap.tapcardformkit.internal.api.enums.PaymentType
 import com.tap.samsungpay.internal.api.enums.TransactionMode
 import com.tap.samsungpay.open.enums.SDKMODE
+
 import company.tap.tapcardvalidator_android.CardBrand
 import company.tap.tapnetworkkit.connection.NetworkApp
 

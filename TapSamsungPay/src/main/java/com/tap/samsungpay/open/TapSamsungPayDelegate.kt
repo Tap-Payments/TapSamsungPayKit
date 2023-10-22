@@ -3,7 +3,7 @@ package com.tap.samsungpay.open
 import com.tap.samsungpay.internal.api.responses.Token
 
 
-interface TapSamsunPayDelegate {
+interface TapSamsungPayDelegate {
     fun onError(error: String?)
     fun onSamsungPayToken(token: String)
     fun onReady(readyStatus: String)
