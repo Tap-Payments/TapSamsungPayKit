@@ -133,54 +133,40 @@ Here we need to make a Top level declaration
        
         initConfigurations()
 
-   private fun initConfigurations() {
+       private fun initConfigurations() {
 
-      tapConfiguration =
+   tapConfiguration =
       TapConfiguration.Builder()
          .setOperator(
             Operator.Builder()
-               .setPublicKey(
-                  getPrefStringValue(
-                     "publicKey",
-                     "pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
-                  )
-               )
-               .setHashString(getPrefStringValue("hashKey", "test"))
+               .setPublicKey("pk_test_XXXXXXXXXX")
+               .setHashString(getPrefStringValue("XXXXXXX"))
                .build()
          )
          .setMerchant(
-            Merchant.Builder().setId(getPrefStringValue("merchantIdKey", "1124340"))
-               .setGatwayId(getPrefStringValue("gatewayIdKey", "tappayments")).build()
-         )
+            Merchant.Builder().setId("Merchant Id associated with Tap ")
+               .setGatwayId("tappayments").build())
          .setOrders(
-            OrderDetail.Builder().setAmount((getPrefStringValue("amountKey", "0.1")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
-               .setShipping(Shipping((getPrefStringValue("shipNameKey", "tester")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
-               .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
+            OrderDetail.Builder().setAmount( "0.2".toDouble()).setCurrency( "USD")
+               .setShipping(Shipping("tester"),  "0.1").toDouble().setTax(Tax( "test"),  "0.1".toDouble()) //Optional
+               .setOrderNumber( "AMZ333") //**Optional**//
                .build()
          )
-         .setScope(getScope("scopeKey"))
+         .setScope(Scope.SAMSUNG_TOKEN or Scope.TAP_TOKEN)
          .setAcceptance(
             Acceptance(
                supportedSchemes = getPrefs().getStringSet("selectedSchemesKey", emptySet<String>())!!.toMutableList(),
             )
          )
-         .setFieldsVisibility(
-            Fields(
-               shipping = getPrefBooleanValue("shippingEnableKey", true),//Optional
-               billing = getPrefBooleanValue("billingEnableKey", true)//Optional
-            )
-         )//Optional
          .setTapCustomer(getTapCustomer()) //Required
          .setTapInterface(
             TapInterface(
-               getLanguageMode("selectedlangKey"),
-               Edges.CURVED,
-               getThemeMode("selectedthemeKey"), getColorStyle("selectedccolorstyleKey")
+               Language.EN.name,
+               Edges.curved,
+               ThemeMode.DARK, ColorStyle.colored.name)
             ) //Optional
-
-         )
-         .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))//**Required**//
-         .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))//**Required**//
+         .setPackageName("Package Id registered with samsungpay")//**Required**//
+         .setServiceId("Service id generated from samsungpay portal")//**Required**//
          .build()
 
 }
@@ -220,13 +206,9 @@ Pass the above data to TapConfigurations as below:
    	 <td> setCurrency  </td>
    	 <td> Set the transaction currency associated to your account.  currency must be of type TapCurrency("currency_iso_code"). i.e new TapCurrency("USD") </td>
     </tr>
-    <tr>
-	 <td> setEnvironmentMode  </td>
-	 <td> SDK offers different environment modes such as [ TEST - PRODUCTION]   </td>
-    </tr>
-    <tr>
-	 <td> setAmount </td>
-	 <td> Set Total Amount. Amount value must be of type BigDecimal i.e new BigDecimal(40) </td>
+      <tr>
+	 <td> setOrders </td>
+	 <td> Set details related to transaction the amount currency , shipping , taxes etc</td>
     </tr>
     <tr>
 	 <td> setGatewayId </td>
@@ -257,53 +239,37 @@ SDK open Enums available for implementation through Merchant Project:
 
 ```kotlin
 enum class Scope {
-    TAP_TOKEN,
-    SAMSUNG_TOKEN
+   TAP_TOKEN,
+   SAMSUNG_TOKEN
 }
 
 
-
+enum class ColorStyle {
+   colored,
+   monochrome
+}
 
 enum class ThemeMode {
-    DARK,
-    LIGHT,
+   DARK,
+   LIGHT,
 }
 enum class Language {
-    EN,
-    AR,
+   EN,
+   AR,
 }
 
 
-enum class SupportedBrands {
-    AMERICAN_EXPRESS,
-    MADA,
-    MASTERCARD,
-    OMANNET,
-    VISA,
-    MEEZA,
-    ALL
-}
+enum class SupportedSchemes {
+   AMERICAN_EXPRESS,
+   MASTERCARD,
+   VISA,
 
-enum class SupportedFundSource {
-    ALL,
-    DEBIT,
-    CREDIT
-}
-
-enum class SupportedPaymentAuthentications {
-    ThreeDS,
-    EMV,
-}
-
-enum class SDKMODE {
-    SANDBOX,
-    PRODUCTION,
 }
 
 
 enum class Edges {
-    CURVED,
-    STRAIGHT
+   flat,
+   curved
 }
 ```
 ## SDK Delegate

@@ -26,23 +26,6 @@ enum class SupportedSchemes {
     MASTERCARD,
     VISA,
 
-    ALL
-}
-
-enum class SupportedFundSource {
-    ALL,
-    DEBIT,
-    CREDIT
-}
-
-enum class SupportedPaymentAuthentications {
-    ThreeDS,
-    EMV,
-}
-
-enum class SDKMODE {
-    SANDBOX,
-    PRODUCTION,
 }
 
 
