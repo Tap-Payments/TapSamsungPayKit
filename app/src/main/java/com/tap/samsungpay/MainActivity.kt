@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                         shipping = getPrefBooleanValue("shippingEnableKey", true),//Optional
                         billing = getPrefBooleanValue("billingEnableKey", true)//Optional
                     )
-                )
+                )//Optional
                 .setTapCustomer(getTapCustomer()) //Required
                 .setTapInterface(
                     TapInterface(
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                     ) //Optional
 
                 )
-                .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))
+                .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))//**Required**//
                 .setDeviceType(getPrefStringValue("deviceTypeKey", "Android Native"))
                 .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))//**Required**//
                 .build()

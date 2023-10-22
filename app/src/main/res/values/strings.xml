@@ -56,7 +56,6 @@
     </string-array>
 
     <string-array name="SupportedSchemes">
-        <item>SAMSUNG_PAY</item>
         <item>AMERICANEXPRESS</item>
         <item>VISA</item>
         <item>MASTERCARD</item>

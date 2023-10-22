@@ -133,59 +133,55 @@ Here we need to make a Top level declaration
        
         initConfigurations()
 
-   private fun initConfigurations() {
-      tapConfiguration =
-          TapConfiguration.Builder()
+private fun initConfigurations() {
+
+   tapConfiguration =
+      TapConfiguration.Builder()
          .setOperator(
             Operator.Builder()
                .setPublicKey(
-                  "pk_test_XXXXXXXXXXXXX"
-                  
-               ) //**Required**/
-               .setHashString("test")//**Required**/
+                  getPrefStringValue(
+                     "publicKey",
+                     "pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
+                  )
+               )
+               .setHashString(getPrefStringValue("hashKey", "test"))
                .build()
          )
          .setMerchant(
-            Merchant.Builder().setId("Pass MerchantId associated with Tap") //**Required**//
-               .setGatwayId("tappayments").build()//**Required has to be tappayments **/
+            Merchant.Builder().setId(getPrefStringValue("merchantIdKey", "1124340"))
+               .setGatwayId(getPrefStringValue("gatewayIdKey", "tappayments")).build()
          )
-         .setTransactions(
-            Transaction.Builder().setAmount(0.1).setCurrency("USD")//**Required to start samsungpayment**/
-               .setShipping(Shipping("test", 0.1)).setTax(Tax("test", 0.1)) //Optional
+         .setOrders(
+            OrderDetail.Builder().setAmount((getPrefStringValue("amountKey", "0.1")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
+               .setShipping(Shipping((getPrefStringValue("shipNameKey", "tester")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
+               .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
                .build()
          )
-         .setScope(Scope.SAMSUNG_TOKEN)//**Required to know what you prefer only samsung token  / tap token  Scope.TAP_TOKEN select from enum**//
+         .setScope(getScope("scopeKey"))
          .setAcceptance(
             Acceptance(
-               supportedFundSource = SupportedFundSource.DEBIT,
-               supportedBrands = arrayListOf<CardBrand>(
-                  CardBrand.SAMSUNG_PAY
-               ),
-               supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
+               supportedSchemes = getPrefs().getStringSet("selectedSchemesKey", emptySet<String>())!!.toMutableList(),
             )
-         )//**Required**/
-         .setFields(
+         )
+         .setFieldsVisibility(
             Fields(
                shipping = getPrefBooleanValue("shippingEnableKey", true),//Optional
                billing = getPrefBooleanValue("billingEnableKey", true)//Optional
             )
-         )
-         .setTapCustomer(getTapCustomer()) //**Required**//
+         )//Optional
+         .setTapCustomer(getTapCustomer()) //Required
          .setTapInterface(
             TapInterface(
-               Language.EN.name,
+               getLanguageMode("selectedlangKey"),
                Edges.CURVED,
-               ThemeMode.DARK
-            ) //Optional if not set it will take sdk defaults
+               getThemeMode("selectedthemeKey")
+            ) //Optional
 
-         ).setAuthToken(AuthKey.Builder()
-            .setSandBox("sk_test_XXXXXXXXXXXX")
-            .setProductionLiveKey("sk_live_XXXXXXXXXXXXXXXXXX").build() //**Required by tap**//
          )
-         .setPackageName("Pass package id of your app registered with samsung") //**Required**//
-         .setDeviceType("Android Native")//**Required**//
-
-         .setServiceId("Pass the service id generated from samsung portal")//**Required to start samsungpayment**//
+         .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))//**Required**//
+         .setDeviceType(getPrefStringValue("deviceTypeKey", "Android Native"))
+         .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))//**Required**//
          .build()
 
 }

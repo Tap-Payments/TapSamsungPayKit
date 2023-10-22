@@ -120,20 +120,17 @@ class SamsungPayTransaction {
 
                 for (i in tapBrands?.indices!!) {
                     //Added temp until we get this from BE
-                    if(tapBrands.contains("SAMSUNG_PAY")){
+                   /* if(tapBrands.contains("SAMSUNG_PAY")){
                         tapBrands.remove("SAMSUNG_PAY")
                         tapBrands.add("UNKNOWN_CARD")
-                    }
+                    }*/
                    if(_brandList.contains(SpaySdk.Brand.valueOf(tapBrands[i]))){
                        _brandList.add(SpaySdk.Brand.valueOf(tapBrands[i]))
 
                    }
                 }
            // }
-           /* brandList.add(SpaySdk.Brand.VISA)
-            brandList.add(SpaySdk.Brand.MASTERCARD)
-            brandList.add(SpaySdk.Brand.AMERICANEXPRESS)
-            brandList.add(SpaySdk.Brand.DISCOVER)*/
+
             println("_brandList new"+_brandList)
             return _brandList
         }
