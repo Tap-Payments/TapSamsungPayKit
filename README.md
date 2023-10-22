@@ -113,7 +113,7 @@ Here we need to make a Top level declaration
  private lateinit var tapConfiguration: TapConfiguration
 ```
    
-#Usage
+### Usage
 ---
 <a name="configure_sdk_with_required_data"></a>
 ### Configure SDK With Required Data
@@ -184,7 +184,7 @@ Pass the above data to TapConfigurations as below:
 
 
    <tr>
-	<td> tapSamsunPayDelegate  </td>
+	<td> tapSamsungPayDelegate  </td>
 	<td> Activity </td>
 	<td> Activity. it is used to notify Merchant application with all SDK Events </td>
    <tr>
@@ -220,7 +220,7 @@ Pass the above data to TapConfigurations as below:
  
 SDK open Interfaces available for implementation through Merchant Project:
 
-1. TapSamsunPayDelegate
+1. TapSamsungPayDelegate
 ```kotlin
      fun onError(error: String?)
      fun onSamsungPayToken(token: String)

@@ -1,3 +1,10 @@
+/**
+ *   Created by AhlaamK on 10/22/23, 4:58 PM
+ *   Copyright (c) 2023 .
+ *   Tap Payments All rights reserved.
+ *
+ **/
+
 package com.tap.samsungpay.open.enums
 
 enum class Scope {

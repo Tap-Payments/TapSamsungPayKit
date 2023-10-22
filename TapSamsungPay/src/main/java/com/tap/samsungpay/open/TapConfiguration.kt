@@ -175,7 +175,7 @@ class TapConfiguration private constructor(
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,
-            tapSamsunPayDelegate: TapSamsunPayDelegate? = null
+            tapSamsungPayDelegate: TapSamsungPayDelegate? = null
 
         ) {
             when (tapConfiguration.tapInterface?.theme){
@@ -187,14 +187,14 @@ class TapConfiguration private constructor(
 
                 }
                 ThemeMode.LIGHT -> {
-                   // if(context.resources.configuration.uiMode==Configuration.UI_MODE_NIGHT_NO ) {
+                    if(context.resources.configuration.uiMode==Configuration.UI_MODE_NIGHT_NO ) {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                   // }
+                    }
                 }
                 else -> {}
             }
 
-            DataConfiguration.addSDKDelegate(tapSamsunPayDelegate)
+            DataConfiguration.addSDKDelegate(tapSamsungPayDelegate)
             setTapConfiguration(tapConfiguration)
             val intent = Intent(context, SamsungPayActivity::class.java)
             context.startActivity(intent)

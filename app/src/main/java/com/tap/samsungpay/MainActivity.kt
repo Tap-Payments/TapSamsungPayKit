@@ -26,7 +26,7 @@ import com.tap.samsungpay.internal.models.TapCustomer
 import com.tap.samsungpay.internal.models.TapInterface
 import com.tap.samsungpay.internal.models.Tax
 import com.tap.samsungpay.open.TapConfiguration
-import com.tap.samsungpay.open.TapSamsunPayDelegate
+import com.tap.samsungpay.open.TapSamsungPayDelegate
 import com.tap.samsungpay.open.enums.ColorStyle
 import com.tap.samsungpay.open.enums.Edges
 import com.tap.samsungpay.open.enums.Language
@@ -36,7 +36,7 @@ import com.tap.samsungpay.open.enums.ThemeMode
 
 
 
-class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
+class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
 
     private lateinit var tapConfiguration: TapConfiguration
 

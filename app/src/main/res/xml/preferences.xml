@@ -88,7 +88,7 @@
 
         <EditTextPreference
             app:key="shipNameKey"
-            app:defaultValue="tester"
+            app:defaultValue="Shipping Test"
             app:title="@string/ship_name"
             app:useSimpleSummaryProvider="true"/>
 
@@ -100,7 +100,7 @@
 
         <EditTextPreference
             app:key="taxNameKey"
-            app:defaultValue="test"
+            app:defaultValue="Tax Test"
             app:title="@string/tax_name"
             app:useSimpleSummaryProvider="true"/>
         <EditTextPreference

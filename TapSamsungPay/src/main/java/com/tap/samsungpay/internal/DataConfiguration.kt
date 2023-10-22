@@ -1,10 +1,9 @@
-/*
- * *
- *  * Created by $AhlaamK on 10/19/23, 11:37 AM
- *  * Copyright (c) 2023 .
- *  * Tap Payments All rights reserved.
- *  *
- *  *
+/**
+ *  Created by $AhlaamK on 10/19/23, 11:37 AM
+ *  Copyright (c) 2023 .
+ *  Tap Payments All rights reserved.
+ *
+ *
  */
 
 package com.tap.samsungpay.internal
@@ -17,7 +16,7 @@ import com.tap.samsungpay.internal.models.OrderObject
 import com.tap.samsungpay.internal.api.CardViewEvent
 import com.tap.samsungpay.internal.api.SmsungPayViewModel
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
-import com.tap.samsungpay.open.TapSamsunPayDelegate
+import com.tap.samsungpay.open.TapSamsungPayDelegate
 import com.tap.samsungpay.open.TapConfiguration
 import company.tap.tapcardformkit.internal.api.enums.PaymentType
 import com.tap.samsungpay.internal.api.enums.TransactionMode
@@ -28,13 +27,12 @@ import company.tap.tapnetworkkit.connection.NetworkApp
 
 
 object DataConfiguration {
-    private var tapSamsunPayDelegate: TapSamsunPayDelegate? = null
+    private var tapSamsungPayDelegate: TapSamsungPayDelegate? = null
     private var internalCheckoutProfileDelegate: InternalCheckoutProfileDelegate? = null
 
 
-    fun addSDKDelegate(_tapSamsunPayDelegate: TapSamsunPayDelegate?) {
-        println("addSDKDelegate sdk ${_tapSamsunPayDelegate}")
-        tapSamsunPayDelegate = _tapSamsunPayDelegate
+    fun addSDKDelegate(_tapSamsungPayDelegate: TapSamsungPayDelegate?) {
+        tapSamsungPayDelegate = _tapSamsungPayDelegate
 
 
     }
@@ -45,8 +43,8 @@ object DataConfiguration {
 
     }
 
-    fun getListener(): TapSamsunPayDelegate? {
-        return tapSamsunPayDelegate
+    fun getListener(): TapSamsungPayDelegate? {
+        return tapSamsungPayDelegate
     }
 
     fun getInternalCheckoutDelegate(): InternalCheckoutProfileDelegate? {
