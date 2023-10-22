@@ -68,10 +68,7 @@ Step 2. Add the dependency
 ---
 # Get your Tap keys
 You can always use the example keys within our example app, but we do recommend you to head to our [onboarding](https://register.tap.company/sell)  page. You will need to register your `package name` to get your `Tap Key` that you will need to activate our `TapSamsungPaySDK`.
-<a name="setup_tapsamsung_pay_sdk_class_properties_secret_ke"></a>
-### Secret Key and Application ID
 
-To set it up, add the following line of code somewhere in your project and make sure it will be called before any usage of `TapSamsungPaySDK`, otherwise an exception will be thrown. **Required**.
 
 <a name="setup_steps"></a>
 
@@ -264,6 +261,11 @@ enum class SupportedSchemes {
    MASTERCARD,
    VISA,
 
+}
+
+enum class SDKMODE {
+   SANDBOX,
+   PRODUCTION,
 }
 
 
