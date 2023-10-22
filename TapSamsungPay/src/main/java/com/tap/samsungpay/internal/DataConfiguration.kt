@@ -22,6 +22,7 @@ import com.tap.samsungpay.open.TapConfiguration
 import company.tap.tapcardformkit.internal.api.enums.PaymentType
 import com.tap.samsungpay.internal.api.enums.TransactionMode
 import com.tap.samsungpay.open.enums.SDKMODE
+import company.tap.tapcardvalidator_android.CardBrand
 import company.tap.tapnetworkkit.connection.NetworkApp
 
 
@@ -63,7 +64,7 @@ object DataConfiguration {
             )
            /* PaymentDataSourceImpl.setSupportedPaymentMethods(this.acceptance?.supportedBrands?.map { it.rawValue }
                 ?.toMutableList())*/
-            PaymentDataSourceImpl.setSupportedPaymentMethods(this.acceptance?.supportedBrands)
+            PaymentDataSourceImpl.setSupportedPaymentMethods(listOf(CardBrand.SAMSUNG_PAY.name))
             PaymentDataSourceImpl.setSupportedCurrencies(
                 arrayListOf(
                     this.transaction.currency!!
@@ -76,7 +77,7 @@ object DataConfiguration {
             PaymentDataSourceImpl.setCustomer(this.tapCustomer!!)
             PaymentDataSourceImpl.setMerchant(this.merchant)
             PaymentDataSourceImpl.setPaymentType(PaymentType.DEVICE.name)
-            PaymentDataSourceImpl.setCardType(this.acceptance?.supportedFundSource?.name)
+           // PaymentDataSourceImpl.setCardType(this.acceptance?.supportedFundSource?.name)
             PaymentDataSourceImpl.setOrder(
                 OrderObject(
                     amount = this.transaction.amount!!.toBigDecimal(),

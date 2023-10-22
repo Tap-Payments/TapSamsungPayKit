@@ -79,10 +79,9 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                 .setAcceptance(
                     Acceptance(
                         supportedSchemes = getPrefs().getStringSet("selectedSchemesKey", emptySet<String>())!!.toMutableList(),
-                        supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
                     )
                 )
-                .setFields(
+                .setFieldsVisibility(
                     Fields(
                         shipping = getPrefBooleanValue("shippingEnableKey", true),//Optional
                         billing = getPrefBooleanValue("billingEnableKey", true)//Optional

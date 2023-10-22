@@ -31,8 +31,7 @@ data class PhoneNumber(var isdNumber: String, var phoneNumber: String)
  */
 data class Acceptance(
     val supportedSchemes: MutableList<String> = arrayListOf(),
-    val supportedFundSource: SupportedFundSource = SupportedFundSource.CREDIT,
-    val supportedPaymentAuthentications: SupportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS,
+
 )
 
 

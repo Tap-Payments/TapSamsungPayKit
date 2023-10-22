@@ -32,10 +32,7 @@ class TapConfiguration private constructor(
     val transaction: Transaction,
     val merchant: Merchant,
     val tapCustomer: TapCustomer?,
-    val acceptance: Acceptance? = Acceptance(
-        supportedFundSource = SupportedFundSource.ALL,
-        supportedPaymentAuthentications = SupportedPaymentAuthentications.ThreeDS
-    ),
+    val acceptance: Acceptance?,
     val fields: Fields = Fields(shipping = true, billing = true),
     val addOns: AddOns?,
     val tapInterface: TapInterface?,
@@ -100,7 +97,7 @@ class TapConfiguration private constructor(
         }
 
         var fields: Fields? = null
-        fun setFields(fields: Fields?) = apply {
+        fun setFieldsVisibility(fields: Fields?) = apply {
             this.fields = fields
         }
 
