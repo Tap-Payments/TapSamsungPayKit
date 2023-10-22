@@ -26,6 +26,7 @@ import com.tap.samsungpay.internal.models.TapInterface
 import com.tap.samsungpay.internal.models.Tax
 import com.tap.samsungpay.open.TapConfiguration
 import com.tap.samsungpay.open.TapSamsunPayDelegate
+import com.tap.samsungpay.open.enums.ColorStyle
 import com.tap.samsungpay.open.enums.Edges
 import com.tap.samsungpay.open.enums.Language
 import com.tap.samsungpay.open.enums.Scope
@@ -92,13 +93,12 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
                 .setTapInterface(
                     TapInterface(
                         getLanguageMode("selectedlangKey"),
-                        Edges.CURVED,
-                        getThemeMode("selectedthemeKey")
+                        getEdges("selectedcardedgeKey"),
+                        getThemeMode("selectedthemeKey"), getColorStyle("selectedccolorstyleKey")
                     ) //Optional
 
                 )
                 .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))//**Required**//
-                .setDeviceType(getPrefStringValue("deviceTypeKey", "Android Native"))
                 .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))//**Required**//
                 .build()
 
@@ -133,6 +133,14 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
         else return Language.EN.name
     }
 
+    private fun getEdges(key: String): Edges {
+        val selectedcardedgeKey: String = getPrefStringValue(key, Edges.curved.name)
+
+        if (selectedcardedgeKey == Edges.curved.name) return Edges.curved
+        else if (selectedcardedgeKey == Edges.flat.name) return Edges.flat
+        else return Edges.curved
+    }
+
     private fun getScope(key: String): Scope {
         val scopeKey: String = getPrefStringValue(key, Scope.SAMSUNG_TOKEN.name)
 
@@ -140,6 +148,14 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
         if (scopeKey == Scope.SAMSUNG_TOKEN.name) return Scope.SAMSUNG_TOKEN
         else if (scopeKey == Scope.TAP_TOKEN.name) return Scope.TAP_TOKEN
         else return Scope.SAMSUNG_TOKEN
+    }
+
+    private fun getColorStyle(key: String): String {
+        val selectedccolorstyleKey: String = getPrefStringValue(key, ColorStyle.colored.name)
+
+        if (selectedccolorstyleKey == ColorStyle.colored.name) return ColorStyle.colored.name
+        else if (selectedccolorstyleKey == ColorStyle.monochrome.name) return ColorStyle.monochrome.name
+        else return ColorStyle.colored.name
     }
 
     private fun customAlertBox(title: String, message: String) {
@@ -177,6 +193,7 @@ class MainActivity : AppCompatActivity() , TapSamsunPayDelegate{
     }
 
     override fun onError(error: String?) {
+        println("error>>" + error)
         if (error != null) {
             customAlertBox("error", error)
         }

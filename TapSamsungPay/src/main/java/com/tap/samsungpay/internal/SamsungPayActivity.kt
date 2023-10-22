@@ -422,12 +422,18 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             // This callback is received when the online payment transaction has failed.
             override fun onFailure(errorCode: Int, errorData: Bundle?) {
                // println("errorData>>>" + errorData)
-                DataConfiguration.getListener()?.onError("Failed to show"+errorData.toString())
+                Log.e("onFailure >>>>>", errorCode.toString() )
+                if(errorCode.toString()!=null && errorCode==-7){
+                    DataConfiguration.getListener()?.onError("Payment cancelled")
+                    finish()
+
+                }else DataConfiguration.getListener()?.onError("Failed to show"+errorData.toString())
 
             }
         }
 
     override fun onError(error: String?) {
+        Log.e("SPAYY >>>>>", error.toString() )
         //samsungPayButton.visibility = View.GONE
 
     }

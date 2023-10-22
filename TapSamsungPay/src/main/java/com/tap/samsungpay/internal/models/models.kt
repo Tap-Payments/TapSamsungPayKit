@@ -48,4 +48,4 @@ data class Fields(
     var billing: Boolean = true,
 )
 
-data class TapInterface(var locale: String, var edges: Edges,var theme:ThemeMode?=ThemeMode.LIGHT)
+data class TapInterface(var locale: String, var edges: Edges,var theme:ThemeMode?=ThemeMode.LIGHT, var colorStyle :String )

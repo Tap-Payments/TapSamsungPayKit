@@ -133,9 +133,9 @@ Here we need to make a Top level declaration
        
         initConfigurations()
 
-private fun initConfigurations() {
+   private fun initConfigurations() {
 
-   tapConfiguration =
+      tapConfiguration =
       TapConfiguration.Builder()
          .setOperator(
             Operator.Builder()
@@ -175,12 +175,11 @@ private fun initConfigurations() {
             TapInterface(
                getLanguageMode("selectedlangKey"),
                Edges.CURVED,
-               getThemeMode("selectedthemeKey")
+               getThemeMode("selectedthemeKey"), getColorStyle("selectedccolorstyleKey")
             ) //Optional
 
          )
          .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))//**Required**//
-         .setDeviceType(getPrefStringValue("deviceTypeKey", "Android Native"))
          .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))//**Required**//
          .build()
 

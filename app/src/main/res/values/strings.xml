@@ -27,6 +27,7 @@
     <string name="order_name">Order Number</string>
     <string name="ship_amount">Shipment Amount</string>
     <string name="tax_amount">Tax Amount</string>
+    <string name="orderdetails">Order Details</string>
 
     <string-array name="ScopeList">
         <item>SAMSUNG_TOKEN</item>
@@ -85,7 +86,10 @@
         <item>Android Native</item>
 
     </string-array>
-
+    <string-array name="ColorStyle">
+        <item>colored</item>
+        <item>monochrome</item>
+    </string-array>
 
     <string-array name="currencies">
         <item>USD</item>

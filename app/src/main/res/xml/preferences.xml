@@ -71,7 +71,7 @@
 
 
     <PreferenceCategory
-        app:title="@string/Transdetails">
+        app:title="@string/orderdetails">
 
 
         <EditTextPreference
@@ -187,6 +187,15 @@
             app:defaultValue="1"
             app:useSimpleSummaryProvider="true"/>
 
+        <DropDownPreference
+            app:key="selectedccolorstyleKey"
+            app:title="Color Style"
+
+            app:entries="@array/ColorStyle"
+            app:entryValues="@array/ColorStyle"
+            app:defaultValue="1"
+            app:useSimpleSummaryProvider="true"/>
+
 
 
 
@@ -233,7 +242,8 @@
             app:entries="@array/deviceTypeList"
             app:entryValues="@array/deviceTypeList"
             app:defaultValue="1"
-            app:useSimpleSummaryProvider="true"/>
+            app:useSimpleSummaryProvider="true"
+            app:isPreferenceVisible="false"/>
         <EditTextPreference
             app:key="serviceIdKey"
             app:defaultValue="fff80d901c2849ba8f3641"
