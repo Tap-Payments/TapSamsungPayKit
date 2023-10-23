@@ -23,7 +23,7 @@ https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/459d5389-dde1-4
    [Configure SDK with Required Data](#configure_sdk_with_required_data)
 5. [TapSamsungPay_Delegate](#sdk_delegate)
     1. [OnTapToken Success Callback](#tap_token_success_callback)
-    2. [OnFailure Callback](#failed_callback)
+    2. [OnError Callback](#failed_callback)
     3. [OnSamsungPay_Token_Success Callback](#samsung_pay_success_callback)
    4.  [OnReady Callback](#onready_success_callback)
 
@@ -271,9 +271,9 @@ enum class Edges {
    curved
 }
 ```
-## SDK Delegate
+## TapSamsungPay Delegate
 
-**SDK Delegate** is an interface which you may want to implement to receive payment/authorization/card saving status updates and update your user interface accordingly when payment window closes.
+**TapSamsungPay Delegate** is an interface which you may want to implement to receive payment status updates and update your user interface accordingly when payment window closes.
 Below are listed down all available callbacks:
 
 <a name="samsung_pay_success_callback"></a>

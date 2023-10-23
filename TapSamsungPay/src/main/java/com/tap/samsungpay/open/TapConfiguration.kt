@@ -187,9 +187,8 @@ class TapConfiguration private constructor(
 
                 }
                 ThemeMode.LIGHT -> {
-                    if(context.resources.configuration.uiMode==Configuration.UI_MODE_NIGHT_NO ) {
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    }
+
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
                 else -> {}
             }
