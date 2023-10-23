@@ -2,8 +2,6 @@ package com.tap.samsungpay.internal.api.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.models.Expiry
-import company.tap.tapcardformkit.internal.api.models.Order
 import java.io.Serializable
 
 /**
@@ -13,36 +11,36 @@ Copyright (c) 2021    Tap Payments.
 All rights reserved.
  **/
 data class TransactionDetails(
-        @SerializedName("created") @Expose
+    @SerializedName("created") @Expose
         var created: Long = 0,
 
-        @SerializedName("timezone")
+    @SerializedName("timezone")
         @Expose
         val timezone: String,
 
-        @SerializedName("authorization_id")
+    @SerializedName("authorization_id")
         @Expose
         val authorizationID: String? = null,
 
-        @SerializedName("url")
+    @SerializedName("url")
         @Expose
         val url: String? = null,
 
-        @SerializedName("order")
+    @SerializedName("order")
         @Expose
         val order: Order? = null,
 
-        @SerializedName("expiry")
+    @SerializedName("expiry")
         @Expose
         val expiry: Expiry? = null,
 
-        @SerializedName("asynchronous")
+    @SerializedName("asynchronous")
         @Expose
         val asynchronous: Boolean = false,
 
-        @SerializedName("amount") @Expose
+    @SerializedName("amount") @Expose
         var amount: Double = 0.0,
 
-        @SerializedName("currency") @Expose
+    @SerializedName("currency") @Expose
         private var currency: String? = null
 ) : Serializable

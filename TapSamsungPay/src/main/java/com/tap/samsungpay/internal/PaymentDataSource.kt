@@ -19,6 +19,7 @@ import company.tap.checkout.open.models.Destinations
 import com.tap.samsungpay.internal.api.responses.InitResponseModel
 import com.tap.samsungpay.internal.api.responses.MerchantData
 import com.tap.samsungpay.internal.api.enums.TransactionMode
+import com.tap.samsungpay.internal.api.models.CardIssuer
 import com.tap.samsungpay.internal.models.AuthorizeAction
 import com.tap.samsungpay.internal.models.ItemsModel
 import com.tap.samsungpay.internal.models.OrderObject

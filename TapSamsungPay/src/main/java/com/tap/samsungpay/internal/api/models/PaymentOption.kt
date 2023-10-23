@@ -5,7 +5,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.enums.PaymentType
 import company.tap.tapcardformkit.internal.api.models.ExtraFee
-import company.tap.tapcardformkit.internal.api.models.Logos
 import company.tap.tapcardvalidator_android.CardBrand
 import java.io.Serializable
 import java.util.ArrayList

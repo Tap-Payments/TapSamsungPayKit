@@ -3,6 +3,7 @@ package company.tap.tapcardformkit.internal.api.models
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.tap.samsungpay.internal.api.models.AmountModificator
 
 /**
  * Created by AhlaamK on 7/24/22.

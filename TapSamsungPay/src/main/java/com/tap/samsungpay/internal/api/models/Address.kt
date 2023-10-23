@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.internal.api.models
+package com.tap.samsungpay.internal.api.models
 
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.SerializedName

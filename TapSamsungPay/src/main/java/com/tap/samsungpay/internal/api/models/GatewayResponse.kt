@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.internal.api.models
+package com.tap.samsungpay.internal.api.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -9,4 +9,5 @@ Copyright (c) 2022    Tap Payments.
 All rights reserved.
  **/
 data class GatewayResponse ( @SerializedName("response")
-                             val response: Response)
+                             val response: Response
+)

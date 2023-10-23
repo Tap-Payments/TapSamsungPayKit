@@ -2,7 +2,7 @@ package company.tap.checkout.open.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.models.Destination
+import com.tap.samsungpay.internal.api.models.Destination
 import java.math.BigDecimal
 import java.util.*
 

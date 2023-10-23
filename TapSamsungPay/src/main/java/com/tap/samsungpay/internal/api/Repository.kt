@@ -23,7 +23,7 @@ import com.tap.samsungpay.internal.models.AmountModificator
 import com.tap.samsungpay.internal.models.OrderObject
 import com.tap.samsungpay.internal.models.Shipping
 import com.tap.samsungpay.internal.models.Tax
-import company.tap.tapcardformkit.internal.api.models.AssetsModel
+import com.tap.samsungpay.internal.api.models.AssetsModel
 import company.tap.tapcardformkit.internal.api.models.TopUp
 
 import company.tap.tapcardformkit.open.*

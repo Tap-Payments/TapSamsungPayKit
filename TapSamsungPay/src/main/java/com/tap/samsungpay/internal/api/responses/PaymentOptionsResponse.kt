@@ -4,9 +4,8 @@ import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.models.OrderId
+import com.tap.samsungpay.internal.api.models.OrderId
 import com.tap.samsungpay.internal.api.models.PaymentOption
-import com.tap.samsungpay.internal.api.responses.BaseResponse
 import company.tap.tapcardformkit.internal.api.models.SavedCard
 import company.tap.tapcardformkit.internal.api.models.SupportedCurrencies
 import java.util.*

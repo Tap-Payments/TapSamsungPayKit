@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.*
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.api.enums.AmountModificatorType
-import company.tap.tapcardformkit.internal.api.models.AmountModificator
+import com.tap.samsungpay.internal.api.models.AmountModificator
 import company.tap.tapcardformkit.internal.api.models.MetaData
 import java.io.Serializable
 import java.math.BigDecimal

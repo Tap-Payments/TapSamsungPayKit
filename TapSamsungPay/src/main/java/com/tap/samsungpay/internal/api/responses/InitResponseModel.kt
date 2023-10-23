@@ -6,7 +6,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.enums.LogsModel
 import com.tap.samsungpay.internal.api.enums.Permission
-import company.tap.tapcardformkit.internal.api.models.AssetsModel
+import com.tap.samsungpay.internal.api.models.AssetsModel
 import java.io.Serializable
 import java.util.ArrayList
 

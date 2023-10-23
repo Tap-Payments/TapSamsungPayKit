@@ -6,6 +6,7 @@ import com.google.gson.Gson
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.PaymentDataSourceImpl
+import com.tap.samsungpay.internal.api.models.Address
 
 import java.io.Serializable
 
