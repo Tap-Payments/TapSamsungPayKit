@@ -1,10 +1,8 @@
-/*
- * *
- *  * Created by $AhlaamK on 10/19/23, 11:36 AM
- *  * Copyright (c) 2023 .
- *  * Tap Payments All rights reserved.
- *  *
- *  *
+/**
+ *  Created by AhlaamK on 10/19/23, 11:36 AM
+ *  Copyright (c) 2023 .
+ *  Tap Payments All rights reserved.
+ **
  */
 
 package com.tap.samsungpay.open
@@ -171,7 +169,7 @@ class TapConfiguration private constructor(
     }
 
     companion object {
-        var tapConfigurationS: TapConfiguration? = null
+        private var tapConfigurationS: TapConfiguration? = null
         fun configureSamsungPayWithTapConfiguration(
             tapConfiguration: TapConfiguration,
             context: Context,
@@ -181,9 +179,9 @@ class TapConfiguration private constructor(
             when (tapConfiguration.tapInterface?.theme){
 
                 ThemeMode.DARK ->{
-                  // if(context.resources.configuration.uiMode==Configuration.UI_MODE_NIGHT_YES ){
-                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                   //    }
+
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
 
                 }
                 ThemeMode.LIGHT -> {
