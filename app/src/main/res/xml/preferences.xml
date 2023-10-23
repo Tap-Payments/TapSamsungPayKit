@@ -164,7 +164,7 @@
         app:title="@string/interface_">
 
         <DropDownPreference
-            app:key="selectedlangKey"
+            app:key="selectedLangKey"
             app:title="@string/choose_language"
             app:entries="@array/Lanugages"
             app:entryValues="@array/LanugagesValues"
@@ -189,7 +189,7 @@
             app:useSimpleSummaryProvider="true"/>
 
         <DropDownPreference
-            app:key="selectedccolorstyleKey"
+            app:key="selectedColorStyleKey"
             app:title="Color Style"
 
             app:entries="@array/ColorStyle"

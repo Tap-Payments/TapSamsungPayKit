@@ -134,6 +134,7 @@ class SamsungPayButton : LinearLayout {
         themeMode: ThemeMode,
         language: String
     ): String {
+        println("locale"+language)
         return (paymentOption.buttonStyle?.titleAssets?.replace(
             "{theme}",
             themeMode.name.lowercase()
@@ -145,6 +146,7 @@ class SamsungPayButton : LinearLayout {
     }
 
     private fun applyButtonText(samsungPayPaymentAsset: String?) {
+        println("samsungPayPaymentAsset str"+samsungPayPaymentAsset)
         Glide.with(this)
             .asBitmap()
             .load(samsungPayPaymentAsset)

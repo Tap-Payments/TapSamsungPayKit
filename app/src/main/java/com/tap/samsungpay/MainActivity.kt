@@ -8,11 +8,8 @@
 package com.tap.samsungpay
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.chillibits.simplesettings.tool.getPrefBooleanValue
 import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.chillibits.simplesettings.tool.getPrefs
 import com.tap.samsungpay.internal.api.responses.Token
@@ -20,7 +17,6 @@ import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TransactionBuilder.OrderDetail
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.Acceptance
-import com.tap.samsungpay.internal.models.Fields
 import com.tap.samsungpay.internal.models.PhoneNumber
 import com.tap.samsungpay.internal.models.Shipping
 import com.tap.samsungpay.internal.models.TapCustomer
@@ -32,13 +28,10 @@ import com.tap.samsungpay.open.enums.ColorStyle
 import com.tap.samsungpay.open.enums.Edges
 import com.tap.samsungpay.open.enums.Language
 import com.tap.samsungpay.open.enums.Scope
-
 import com.tap.samsungpay.open.enums.ThemeMode
-import java.util.*
+import java.util.Formatter
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
-import kotlin.collections.HashMap
-import kotlin.collections.LinkedHashMap
 
 
 class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
@@ -124,9 +117,9 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
                 .setTapCustomer(getTapCustomer()) //Required
                 .setTapInterface(
                     TapInterface(
-                        getLanguageMode("selectedlangKey"),
+                        getLanguageMode("selectedLangKey"),
                         getEdges("selectedcardedgeKey"),
-                        getThemeMode("selectedthemeKey"), getColorStyle("selectedccolorstyleKey")
+                        getThemeMode("selectedthemeKey"), getColorStyle("selectedColorStyleKey")
                     ) //Optional
 
                 )
@@ -158,36 +151,46 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
     }
 
     private fun getLanguageMode(key: String): String {
-        val selectedlangKey: String = getPrefStringValue(key, Language.EN.name)
+        val selectedLangKey: String = getPrefStringValue(key, Language.EN.name)
 
-        if (selectedlangKey == Language.EN.name) return Language.EN.name
-        else if (selectedlangKey == Language.AR.name) return Language.AR.name
-        else return Language.EN.name
+        return when (selectedLangKey) {
+            Language.EN.name.toLowerCase() -> Language.EN.name
+            Language.AR.name.toLowerCase() -> Language.AR.name
+            else -> Language.EN.name
+        }
     }
 
     private fun getEdges(key: String): Edges {
         val selectedcardedgeKey: String = getPrefStringValue(key, Edges.curved.name)
 
-        if (selectedcardedgeKey == Edges.curved.name) return Edges.curved
-        else if (selectedcardedgeKey == Edges.flat.name) return Edges.flat
-        else return Edges.curved
+        return when (selectedcardedgeKey) {
+            Edges.curved.name -> Edges.curved
+            Edges.flat.name -> Edges.flat
+            else -> Edges.curved
+        }
     }
 
     private fun getScope(key: String): Scope {
         val scopeKey: String = getPrefStringValue(key, Scope.SAMSUNG_TOKEN.name)
 
-        println("Scope.TAP_TOKEN.name"+Scope.TAP_TOKEN.name)
-        if (scopeKey == Scope.SAMSUNG_TOKEN.name) return Scope.SAMSUNG_TOKEN
-        else if (scopeKey == Scope.TAP_TOKEN.name) return Scope.TAP_TOKEN
-        else return Scope.SAMSUNG_TOKEN
+        return when (scopeKey) {
+            Scope.SAMSUNG_TOKEN.name -> Scope.SAMSUNG_TOKEN
+            Scope.TAP_TOKEN.name -> Scope.TAP_TOKEN
+            else -> Scope.SAMSUNG_TOKEN
+        }
     }
 
     private fun getColorStyle(key: String): String {
-        val selectedccolorstyleKey: String = getPrefStringValue(key, ColorStyle.colored.name)
+        val selectedColorStyleKey: String = getPrefStringValue(key, ColorStyle.colored.name)
 
-        if (selectedccolorstyleKey == ColorStyle.colored.name) return ColorStyle.colored.name
-        else if (selectedccolorstyleKey == ColorStyle.monochrome.name) return ColorStyle.monochrome.name
-        else return ColorStyle.colored.name
+        return when (selectedColorStyleKey) {
+            ColorStyle.colored.name -> {
+                ColorStyle.colored.name
+            }
+
+            ColorStyle.monochrome.name -> ColorStyle.monochrome.name
+            else -> ColorStyle.colored.name
+        }
     }
 
     private fun customAlertBox(title: String, message: String) {
@@ -198,13 +201,13 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
         builder.setMessage(message)
 
         // Set Alert Title
-        builder.setTitle(title)
+         .setTitle(title)
 
         // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
-        builder.setCancelable(false)
+        .setCancelable(false)
 
         // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setPositiveButton("Yes") {
+        .setPositiveButton("Yes") {
             // When the user click yes button then app will close
                 dialog, which ->
             dialog.dismiss()
@@ -213,10 +216,11 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
         }
 
         // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
-        builder.setNegativeButton("No") {
+        .setNegativeButton("No") {
             // If user click no then dialog box is canceled.
                 dialog, which ->
             dialog.cancel()
+            finish()
         }
 
         // Create the Alert dialog
@@ -245,12 +249,12 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
     }
 
     override fun onTapToken(token: Token) {
-        customAlertBox("onTapToken", token.id.toString())
+        customAlertBox("onTapToken Called", token.id.toString())
 
     }
 
     override fun onCancel(cancel: String) {
-        customAlertBox("onCancel",cancel)
+        customAlertBox("onCancel Called",cancel)
     }
 
 

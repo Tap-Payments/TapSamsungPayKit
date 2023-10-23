@@ -66,8 +66,8 @@
 
 
     <string-array name="Lanugages">
-        <item>English</item>
-        <item>Arabic</item>
+        <item>ENGLISH</item>
+        <item>ARABIC</item>
     </string-array>
     <string-array name="LanugagesValues">
         <item>en</item>
