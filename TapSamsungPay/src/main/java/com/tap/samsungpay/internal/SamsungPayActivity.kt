@@ -94,22 +94,13 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                          * start In App Pay for for normal Transaction
                          */
                       //  startInAppPayment()
-                        /**
-                         * start In App Pay for Custom Sheet
-                         */
-                        //  startInAppPayWithCustomSheet()
-                     //   samsungPayButton.stopShimmer();
+
 
                     }
                     SpaySdk.SPAY_NOT_READY -> {
 
                         DataConfiguration.getListener()?.onError("SPAY_NOT_READY")
 
-                       /* Toast.makeText(
-                            this@SamsungPayActivity,
-                            "Samsung Pay is supported but not fully ready",
-                            Toast.LENGTH_SHORT
-                        ).show()*/
                         // Samsung Pay is supported but not fully ready.
 
                         // If EXTRA_ERROR_REASON is ERROR_SPAY_APP_NEED_TO_UPDATE,
@@ -157,10 +148,12 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
     private fun startCallForCheckoutProfileAPi() {
        // println("TapConfiguration.getTapConfiguration()"+ TapConfiguration.getTapConfiguration())
         with(TapConfiguration.getTapConfiguration()) {
-            DataConfiguration.initalizeCheckoutProfileAPi(
-                context = this@SamsungPayActivity,
-                this!!
-            )
+            this?.let {
+                DataConfiguration.initalizeCheckoutProfileAPi(
+                    context = this@SamsungPayActivity,
+                    it
+                )
+            }
         }
 
 
@@ -168,13 +161,13 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
     override fun onResume() {
         super.onResume()
-        samsungPayButton.startShimmer();
+        samsungPayButton.startShimmer()
 
     }
 
     override fun onPause() {
         super.onPause()
-        samsungPayButton.stopShimmer();
+        samsungPayButton.stopShimmer()
 
     }
 
