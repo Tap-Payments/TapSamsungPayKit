@@ -109,13 +109,7 @@ class SamsungPayButton : LinearLayout {
             }
             else -> {
 
-                applyThemeToButton(samsungPayPaymentOption?.buttonStyle?.background?.darkModel?.backgroundColors)
-                applyButtonText(
-                    getAssetToLoadLink(
-                        samsungPayPaymentOption!!, ThemeMode.DARK,
-                        TapConfiguration.getTapConfiguration()?.tapInterface?.locale.toString()
-                    )
-                )
+
             }
         }
 

@@ -46,6 +46,6 @@ dependencies {
 
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation 'com.github.Tap-Payments:TapAndroidForm:0.0.1'
+    implementation 'com.github.Tap-Payments:TapAndroidForm:0.0.3'
     implementation 'com.github.Tap-Payments:TapCardValidator-Android:2.1.15'
 }
