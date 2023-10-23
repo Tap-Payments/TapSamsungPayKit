@@ -8,6 +8,7 @@
 package com.tap.samsungpay
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -33,12 +34,38 @@ import com.tap.samsungpay.open.enums.Language
 import com.tap.samsungpay.open.enums.Scope
 
 import com.tap.samsungpay.open.enums.ThemeMode
-
+import java.util.*
+import javax.crypto.Mac
+import javax.crypto.spec.SecretKeySpec
+import kotlin.collections.HashMap
+import kotlin.collections.LinkedHashMap
 
 
 class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
 
     private lateinit var tapConfiguration: TapConfiguration
+    var postUrl:String = ""
+    lateinit var hashString :String
+    object Hmac {
+        fun digest(
+            msg: String,
+            key: String,
+            alg: String = "HmacSHA256"
+        ): String {
+            val signingKey = SecretKeySpec(key.toByteArray(), alg)
+            val mac = Mac.getInstance(alg)
+            mac.init(signingKey)
+
+            val bytes = mac.doFinal(msg.toByteArray())
+            return format(bytes)
+        }
+
+        private fun format(bytes: ByteArray): String {
+            val formatter = Formatter()
+            bytes.forEach { formatter.format("%02x", it) }
+            return formatter.toString()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +80,17 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
     }
 
     private fun initConfigurations() {
+        /** Generate HashString**/
+        val stringmsg = "x_publickey${getPrefStringValue(
+            "publicKey",
+            "pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
+        )}x_amount${(getPrefStringValue("amountKey", "0.2")).toDouble()}x_currency${(getPrefStringValue("selectedCurrencyKey", "USD"))}x_transaction${""}x_post$postUrl"
+
+        hashString = Hmac.digest(msg = stringmsg, key =getPrefStringValue(
+            "secretKey",
+            "sk_test_kovrMB0mupFJXfNZWx6Etg5y"
+        ) )
+       // Log.e("encrypted hashString",hashstring.toString())
 
         tapConfiguration =
             TapConfiguration.Builder()
@@ -64,7 +102,7 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
                                 "pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
                             )
                         )
-                        .setHashString(getPrefStringValue("hashKey", "test"))
+                        .setHashString(hashString)
                         .build()
                 )
                 .setMerchant(

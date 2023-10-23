@@ -28,6 +28,7 @@
     <string name="ship_amount">Shipment Amount</string>
     <string name="tax_amount">Tax Amount</string>
     <string name="orderdetails">Order Details</string>
+    <string name="secret_key">Secret Key</string>
 
     <string-array name="ScopeList">
         <item>SAMSUNG_TOKEN</item>
