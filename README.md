@@ -7,9 +7,7 @@ A standalone kit for handling SamsungPay
 [![SDK Version](https://img.shields.io/badge/targetSdkVersion-30-informational.svg)](https://stuff.mit.edu/afs/sipb/project/android/docs/reference/packages.html)
 
 
-
-https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/459d5389-dde1-4e00-b159-365fe466851e
-
+https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/40844c79-33a5-4d78-a375-904031f00add
 
 
 # Table of Contents
