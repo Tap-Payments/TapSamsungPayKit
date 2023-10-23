@@ -6,8 +6,8 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.models.OrderId
 import com.tap.samsungpay.internal.api.models.PaymentOption
-import company.tap.tapcardformkit.internal.api.models.SavedCard
-import company.tap.tapcardformkit.internal.api.models.SupportedCurrencies
+import com.tap.samsungpay.internal.api.models.SavedCard
+import com.tap.samsungpay.internal.api.models.SupportedCurrencies
 import java.util.*
 
 /**

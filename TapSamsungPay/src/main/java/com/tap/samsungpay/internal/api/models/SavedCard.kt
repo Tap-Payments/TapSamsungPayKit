@@ -1,10 +1,8 @@
-package company.tap.tapcardformkit.internal.api.models
+package com.tap.samsungpay.internal.api.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.enums.CardScheme
-import com.tap.samsungpay.internal.api.models.ExpirationDate
-import com.tap.samsungpay.internal.api.models.Logos
 import company.tap.tapcardvalidator_android.CardBrand
 import java.util.ArrayList
 

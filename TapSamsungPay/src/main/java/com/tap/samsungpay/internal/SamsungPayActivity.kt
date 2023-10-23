@@ -3,7 +3,6 @@
  *   Copyright (c) 2023 .
  *   Tap Payments All rights reserved.
  *
- *
  **/
 
 package com.tap.samsungpay.internal

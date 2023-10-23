@@ -16,8 +16,6 @@ import java.util.HashMap;
 import company.tap.checkout.open.models.Destinations;
 import com.tap.samsungpay.internal.api.enums.ChargeStatus;
 
-import company.tap.tapcardformkit.internal.api.models.TopUp;
-
 import com.tap.samsungpay.internal.models.TapCustomer;
 
 

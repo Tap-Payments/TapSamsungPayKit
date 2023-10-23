@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.open.builder
+package com.tap.samsungpay.internal.builder
 
 class AuthKey(
     var sandBoxKey: String? = null,

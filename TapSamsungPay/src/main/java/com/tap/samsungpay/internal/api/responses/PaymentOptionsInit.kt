@@ -5,8 +5,7 @@ import androidx.annotation.RestrictTo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.models.PaymentOption
-import com.tap.samsungpay.internal.api.responses.MerchantData
-import company.tap.tapcardformkit.internal.api.models.SupportedCurrencies
+import com.tap.samsungpay.internal.api.models.SupportedCurrencies
 import java.io.Serializable
 
 /**

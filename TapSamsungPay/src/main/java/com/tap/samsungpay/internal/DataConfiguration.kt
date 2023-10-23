@@ -1,14 +1,14 @@
 /**
- *  Created by $AhlaamK on 10/19/23, 11:37 AM
+ *  Created by AhlaamK on 10/19/23, 11:37 AM
  *  Copyright (c) 2023 .
  *  Tap Payments All rights reserved.
  *
- *
- */
+ **/
 
 package com.tap.samsungpay.internal
 
 import android.app.Activity
+import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
 import com.tap.samsungpay.internal.api.ApiService
 import com.tap.samsungpay.internal.models.ItemsModel
@@ -25,7 +25,7 @@ import com.tap.samsungpay.open.enums.SDKMODE
 import company.tap.tapcardvalidator_android.CardBrand
 import company.tap.tapnetworkkit.connection.NetworkApp
 
-
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 object DataConfiguration {
     private var tapSamsungPayDelegate: TapSamsungPayDelegate? = null
     private var internalCheckoutProfileDelegate: InternalCheckoutProfileDelegate? = null

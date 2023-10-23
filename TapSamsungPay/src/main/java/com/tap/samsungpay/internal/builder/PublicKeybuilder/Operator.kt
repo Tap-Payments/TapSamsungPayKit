@@ -8,10 +8,10 @@ class Operator(
     init {
 
         if (publicKey.isNullOrBlank())
-            throw IllegalArgumentException("sandboxKey must not be null or blank.")
+            throw IllegalArgumentException("publicKey must not be null or blank.")
 
         if (hashString.isNullOrBlank())
-            throw IllegalArgumentException("productionKey must not be null or blank.")
+            throw IllegalArgumentException("hashString must not be null or blank.")
     }
 
     class Builder {

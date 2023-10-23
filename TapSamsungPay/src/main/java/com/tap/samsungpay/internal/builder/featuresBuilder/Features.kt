@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.open.builder.featuresBuilder
+package com.tap.samsungpay.internal.builder.featuresBuilder
 
 class Features(
     var acceptanceBadge: Boolean?

@@ -24,7 +24,7 @@ import com.tap.samsungpay.internal.models.TapInterface
 import com.tap.samsungpay.open.enums.SDKMODE
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.open.enums.ThemeMode
-import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
+import com.tap.samsungpay.internal.builder.featuresBuilder.Features
 
 
 class TapConfiguration private constructor(

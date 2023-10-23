@@ -24,7 +24,7 @@ import com.tap.samsungpay.internal.models.OrderObject
 import com.tap.samsungpay.internal.models.Shipping
 import com.tap.samsungpay.internal.models.Tax
 import com.tap.samsungpay.internal.api.models.AssetsModel
-import company.tap.tapcardformkit.internal.api.models.TopUp
+import com.tap.samsungpay.internal.api.models.TopUp
 
 import company.tap.tapcardformkit.open.*
 import company.tap.tapnetworkkit.connection.NetworkApp

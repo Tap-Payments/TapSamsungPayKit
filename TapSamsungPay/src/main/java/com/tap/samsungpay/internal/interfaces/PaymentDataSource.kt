@@ -1,26 +1,25 @@
-/*
- * *
- *  * Created by $AhlaamK on 10/19/23, 12:01 PM
- *  * Copyright (c) 2023 .
- *  * Tap Payments All rights reserved.
- *  *
- *  *
- */
+/**
+ * Created by AhlaamK on 10/19/23, 12:01 PM
+ * Copyright (c) 2023 .
+ * Tap Payments All rights reserved.
+ *
+ **/
 
 package com.tap.samsungpay.internal.interfaces
 
+import androidx.annotation.RestrictTo
 import com.tap.samsungpay.internal.api.models.BINLookupResponse
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import company.tap.checkout.open.models.Destinations
 import com.tap.samsungpay.internal.api.enums.TransactionMode
 import com.tap.samsungpay.internal.api.models.CardIssuer
+import com.tap.samsungpay.internal.api.models.TopUp
 import com.tap.samsungpay.internal.models.AuthorizeAction
 import com.tap.samsungpay.internal.models.ItemsModel
 import com.tap.samsungpay.internal.models.OrderObject
 import com.tap.samsungpay.internal.models.Shipping
 import com.tap.samsungpay.internal.models.TapCurrency
 import com.tap.samsungpay.internal.models.Tax
-import company.tap.tapcardformkit.internal.api.models.*
 import com.tap.samsungpay.internal.api.responses.InitResponseModel
 import com.tap.samsungpay.internal.api.responses.MerchantData
 import com.tap.samsungpay.internal.api.responses.PaymentOptionsResponse
@@ -34,6 +33,7 @@ import java.math.BigDecimal
 Copyright (c) 2022    Tap Payments.
 All rights reserved.
  **/
+@RestrictTo(RestrictTo.Scope.LIBRARY)
 interface PaymentDataSource {
 
 
