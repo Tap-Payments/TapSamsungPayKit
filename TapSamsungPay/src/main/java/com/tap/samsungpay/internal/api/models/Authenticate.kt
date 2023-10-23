@@ -2,9 +2,9 @@ package company.tap.tapcardformkit.internal.api.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.checkout.internal.api.enums.AuthenticationRequirer
-import company.tap.checkout.internal.api.enums.AuthenticationStatus
-import company.tap.checkout.internal.api.enums.AuthenticationType
+import com.tap.samsungpay.internal.api.enums.AuthenticationRequirer
+import com.tap.samsungpay.internal.api.enums.AuthenticationStatus
+import com.tap.samsungpay.internal.api.enums.AuthenticationType
 import java.io.Serializable
 
 /**

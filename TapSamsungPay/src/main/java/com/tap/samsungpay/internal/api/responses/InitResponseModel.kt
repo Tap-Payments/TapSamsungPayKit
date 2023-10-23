@@ -4,8 +4,8 @@ import androidx.annotation.NonNull
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.enums.LogsModel
-import company.tap.tapcardformkit.internal.api.enums.Permission
+import com.tap.samsungpay.internal.api.enums.LogsModel
+import com.tap.samsungpay.internal.api.enums.Permission
 import company.tap.tapcardformkit.internal.api.models.AssetsModel
 import java.io.Serializable
 import java.util.ArrayList

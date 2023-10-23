@@ -3,7 +3,7 @@ package company.tap.tapcardformkit.internal.api.models
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.enums.AddressFormat
-import company.tap.tapcardformkit.internal.api.enums.AddressType
+import com.tap.samsungpay.internal.api.enums.AddressType
 import java.io.Serializable
 
 /**

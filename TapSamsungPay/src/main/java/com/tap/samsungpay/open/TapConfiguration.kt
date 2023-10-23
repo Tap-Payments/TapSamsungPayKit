@@ -9,7 +9,6 @@ package com.tap.samsungpay.open
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.google.gson.Gson
@@ -17,12 +16,15 @@ import com.tap.samsungpay.internal.DataConfiguration
 import com.tap.samsungpay.internal.SamsungPayActivity
 import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.TransactionBuilder.OrderDetail
-
-import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
-import com.tap.samsungpay.internal.models.*
-import com.tap.samsungpay.open.enums.*
-import company.tap.tapcardformkit.open.builder.AuthKey
+import com.tap.samsungpay.internal.models.Acceptance
+import com.tap.samsungpay.internal.models.AddOns
+import com.tap.samsungpay.internal.models.TapCustomer
+import com.tap.samsungpay.internal.models.TapInterface
+import com.tap.samsungpay.open.enums.SDKMODE
+import com.tap.samsungpay.open.enums.Scope
+import com.tap.samsungpay.open.enums.ThemeMode
+import company.tap.tapcardformkit.open.builder.featuresBuilder.Features
 
 
 class TapConfiguration private constructor(

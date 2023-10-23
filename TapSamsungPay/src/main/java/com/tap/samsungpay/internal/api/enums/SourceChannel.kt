@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.internal.api.enums
+package com.tap.samsungpay.internal.api.enums
 
 /**
  * Created by AhlaamK on 6/13/21.

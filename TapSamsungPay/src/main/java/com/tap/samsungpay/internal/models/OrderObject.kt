@@ -13,7 +13,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.*
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
-import company.tap.tapcardformkit.internal.api.enums.AmountModificatorType
+import com.tap.samsungpay.internal.api.enums.AmountModificatorType
 import company.tap.tapcardformkit.internal.api.models.AmountModificator
 import company.tap.tapcardformkit.internal.api.models.MetaData
 import java.io.Serializable

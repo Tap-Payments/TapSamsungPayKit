@@ -3,7 +3,7 @@ package com.tap.samsungpay.internal.api.models
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.enums.PaymentType
+import com.tap.samsungpay.internal.api.enums.PaymentType
 import company.tap.tapcardformkit.internal.api.models.ExtraFee
 import company.tap.tapcardformkit.internal.api.models.Logos
 import company.tap.tapcardvalidator_android.CardBrand

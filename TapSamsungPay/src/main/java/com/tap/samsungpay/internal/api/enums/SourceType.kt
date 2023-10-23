@@ -1,4 +1,4 @@
-package company.tap.tapcardformkit.internal.api.enums
+package com.tap.samsungpay.internal.api.enums
 
 import com.google.gson.annotations.SerializedName
 

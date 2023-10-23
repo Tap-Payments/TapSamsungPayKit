@@ -2,7 +2,6 @@ package com.tap.samsungpay.internal.api.enums
 
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.enums.AddressType
 import java.io.Serializable
 
 @RestrictTo(RestrictTo.Scope.LIBRARY)

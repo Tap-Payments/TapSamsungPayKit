@@ -2,9 +2,9 @@ package company.tap.tapcardformkit.internal.api.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.enums.SourceChannel
+import com.tap.samsungpay.internal.api.enums.SourceChannel
 
-import company.tap.tapcardformkit.internal.api.enums.SourceType
+import com.tap.samsungpay.internal.api.enums.SourceType
 import company.tap.tapcardvalidator_android.CardBrand
 import java.io.Serializable
 

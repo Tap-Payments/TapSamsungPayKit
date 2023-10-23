@@ -3,7 +3,7 @@ package company.tap.tapcardformkit.internal.api.models
 import androidx.annotation.RestrictTo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.enums.AmountModificatorType
+import com.tap.samsungpay.internal.api.enums.AmountModificatorType
 import java.io.Serializable
 import java.math.BigDecimal
 

@@ -2,7 +2,7 @@ package com.tap.samsungpay.internal.api.responses
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardformkit.internal.api.enums.TokenType
+import com.tap.samsungpay.internal.api.enums.TokenType
 
 import java.io.Serializable
 

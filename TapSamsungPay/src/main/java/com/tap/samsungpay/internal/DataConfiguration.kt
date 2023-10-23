@@ -18,7 +18,7 @@ import com.tap.samsungpay.internal.api.SmsungPayViewModel
 import com.tap.samsungpay.open.InternalCheckoutProfileDelegate
 import com.tap.samsungpay.open.TapSamsungPayDelegate
 import com.tap.samsungpay.open.TapConfiguration
-import company.tap.tapcardformkit.internal.api.enums.PaymentType
+import com.tap.samsungpay.internal.api.enums.PaymentType
 import com.tap.samsungpay.internal.api.enums.TransactionMode
 import com.tap.samsungpay.open.enums.SDKMODE
 

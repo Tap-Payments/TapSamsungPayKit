@@ -37,8 +37,8 @@ import javax.crypto.spec.SecretKeySpec
 class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
 
     private lateinit var tapConfiguration: TapConfiguration
-    var postUrl:String = ""
-    lateinit var hashString :String
+    private var postUrl:String = ""
+    private lateinit var hashString :String
     object Hmac {
         fun digest(
             msg: String,
@@ -97,11 +97,11 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
                         )
                         .setHashString(hashString)
                         .build()
-                )
+                )//**Required**//
                 .setMerchant(
                     Merchant.Builder().setId(getPrefStringValue("merchantIdKey", "1124340"))
                         .setGatwayId(getPrefStringValue("gatewayIdKey", "tappayments")).build()
-                )
+                )//**Required**//
                 .setOrders(
                     OrderDetail.Builder().setAmount((getPrefStringValue("amountKey", "0.2")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
                         .setShipping(Shipping((getPrefStringValue("shipNameKey", "Shipping Test")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "Tax Test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
@@ -113,14 +113,14 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
                     Acceptance(
                         supportedSchemes = getPrefs().getStringSet("selectedSchemesKey", emptySet<String>())!!.toMutableList(),
                     )
-                )
-                .setTapCustomer(getTapCustomer()) //Required
+                )//**Required**//
+                .setTapCustomer(getTapCustomer()) //**Required**//
                 .setTapInterface(
                     TapInterface(
                         getLanguageMode("selectedLangKey"),
                         getEdges("selectedcardedgeKey"),
                         getThemeMode("selectedthemeKey"), getColorStyle("selectedColorStyleKey")
-                    ) //Optional
+                    ) //**Optional**//
 
                 )
                 .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))//**Required**//
@@ -143,17 +143,17 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
 
 
     private fun getThemeMode(key: String): ThemeMode? {
-        val selecetdTheme: String = getPrefStringValue(key, ThemeMode.DARK.name)
 
-        if (selecetdTheme == ThemeMode.DARK.name) return ThemeMode.DARK
-        else if (selecetdTheme == ThemeMode.LIGHT.name) return ThemeMode.LIGHT
-        else return ThemeMode.DARK
+        return when (getPrefStringValue(key, ThemeMode.DARK.name)) {
+            ThemeMode.DARK.name -> ThemeMode.DARK
+            ThemeMode.LIGHT.name -> ThemeMode.LIGHT
+            else -> ThemeMode.DARK
+        }
     }
 
     private fun getLanguageMode(key: String): String {
-        val selectedLangKey: String = getPrefStringValue(key, Language.EN.name)
 
-        return when (selectedLangKey) {
+        return when (getPrefStringValue(key, Language.EN.name)) {
             Language.EN.name.toLowerCase() -> Language.EN.name
             Language.AR.name.toLowerCase() -> Language.AR.name
             else -> Language.EN.name
@@ -161,9 +161,8 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
     }
 
     private fun getEdges(key: String): Edges {
-        val selectedcardedgeKey: String = getPrefStringValue(key, Edges.curved.name)
 
-        return when (selectedcardedgeKey) {
+        return when (getPrefStringValue(key, Edges.curved.name)) {
             Edges.curved.name -> Edges.curved
             Edges.flat.name -> Edges.flat
             else -> Edges.curved
@@ -171,9 +170,8 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
     }
 
     private fun getScope(key: String): Scope {
-        val scopeKey: String = getPrefStringValue(key, Scope.SAMSUNG_TOKEN.name)
 
-        return when (scopeKey) {
+        return when (getPrefStringValue(key, Scope.SAMSUNG_TOKEN.name)) {
             Scope.SAMSUNG_TOKEN.name -> Scope.SAMSUNG_TOKEN
             Scope.TAP_TOKEN.name -> Scope.TAP_TOKEN
             else -> Scope.SAMSUNG_TOKEN
@@ -181,9 +179,8 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
     }
 
     private fun getColorStyle(key: String): String {
-        val selectedColorStyleKey: String = getPrefStringValue(key, ColorStyle.colored.name)
 
-        return when (selectedColorStyleKey) {
+        return when (getPrefStringValue(key, ColorStyle.colored.name)) {
             ColorStyle.colored.name -> {
                 ColorStyle.colored.name
             }

@@ -4,7 +4,7 @@ import androidx.annotation.RestrictTo
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
-import company.tap.tapcardformkit.internal.api.enums.Permission
+import com.tap.samsungpay.internal.api.enums.Permission
 import java.io.Serializable
 import java.util.ArrayList
 
