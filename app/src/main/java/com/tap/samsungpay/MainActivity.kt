@@ -34,11 +34,12 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
 
-class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
+class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
 
     private lateinit var tapConfiguration: TapConfiguration
-    private var postUrl:String = ""
-    private lateinit var hashString :String
+    private var postUrl: String = ""
+    private lateinit var hashString: String
+
     object Hmac {
         fun digest(
             msg: String,
@@ -74,16 +75,30 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
 
     private fun initConfigurations() {
         /** Generate HashString**/
-        val stringmsg = "x_publickey${getPrefStringValue(
-            "publicKey",
-            "pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
-        )}x_amount${(getPrefStringValue("amountKey", "0.2")).toDouble()}x_currency${(getPrefStringValue("selectedCurrencyKey", "USD"))}x_transaction${""}x_post$postUrl"
+        val stringmsg = "x_publickey${
+            getPrefStringValue(
+                "publicKey",
+                "pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
+            )
+        }x_amount${
+            (getPrefStringValue(
+                "amountKey",
+                "0.2"
+            )).toDouble()
+        }x_currency${
+            (getPrefStringValue(
+                "selectedCurrencyKey",
+                "USD"
+            ))
+        }x_transaction${""}x_post$postUrl"
 
-        hashString = Hmac.digest(msg = stringmsg, key =getPrefStringValue(
-            "secretKey",
-            "sk_test_kovrMB0mupFJXfNZWx6Etg5y"
-        ) )
-       // Log.e("encrypted hashString",hashstring.toString())
+        hashString = Hmac.digest(
+            msg = stringmsg, key = getPrefStringValue(
+                "secretKey",
+                "sk_test_kovrMB0mupFJXfNZWx6Etg5y"
+            )
+        )
+        // Log.e("encrypted hashString",hashstring.toString())
 
         tapConfiguration =
             TapConfiguration.Builder()
@@ -103,15 +118,30 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
                         .setGatwayId(getPrefStringValue("gatewayIdKey", "tappayments")).build()
                 )//**Required**//
                 .setOrders(
-                    OrderDetail.Builder().setAmount((getPrefStringValue("amountKey", "0.2")).toDouble()).setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
-                        .setShipping(Shipping((getPrefStringValue("shipNameKey", "Shipping Test")), (getPrefStringValue("shipAmntKey", "0.1")).toDouble())).setTax(Tax((getPrefStringValue("taxNameKey", "Tax Test")),  (getPrefStringValue("shipAmntKey", "0.1")).toDouble())) //Optional
+                    OrderDetail.Builder()
+                        .setAmount((getPrefStringValue("amountKey", "0.2")).toDouble())
+                        .setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
+                        .setShipping(
+                            Shipping(
+                                (getPrefStringValue("shipNameKey", "Shipping Test")),
+                                (getPrefStringValue("shipAmntKey", "0.1")).toDouble()
+                            )
+                        ).setTax(
+                            Tax(
+                                (getPrefStringValue("taxNameKey", "Tax Test")),
+                                (getPrefStringValue("shipAmntKey", "0.1")).toDouble()
+                            )
+                        ) //Optional
                         .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
                         .build()
                 )
                 .setScope(getScope("scopeKey"))
                 .setAcceptance(
                     Acceptance(
-                        supportedSchemes = getPrefs().getStringSet("selectedSchemesKey", emptySet<String>())!!.toMutableList(),
+                        supportedSchemes = getPrefs().getStringSet(
+                            "selectedSchemesKey",
+                            emptySet<String>()
+                        )!!.toMutableList(),
                     )
                 )//**Required**//
                 .setTapCustomer(getTapCustomer()) //**Required**//
@@ -123,8 +153,18 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
                     ) //**Optional**//
 
                 )
-                .setPackageName(getPrefStringValue("packageKey", "company.tap.samsungpay"))//**Required**//
-                .setServiceId(getPrefStringValue("serviceIdKey", "fff80d901c2849ba8f3641"))//**Required**//
+                .setPackageName(
+                    getPrefStringValue(
+                        "packageKey",
+                        "company.tap.samsungpay"
+                    )
+                )//**Required**//
+                .setServiceId(
+                    getPrefStringValue(
+                        "serviceIdKey",
+                        "fff80d901c2849ba8f3641"
+                    )
+                )//**Required**//
                 .build()
 
     }
@@ -143,7 +183,6 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
 
 
     private fun getThemeMode(key: String): ThemeMode? {
-
         return when (getPrefStringValue(key, ThemeMode.DARK.name)) {
             ThemeMode.DARK.name -> ThemeMode.DARK
             ThemeMode.LIGHT.name -> ThemeMode.LIGHT
@@ -152,7 +191,6 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
     }
 
     private fun getLanguageMode(key: String): String {
-
         return when (getPrefStringValue(key, Language.EN.name)) {
             Language.EN.name.toLowerCase() -> Language.EN.name
             Language.AR.name.toLowerCase() -> Language.AR.name
@@ -197,28 +235,27 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
         // Set the message show for the Alert time
         builder.setMessage(message)
 
-        // Set Alert Title
-         .setTitle(title)
+            // Set Alert Title
+            .setTitle(title)
 
-        // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
-        .setCancelable(false)
+            // Set Cancelable false for when the user clicks on the outside the Dialog Box then it will remain show
+            .setCancelable(false)
 
-        // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
-        .setPositiveButton("Yes") {
-            // When the user click yes button then app will close
-                dialog, which ->
-            dialog.dismiss()
-            finish()
+            // Set the positive button with yes name Lambda OnClickListener method is use of DialogInterface interface.
+            .setPositiveButton("Yes") {
+                // When the user click yes button then app will close
+                    dialog, which ->
+                dialog.dismiss()
+                finish()
 
-        }
-
-        // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
-        .setNegativeButton("No") {
-            // If user click no then dialog box is canceled.
-                dialog, which ->
-            dialog.cancel()
-            finish()
-        }
+            }
+             // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
+            .setNegativeButton("No") {
+                // If user click no then dialog box is canceled.
+                    dialog, which ->
+                dialog.cancel()
+                finish()
+            }
 
         // Create the Alert dialog
         val alertDialog = builder.create()
@@ -251,11 +288,8 @@ class MainActivity : AppCompatActivity() , TapSamsungPayDelegate{
     }
 
     override fun onCancel(cancel: String) {
-        customAlertBox("onCancel Called",cancel)
+        customAlertBox("onCancel Called", cancel)
     }
-
-
-
 
 
 }
