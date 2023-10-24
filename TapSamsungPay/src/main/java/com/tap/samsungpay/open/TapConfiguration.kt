@@ -14,8 +14,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.google.gson.Gson
 import com.tap.samsungpay.internal.DataConfiguration
 import com.tap.samsungpay.internal.SamsungPayActivity
-import com.tap.samsungpay.internal.builder.publicKeybuilder.Operator
-import com.tap.samsungpay.internal.builder.transactionBuilder.OrderDetail
+
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.Acceptance
 import com.tap.samsungpay.internal.models.AddOns
@@ -25,6 +24,8 @@ import com.tap.samsungpay.open.enums.SDKMODE
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.samsungpay.internal.builder.featuresBuilder.Features
+import com.tap.samsungpay.internal.builder.publicKeybuilder.Operator
+import com.tap.samsungpay.internal.builder.transactionBuilder.OrderDetail
 
 
 class TapConfiguration private constructor(

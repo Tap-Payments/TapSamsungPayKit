@@ -26,7 +26,7 @@ import com.tap.samsungpay.internal.models.Tax
 import com.tap.samsungpay.internal.api.models.AssetsModel
 import com.tap.samsungpay.internal.api.models.TopUp
 
-import company.tap.tapcardformkit.open.*
+import com.tap.samsungpay.open.*
 import company.tap.tapnetworkkit.connection.NetworkApp
 import company.tap.tapnetworkkit.controller.NetworkController
 import company.tap.tapnetworkkit.enums.TapMethodType
