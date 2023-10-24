@@ -1,10 +1,3 @@
-/**
- * Created by AhlaamK on 10/19/23, 12:01 PM
- * Copyright (c) 2023 .
- * Tap Payments All rights reserved.
- *
- **/
-
 package com.tap.samsungpay.internal.interfaces
 
 import androidx.annotation.RestrictTo

@@ -19,13 +19,9 @@ private const val PRODUCT_SHIPPING_ID = "productShippingId"
 class SamsungPayTransaction {
     val tapConfiguration = TapConfiguration
     fun makeTransactionDetailsWithSheet(): CustomSheetPaymentInfo? {
-
-
         val extraPaymentInfo = Bundle()
         val customSheet = CustomSheet()
 
-      //  println("tapConfiguration>>>"+tapConfiguration.tapConfigurationS)
-      //  println("extraPaymentInfo>>>"+extraPaymentInfo)
         println("brandList>>>"+brandList)
         customSheet.addControl(makeAmountControl())
 
@@ -124,11 +120,6 @@ class SamsungPayTransaction {
 
 
                 for (i in tapBrands?.indices!!) {
-                    //Added temp until we get this from BE
-                   /* if(tapBrands.contains("SAMSUNG_PAY")){
-                        tapBrands.remove("SAMSUNG_PAY")
-                        tapBrands.add("UNKNOWN_CARD")
-                    }*/
                    if(_brandList.contains(SpaySdk.Brand.valueOf(tapBrands[i]))){
                        _brandList.add(SpaySdk.Brand.valueOf(tapBrands[i]))
 

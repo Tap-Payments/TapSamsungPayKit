@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.chillibits.simplesettings.tool.getPrefs
 import com.tap.samsungpay.internal.api.responses.Token
-import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
-import com.tap.samsungpay.internal.builder.TransactionBuilder.OrderDetail
+import com.tap.samsungpay.internal.builder.publicKeybuilder.Operator
+import com.tap.samsungpay.internal.builder.transactionBuilder.OrderDetail
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.Acceptance
 import com.tap.samsungpay.internal.models.PhoneNumber

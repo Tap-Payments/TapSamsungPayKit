@@ -14,8 +14,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.google.gson.Gson
 import com.tap.samsungpay.internal.DataConfiguration
 import com.tap.samsungpay.internal.SamsungPayActivity
-import com.tap.samsungpay.internal.builder.PublicKeybuilder.Operator
-import com.tap.samsungpay.internal.builder.TransactionBuilder.OrderDetail
+import com.tap.samsungpay.internal.builder.publicKeybuilder.Operator
+import com.tap.samsungpay.internal.builder.transactionBuilder.OrderDetail
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.Acceptance
 import com.tap.samsungpay.internal.models.AddOns

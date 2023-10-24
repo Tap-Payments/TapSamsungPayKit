@@ -1,11 +1,9 @@
-/*
- * *
- *  * Created by $AhlaamK on 10/19/23, 12:00 PM
- *  * Copyright (c) 2023 .
- *  * Tap Payments All rights reserved.
- *  *
- *  *
- */
+/**
+ * Created by AhlaamK on 10/19/23, 12:00 PM
+ * Copyright (c) 2023 .
+ * Tap Payments All rights reserved.
+ *
+ **/
 
 package com.tap.samsungpay.internal
 

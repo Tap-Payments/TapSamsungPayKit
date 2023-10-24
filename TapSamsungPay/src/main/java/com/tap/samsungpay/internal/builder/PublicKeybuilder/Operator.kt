@@ -1,4 +1,4 @@
-package com.tap.samsungpay.internal.builder.PublicKeybuilder
+package com.tap.samsungpay.internal.builder.publicKeybuilder
 
 class Operator(
     var publicKey: String? = null,

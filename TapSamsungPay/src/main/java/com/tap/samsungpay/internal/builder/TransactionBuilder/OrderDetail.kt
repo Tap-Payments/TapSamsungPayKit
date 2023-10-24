@@ -1,4 +1,4 @@
-package com.tap.samsungpay.internal.builder.TransactionBuilder
+package com.tap.samsungpay.internal.builder.transactionBuilder
 
 import com.tap.samsungpay.internal.models.Shipping
 import com.tap.samsungpay.internal.models.Tax
