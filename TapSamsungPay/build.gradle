@@ -40,7 +40,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     api 'com.google.code.gson:gson:2.9.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    api 'com.github.Tap-Payments:TapNetwrok-Android:0.2.2.34'
+    api 'com.github.Tap-Payments:TapNetwrok-Android:0.2.2.44'
     implementation files('libs/SamsungPaySDK_2.18.00_release.jar')
    // api 'com.github.Tap-Payments:TapUIKit-Android:2.0.8'
 
