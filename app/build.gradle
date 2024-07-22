@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.tap.samsungpay'
+    namespace 'com.tap.tapsamsungpay'
 
     compileSdk 33
 

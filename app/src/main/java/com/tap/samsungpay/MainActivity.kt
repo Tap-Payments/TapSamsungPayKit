@@ -7,6 +7,7 @@
 
 package com.tap.samsungpay
 
+
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +30,7 @@ import com.tap.samsungpay.open.enums.Edges
 import com.tap.samsungpay.open.enums.Language
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.open.enums.ThemeMode
+import com.tap.tapsamsungpay.R
 import java.util.Formatter
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
@@ -162,7 +164,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                 .setServiceId(
                     getPrefStringValue(
                         "serviceIdKey",
-                        "fff80d901c2849ba8f3641"
+                        "1cd18649418d46478eb800"
                     )
                 )//**Required**//
                 .build()

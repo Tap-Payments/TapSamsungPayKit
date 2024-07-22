@@ -26,9 +26,9 @@ class SamsungPayTransaction {
         customSheet.addControl(makeAmountControl())
 
         return CustomSheetPaymentInfo.Builder()
-            .setMerchantId(tapConfiguration.getTapConfiguration()?.merchant?.gatewayId)
-            .setMerchantName(tapConfiguration.getTapConfiguration()?.merchant?.id)
-            .setOrderNumber(TapConfiguration.getTapConfiguration()?.orderNumber ?:"")
+            .setMerchantId("12121")
+            .setMerchantName("3131")
+            .setOrderNumber("qwqe")
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
             .setAddressInPaymentSheet(CustomSheetPaymentInfo.AddressInPaymentSheet.DO_NOT_SHOW)
@@ -36,7 +36,7 @@ class SamsungPayTransaction {
             .setCardHolderNameEnabled(true)
             .setRecurringEnabled(false)
             .setCustomSheet(customSheet)
-            .setExtraPaymentInfo(extraPaymentInfo)
+          //  .setExtraPaymentInfo(extraPaymentInfo)
             .build()
     }
 
@@ -47,7 +47,7 @@ class SamsungPayTransaction {
          */
         val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.getTapConfiguration()?.orderDetail?.currency)
         // amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
-        tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
+     /*   tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
             amountBoxControl.addItem(PRODUCT_TAX_ID, tapConfiguration.getTapConfiguration()?.orderDetail!!.tax?.name,
                 it, "")
         }
@@ -58,7 +58,11 @@ class SamsungPayTransaction {
         tapConfiguration.getTapConfiguration()?.orderDetail?.amount?.let {
             amountBoxControl.setAmountTotal(
                 it, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
-        }
+        }*/
+
+        amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
+        amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Item", 0.1, "")
+        amountBoxControl.setAmountTotal(0.22,"sd")
         return amountBoxControl
 
 //        with(TapConfiguration.getTapConfiguration()) {

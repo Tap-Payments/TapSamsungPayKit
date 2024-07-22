@@ -252,7 +252,7 @@
             app:isPreferenceVisible="false"/>
         <EditTextPreference
             app:key="serviceIdKey"
-            app:defaultValue="fff80d901c2849ba8f3641"
+            app:defaultValue="1cd18649418d46478eb800"
             app:title="@string/service_id"
             app:useSimpleSummaryProvider="true"/>
 
