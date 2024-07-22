@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
         val stringmsg = "x_publickey${
             getPrefStringValue(
                 "publicKey",
-                "pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
+                "pk_test_OYw82dpQRWGn7tEy6LclFsev"
             )
         }x_amount${
             (getPrefStringValue(
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
         hashString = Hmac.digest(
             msg = stringmsg, key = getPrefStringValue(
                 "secretKey",
-                "sk_test_kovrMB0mupFJXfNZWx6Etg5y"
+                "sk_test_xliFRQtUrGfMdcCEgO9ohDSw"
             )
         )
         // Log.e("encrypted hashString",hashstring.toString())
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                         .setPublicKey(
                             getPrefStringValue(
                                 "publicKey",
-                                "pk_test_Vlk842B1EA7tDN5QbrfGjYzh"
+                                "pk_test_OYw82dpQRWGn7tEy6LclFsev"
                             )
                         )
                         .setHashString(hashString)
@@ -156,7 +156,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                 .setPackageName(
                     getPrefStringValue(
                         "packageKey",
-                        "company.tap.samsungpay"
+                        "com.tap.tapsamsungpay"
                     )
                 )//**Required**//
                 .setServiceId(

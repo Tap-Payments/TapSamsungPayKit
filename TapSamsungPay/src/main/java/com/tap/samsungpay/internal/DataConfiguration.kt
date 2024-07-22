@@ -101,7 +101,7 @@ object DataConfiguration {
 
         NetworkApp.initNetwork(
             context, dataConfig.publicKey?.publicKey,
-            dataConfig.packageName,
+            "com.tap.tapsamsungpay",
             if (dataConfig.environment == SDKMODE.SANDBOX) ApiService.BASE_URL else ApiService.PRODUCTION_URL,
             if(dataConfig.typeDevice == null || dataConfig.typeDevice == "") "Native Android" else dataConfig.typeDevice,
             true,
