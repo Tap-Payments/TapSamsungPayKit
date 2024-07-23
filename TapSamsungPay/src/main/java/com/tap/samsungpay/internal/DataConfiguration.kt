@@ -100,8 +100,8 @@ object DataConfiguration {
         PaymentDataSourceImpl.setDefaultCardHolderName("")
 
         NetworkApp.initNetwork(
-            context, dataConfig.publicKey?.publicKey,
-            "com.tap.tapsamsungpay",
+            context,"pk_test_6jdl4Qo0FYOSXmrZTR1U5EHp",
+            "company.tap.paybutton",
             if (dataConfig.environment == SDKMODE.SANDBOX) ApiService.BASE_URL else ApiService.PRODUCTION_URL,
             if(dataConfig.typeDevice == null || dataConfig.typeDevice == "") "Native Android" else dataConfig.typeDevice,
             true,

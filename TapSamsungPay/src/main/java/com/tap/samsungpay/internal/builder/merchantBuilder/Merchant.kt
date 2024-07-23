@@ -3,8 +3,6 @@ package com.tap.samsungpay.internal.builder.merchantBuilder
 class Merchant(var id: String? = null, var gatewayId: String? = null) {
     init {
 
-        if (id.isNullOrBlank())
-            throw IllegalArgumentException("merchantId must not be null or blank.")
 
         if (gatewayId.isNullOrBlank())
             throw IllegalArgumentException("gatewayID must not be null or blank.")

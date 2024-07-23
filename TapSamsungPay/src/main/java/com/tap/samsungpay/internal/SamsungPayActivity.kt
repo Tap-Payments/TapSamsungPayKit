@@ -39,6 +39,7 @@ import com.tap.samsungpay.open.SamsungPayButton
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.open.enums.ThemeMode.*
 import com.tap.tapsamsungpay.R
+
 import company.tap.tapcardvalidator_android.CardBrand
 import org.json.JSONException
 import org.json.JSONObject
@@ -88,11 +89,11 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                 when (status) {
                     SpaySdk.SPAY_READY -> {
                         DataConfiguration.getListener()?.onReady("SPAY_READY")
-                        samsungPayButton.buttonSamsung.visibility = View.VISIBLE
+
                         /**
                          * start Checkout transaction
                          */
-                      //   startCallForCheckoutProfileAPi()
+                        startCallForCheckoutProfileAPi()
                         // Perform your operation. of inApp Payment
                         /**
                          * start In App Pay for for normal Transaction

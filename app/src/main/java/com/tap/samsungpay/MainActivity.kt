@@ -31,6 +31,7 @@ import com.tap.samsungpay.open.enums.Language
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.tapsamsungpay.R
+
 import java.util.Formatter
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
         val stringmsg = "x_publickey${
             getPrefStringValue(
                 "publicKey",
-                "pk_test_OYw82dpQRWGn7tEy6LclFsev"
+                "pk_test_6jdl4Qo0FYOSXmrZTR1U5EHp"
             )
         }x_amount${
             (getPrefStringValue(
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
         hashString = Hmac.digest(
             msg = stringmsg, key = getPrefStringValue(
                 "secretKey",
-                "sk_test_xliFRQtUrGfMdcCEgO9ohDSw"
+                "sk_test_bNgRpokWMylX3CBJ6FOresTq"
             )
         )
         // Log.e("encrypted hashString",hashstring.toString())
@@ -109,7 +110,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                         .setPublicKey(
                             getPrefStringValue(
                                 "publicKey",
-                                "pk_test_OYw82dpQRWGn7tEy6LclFsev"
+                                "pk_test_6jdl4Qo0FYOSXmrZTR1U5EHp"
                             )
                         )
                         .setHashString(hashString)
@@ -158,7 +159,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                 .setPackageName(
                     getPrefStringValue(
                         "packageKey",
-                        "com.tap.tapsamsungpay"
+                        "company.tap.paybutton"
                     )
                 )//**Required**//
                 .setServiceId(
