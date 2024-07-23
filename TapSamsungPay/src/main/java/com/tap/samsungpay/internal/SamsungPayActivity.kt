@@ -198,7 +198,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
         val partnerInfo = PartnerInfo(SERVICE_ID, bundle)
         paymentManager = PaymentManager(this, partnerInfo)
-       // paymentManager.requestCardInfo(Bundle(), cardInfoListener)
+        paymentManager.requestCardInfo(Bundle(), cardInfoListener)
 
         /*
          * PaymentManager.startInAppPay is a method to request online (In-App) payment
