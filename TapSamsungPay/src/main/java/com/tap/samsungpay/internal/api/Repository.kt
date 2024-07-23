@@ -77,7 +77,7 @@ class Repository : APIRequestCallback {
             PaymentDataSourceImpl.getDestination(),
             PaymentDataSourceImpl.getCurrency()?.isoCode,
             PaymentDataSourceImpl.getCustomer()?.identifier,
-            "",
+            PaymentDataSourceImpl.getMerchant()?.id,
             PaymentDataSourceImpl.getPaymentDataType().toString(),
             PaymentDataSourceImpl.getTopup(),
             PaymentDataSourceImpl.getOrderObject(),
@@ -311,7 +311,7 @@ class PaymentOptionsRequest(
     @SerializedName("merchant_id")
     @Expose
     @Nullable
-    private val merchant_id: String? = merchant_id
+    private val merchant_id: String? =  merchant_id ?: ""
 
     @SerializedName("payment_type")
     @Expose

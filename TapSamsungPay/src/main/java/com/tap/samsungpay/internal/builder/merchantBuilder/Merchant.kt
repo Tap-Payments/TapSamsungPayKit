@@ -10,7 +10,7 @@ class Merchant(var id: String? = null, var gatewayId: String? = null) {
     }
 
     class Builder {
-        var id: String? = null
+        var id: String? = ""
 
         fun setId(id: String?) = apply {
             this.id = id

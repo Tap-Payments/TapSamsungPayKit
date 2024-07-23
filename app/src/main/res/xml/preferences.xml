@@ -133,7 +133,7 @@
 
         <EditTextPreference
             app:key="merchantIdKey"
-            app:defaultValue="1124340"
+            app:defaultValue=""
             app:title="@string/merchant_id"
             app:useSimpleSummaryProvider="true"/>
 

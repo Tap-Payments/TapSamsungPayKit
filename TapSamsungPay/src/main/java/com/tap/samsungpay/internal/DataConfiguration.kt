@@ -101,7 +101,7 @@ object DataConfiguration {
 
         NetworkApp.initNetwork(
             context,"pk_test_6jdl4Qo0FYOSXmrZTR1U5EHp",
-            "company.tap.paybutton",
+            context.packageName,
             if (dataConfig.environment == SDKMODE.SANDBOX) ApiService.BASE_URL else ApiService.PRODUCTION_URL,
             if(dataConfig.typeDevice == null || dataConfig.typeDevice == "") "Native Android" else dataConfig.typeDevice,
             true,

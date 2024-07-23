@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                         .build()
                 )//**Required**//
                 .setMerchant(
-                    Merchant.Builder().setId(getPrefStringValue("merchantIdKey", "1124340"))
+                    Merchant.Builder().setId(getPrefStringValue("merchantIdKey", ""))
                         .setGatwayId(getPrefStringValue("gatewayIdKey", "tappayments")).build()
                 )//**Required**//
                 .setOrders(
