@@ -410,6 +410,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
     private fun handleSuccessCallBack(paymentData: String) {
         // Token will be null if PaymentDataRequest was not constructed using fromJson(String).
         try {
+            println("paymentData here>>$paymentData")
             val _paymentData = JSONObject(paymentData).getJSONObject("3DS")
             println("paymentData$_paymentData")
 

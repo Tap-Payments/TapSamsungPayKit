@@ -47,7 +47,7 @@ class SamsungPayTransaction {
          */
         val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.getTapConfiguration()?.orderDetail?.currency)
         // amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
-     /*   tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
+       tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
             amountBoxControl.addItem(PRODUCT_TAX_ID, tapConfiguration.getTapConfiguration()?.orderDetail!!.tax?.name,
                 it, "")
         }
@@ -58,11 +58,9 @@ class SamsungPayTransaction {
         tapConfiguration.getTapConfiguration()?.orderDetail?.amount?.let {
             amountBoxControl.setAmountTotal(
                 it, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
-        }*/
+        }
 
-        amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
-        amountBoxControl.addItem(PRODUCT_SHIPPING_ID, "Item", 0.1, "")
-        amountBoxControl.setAmountTotal(0.22,"sd")
+
         return amountBoxControl
 
 //        with(TapConfiguration.getTapConfiguration()) {

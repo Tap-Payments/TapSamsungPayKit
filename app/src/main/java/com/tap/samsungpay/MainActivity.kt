@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                         ).setTax(
                             Tax(
                                 (getPrefStringValue("taxNameKey", "Tax Test")),
-                                (getPrefStringValue("shipAmntKey", "0.1")).toDouble()
+                                (getPrefStringValue("taxAmntKey", "0.1")).toDouble()
                             )
                         ) //Optional
                         .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
