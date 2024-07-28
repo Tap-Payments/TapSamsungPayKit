@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName
 import com.tap.samsungpay.internal.api.enums.LogsModel
 import com.tap.samsungpay.internal.api.enums.Permission
 import com.tap.samsungpay.internal.api.models.AssetsModel
+import com.tap.samsungpay.internal.api.models.OrderId
 import java.io.Serializable
 import java.util.ArrayList
 
@@ -31,9 +32,15 @@ data class InitResponseModel(@SerializedName("payment_options")
                              @NonNull var assestsModel: AssetsModel,
                              @SerializedName("session")
                              @Expose
-                             @NonNull val session: String,):Serializable
+                             @NonNull val session: String,
+                             @SerializedName("order")
+                             @Expose
+                             @NonNull var order :OrderId
+):Serializable
 data class MerchantData(
-
+    @SerializedName("id")
+    @Expose
+    val id: String? = null,
     @SerializedName("encryption_key")
     @Expose
     val encryptionKey: String? = null,

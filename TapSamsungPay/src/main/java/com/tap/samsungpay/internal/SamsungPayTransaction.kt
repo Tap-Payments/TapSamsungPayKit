@@ -9,6 +9,8 @@ import com.samsung.android.sdk.samsungpay.v2.payment.sheet.AmountBoxControl
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.AmountConstants
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.SheetItemType
+import com.tap.samsungpay.internal.PaymentDataSourceImpl.initResponseModel
+import com.tap.samsungpay.internal.PaymentDataSourceImpl.paymentOptionsResponse
 import com.tap.samsungpay.open.TapConfiguration
 
 private const val AMOUNT_CONTROL_ID = "amountControlId"
@@ -26,17 +28,18 @@ class SamsungPayTransaction {
         customSheet.addControl(makeAmountControl())
 
         return CustomSheetPaymentInfo.Builder()
-            .setMerchantId("12121")
-            .setMerchantName("3131")
-            .setOrderNumber("qwqe")
+            .setMerchantId(initResponseModel?.merchant?.id)
+            .setMerchantName(initResponseModel?.merchant?.name)
+            .setOrderNumber(initResponseModel?.order?.getId())
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
             .setAddressInPaymentSheet(CustomSheetPaymentInfo.AddressInPaymentSheet.DO_NOT_SHOW)
-            .setAllowedCardBrands(brandList)
+            .setAllowedCardBrands(null) //TODO
+            //.setAllowedCardBrands(brandList)
             .setCardHolderNameEnabled(true)
             .setRecurringEnabled(false)
             .setCustomSheet(customSheet)
-          //  .setExtraPaymentInfo(extraPaymentInfo)
+            //  .setExtraPaymentInfo(extraPaymentInfo)
             .build()
     }
 
@@ -45,20 +48,42 @@ class SamsungPayTransaction {
         /**
          * amountBox from  integration guide
          */
-        val amountBoxControl = AmountBoxControl(AMOUNT_CONTROL_ID, tapConfiguration.getTapConfiguration()?.orderDetail?.currency)
+        val amountBoxControl = AmountBoxControl(
+            AMOUNT_CONTROL_ID,
+            tapConfiguration.getTapConfiguration()?.orderDetail?.currency
+        )
         // amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
-       tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
-            amountBoxControl.addItem(PRODUCT_TAX_ID, tapConfiguration.getTapConfiguration()?.orderDetail!!.tax?.name,
-                it, "")
+        tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
+            amountBoxControl.addItem(
+                PRODUCT_TAX_ID, tapConfiguration.getTapConfiguration()?.orderDetail!!.tax?.name,
+                it, ""
+            )
         }
         tapConfiguration.getTapConfiguration()?.orderDetail?.shipping?.amount?.let {
-            amountBoxControl.addItem(PRODUCT_SHIPPING_ID,  tapConfiguration.getTapConfiguration()?.orderDetail!!.shipping?.name,
-                it, "")
+            amountBoxControl.addItem(
+                PRODUCT_SHIPPING_ID,
+                tapConfiguration.getTapConfiguration()?.orderDetail!!.shipping?.name,
+                it,
+                ""
+            )
         }
-        tapConfiguration.getTapConfiguration()?.orderDetail?.amount?.let {
+
+        var totalPrice: Double? = tapConfiguration.getTapConfiguration()?.orderDetail?.amount?.let {
+            tapConfiguration.getTapConfiguration()?.orderDetail?.shipping?.amount?.let { it1 ->
+                tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.plus(it1)?.plus(
+                    it
+                )
+            }
+        }
+
+
+
+        if (totalPrice != null) {
             amountBoxControl.setAmountTotal(
-                it, AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
+                totalPrice, AmountConstants.FORMAT_TOTAL_PRICE_ONLY
+            )
         }
+
 
 
         return amountBoxControl
@@ -110,29 +135,31 @@ class SamsungPayTransaction {
     }
 
 
-
-
     private val brandList: ArrayList<SpaySdk.Brand>
         get() {
-            val _brandList :  ArrayList<SpaySdk.Brand> =  ArrayList<SpaySdk.Brand>()
-          //  with(TapConfiguration.getTapConfiguration()) {
-                // var tapBrands = this?.acceptance?.supportedBrands?.map { it.rawValue.replace("_","") }
-                val tapBrands = TapConfiguration.getTapConfiguration()?.acceptance?.supportedSchemes
+            val _brandList: Array<SpaySdk.Brand> = SpaySdk.Brand.values()
+            val bransList: ArrayList<SpaySdk.Brand> = ArrayList<SpaySdk.Brand>()
+            with(TapConfiguration.getTapConfiguration()) {
+                //   var tapBrands = this?.acceptance?.supportedBrands?.map { it.rawValue.replace("_","") }
+                var tapBrands =
+                    initResponseModel?.paymentOptionsResponse?.paymentOptions?.get(0)?.supportedCardBrands
+                // val tapBrands = TapConfiguration.getTapConfiguration()?.acceptance?.supportedSchemes
                 println("tapBrands are" + tapBrands)
 
 
                 for (i in tapBrands?.indices!!) {
-                   if(_brandList.contains(SpaySdk.Brand.valueOf(tapBrands[i]))){
-                       _brandList.add(SpaySdk.Brand.valueOf(tapBrands[i]))
+                    if (_brandList.contains(SpaySdk.Brand.valueOf(tapBrands[i].name.toUpperCase()))) {
+                        bransList.add(SpaySdk.Brand.valueOf(tapBrands[i].name.toUpperCase()))
 
-                   }
+                    }
                 }
-           // }
+                 }
 
-            return _brandList
+                return bransList
+            }
+
         }
 
-}
 
 /*
  * Make user's transaction details.

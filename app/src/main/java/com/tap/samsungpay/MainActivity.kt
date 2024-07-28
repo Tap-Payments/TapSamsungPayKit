@@ -77,6 +77,16 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
     }
 
     private fun initConfigurations() {
+        // Shipping List
+        val shippingList : ArrayList<Shipping> = mutableListOf(Shipping(
+            (getPrefStringValue("shipNameKey", "Shipping Test")),
+            (getPrefStringValue("shipAmntKey", "0.1")).toDouble()
+        )) as ArrayList<Shipping>
+        // Tax List
+        val taxList : ArrayList<Tax> = mutableListOf( Tax(
+            (getPrefStringValue("taxNameKey", "Tax Test")),
+            (getPrefStringValue("shipAmntKey", "0.1")).toDouble()
+        )) as ArrayList<Tax>
         /** Generate HashString**/
         val stringmsg = "x_publickey${
             getPrefStringValue(
@@ -132,10 +142,11 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                         ).setTax(
                             Tax(
                                 (getPrefStringValue("taxNameKey", "Tax Test")),
-                                (getPrefStringValue("taxAmntKey", "0.1")).toDouble()
+                                (getPrefStringValue("shipAmntKey", "0.1")).toDouble()
                             )
                         ) //Optional
                         .setOrderNumber(getPrefStringValue("orderNoKey", "AMZ333")) //**Optional**//
+
                         .build()
                 )
                 .setScope(getScope("scopeKey"))
@@ -168,6 +179,9 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                         "1cd18649418d46478eb800"
                     )
                 )//**Required**//
+                .setShipping(
+                    shippingList)
+                .setTax(taxList)
                 .build()
 
     }
@@ -286,7 +300,20 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
     }
 
     override fun onTapToken(token: Token) {
-        customAlertBox("onTapToken Called", token.id.toString())
+       var  sb : StringBuilder= java.lang.StringBuilder()
+        sb.append('\n' + token.id.toString() +
+                '\n' +token.name +
+                '\n' +token.currency +
+                '\n' +token.card +
+                '\n' +token.`object` +
+                '\n' +token.client_ip +
+                '\n' +token.currency +
+                '\n' +token.created +
+                '\n' +token.livemode +
+                '\n' +token.type +
+                '\n' +token.used)
+
+        customAlertBox("onTapToken Called", token.toString())
 
     }
 

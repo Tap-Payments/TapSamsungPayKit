@@ -26,6 +26,8 @@ import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.samsungpay.internal.builder.featuresBuilder.Features
 import com.tap.samsungpay.internal.builder.publicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.transactionBuilder.OrderDetail
+import com.tap.samsungpay.internal.models.Shipping
+import com.tap.samsungpay.internal.models.Tax
 
 
 class TapConfiguration private constructor(
@@ -43,7 +45,9 @@ class TapConfiguration private constructor(
     val packageName: String?,
     var typeDevice: String? = "Native Android",
     val serviceId:String?,
-    val orderNumber:String?
+    val orderNumber:String?,
+    val taxes: ArrayList<Tax>?,
+    val shipping: ArrayList<Shipping>?
 ) {
 
 
@@ -138,7 +142,14 @@ class TapConfiguration private constructor(
         fun setOrderNumber(orderNumber: String) = apply {
             this.orderNumber = orderNumber
         }
-
+        var taxes: ArrayList<Tax>? = null
+        fun setTax(tax: ArrayList<Tax>) = apply {
+            this.taxes = tax
+        }
+        var shipping: ArrayList<Shipping>? = null
+        fun setShipping(shipping: ArrayList<Shipping>?) = apply {
+            this.shipping = shipping
+        }
 
         fun build(): TapConfiguration {
             return TapConfiguration(
@@ -154,7 +165,7 @@ class TapConfiguration private constructor(
                 tapInterface,
                // authTokenn,
                 packageName,
-                typeDevice,serviceId, orderNumber
+                typeDevice,serviceId, orderNumber , taxes , shipping
             )
         }
     }

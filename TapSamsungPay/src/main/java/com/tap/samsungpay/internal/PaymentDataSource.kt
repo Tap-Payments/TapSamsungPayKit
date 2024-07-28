@@ -18,6 +18,7 @@ import com.tap.samsungpay.internal.api.responses.InitResponseModel
 import com.tap.samsungpay.internal.api.responses.MerchantData
 import com.tap.samsungpay.internal.api.enums.TransactionMode
 import com.tap.samsungpay.internal.api.models.CardIssuer
+import com.tap.samsungpay.internal.api.models.OrderId
 import com.tap.samsungpay.internal.api.models.TopUp
 import com.tap.samsungpay.internal.models.AuthorizeAction
 import com.tap.samsungpay.internal.models.ItemsModel
@@ -32,6 +33,7 @@ import com.tap.samsungpay.internal.models.TapCustomer
 import com.tap.samsungpay.open.enums.SDKMODE
 
 import java.math.BigDecimal
+import java.util.StringJoiner
 
 /**
  * Created by AhlaamK on 3/23/22.
@@ -48,7 +50,7 @@ object PaymentDataSourceImpl : PaymentDataSource {
 
     private var tokenConfig: String? = null
     private var authKeys: String? = null
-    private var initResponseModel: InitResponseModel? = null
+     var initResponseModel: InitResponseModel? = null
     private var transactionMode: TransactionMode? = null
     private var binLookupResponse: BINLookupResponse? = null
     private var cardType: String? = null
@@ -69,6 +71,7 @@ object PaymentDataSourceImpl : PaymentDataSource {
     private var currency: TapCurrency? = null
     private var amount: BigDecimal? = null
     private var taxes: ArrayList<Tax>? = null
+    private var shipping: ArrayList<Shipping>? = null
     private var destination: List<Destinations>? = null
     private var supportedPaymentMethods: List<String>? = null
     private var supportedCurrencies: List<String>? = null
@@ -262,12 +265,15 @@ object PaymentDataSourceImpl : PaymentDataSource {
         PaymentDataSourceImpl.taxes = taxes
     }
 
+    fun setShipping(shipping:  ArrayList<Shipping>?) {
+        PaymentDataSourceImpl.shipping = shipping
+    }
     override fun getTaxes(): ArrayList<Tax>? {
         return taxes
     }
 
     override fun getShipping(): ArrayList<Shipping>? {
-        return arrayListOf()
+        return shipping
     }
 
     override fun getAllowedToSaveCard(): Boolean {

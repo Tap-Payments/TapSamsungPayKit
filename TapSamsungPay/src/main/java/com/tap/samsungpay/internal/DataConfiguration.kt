@@ -71,7 +71,8 @@ object DataConfiguration {
             )
 
             PaymentDataSourceImpl.setSelectedAmount(this.orderDetail.amount?.toBigDecimal()!!)
-            PaymentDataSourceImpl.setTaxes(null)
+            PaymentDataSourceImpl.setTaxes(this.taxes)
+            PaymentDataSourceImpl.setShipping(this.shipping)
             PaymentDataSourceImpl.setDestination(null)
             PaymentDataSourceImpl.setCustomer(this.tapCustomer!!)
             PaymentDataSourceImpl.setMerchant(this.merchant)

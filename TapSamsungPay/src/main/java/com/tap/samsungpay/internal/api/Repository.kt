@@ -68,6 +68,12 @@ class Repository : APIRequestCallback {
             this.smsungPayViewModel = smsungPayViewModel
         }
 
+      //  val supportedCurrenciesList : ArrayList<String>? = ArrayList<String>()
+        if( !PaymentDataSourceImpl?.getSupportedCurrencies()?.contains("SAR")!! == true){
+            PaymentDataSourceImpl.getSupportedCurrencies()?.plus("SAR")
+        }else {
+            PaymentDataSourceImpl.getSupportedCurrencies()
+        }
 
         val requestBody = PaymentOptionsRequest(
             PaymentDataSourceImpl.getTransactionMode(),
@@ -201,6 +207,7 @@ class Repository : APIRequestCallback {
                             PaymentDataSourceImpl.setMerchantData(merchantDataModel)
                             PaymentDataSourceImpl.setInitResponse(initResponseModel)
                             PaymentDataSourceImpl.setTokenConfig(initResponseModel?.session)
+
 
                             DataConfiguration.getInternalCheckoutDelegate()?.onSuccess()
 
