@@ -24,18 +24,19 @@ class SamsungPayTransaction {
         val extraPaymentInfo = Bundle()
         val customSheet = CustomSheet()
 
-        println("brandList>>>"+brandList)
+
         customSheet.addControl(makeAmountControl())
 
+        println("orfder"+initResponseModel?.paymentOptionsResponse?.orderID?.getId()?.removePrefix("ord_"))
         return CustomSheetPaymentInfo.Builder()
             .setMerchantId(initResponseModel?.merchant?.id)
             .setMerchantName(initResponseModel?.merchant?.name)
-            .setOrderNumber(initResponseModel?.order?.getId())
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
             .setAddressInPaymentSheet(CustomSheetPaymentInfo.AddressInPaymentSheet.DO_NOT_SHOW)
-            .setAllowedCardBrands(null) //TODO
+            .setAllowedCardBrands(brandList)
             //.setAllowedCardBrands(brandList)
+            .setOrderNumber(initResponseModel?.paymentOptionsResponse?.orderID?.getId()?.removePrefix("ord_"))
             .setCardHolderNameEnabled(true)
             .setRecurringEnabled(false)
             .setCustomSheet(customSheet)
