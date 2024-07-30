@@ -35,8 +35,8 @@ https://github.com/Tap-Payments/TapSamsungPayKit/assets/57221514/40844c79-33a5-4
 To use the SDK the following requirements must be met:
 
 1. **Android Studio 2022.3.1** or newer
-2. **Android SDK Tools 31** or newer
-3. **Android Platform Version: API 33: Android 10  revision 7** or later
+2. **Android SDK Tools 33** or newer
+3. **Android Platform Version: API 33: Android 13  revision 7** or later
 4. **Android targetSdkVersion: 33
 
 <a name="installation"></a>
