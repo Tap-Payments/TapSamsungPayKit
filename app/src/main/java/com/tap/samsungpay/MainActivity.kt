@@ -7,7 +7,6 @@
 
 package com.tap.samsungpay
 
-
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,12 +14,15 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.chillibits.simplesettings.tool.getPrefs
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonElement
+import com.google.gson.JsonParser
 import com.tap.samsungpay.internal.api.responses.Token
 import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.builder.publicKeybuilder.Operator
@@ -47,8 +49,8 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
-import java.io.IOException
 import java.util.Formatter
+import java.util.concurrent.TimeUnit
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
@@ -389,7 +391,11 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
     private fun callChargeAPI(token: String) {
 
 
-        val client = OkHttpClient()
+        val client = OkHttpClient.Builder()
+            .connectTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .build()
 
         val MEDIA_TYPE = "application/json".toMediaType()
 // PLease use the amount + currency from the demo values
@@ -435,6 +441,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
 
     //    val requestBody = "\n{\n  \"amount\": 1,\n  \"currency\": \"KWD\",\n  \"customer\": {\n    \"first_name\": \"test\",\n    \"middle_name\": \"test\",\n    \"last_name\": \"test\",\n    \"email\": \"test@test.com\",\n    \"phone\": {\n      \"country_code\": 965,\n      \"number\": 51234567\n    }\n  },\n  \"merchant\": {\n    \"id\": \"1124340\"\n  },\n  \"source\": {\n    \"id\": \"tok_0WX4824149cRuT21uQ7R883\"\n  },\n  \"post\": {\n    \"url\": \"http://your_website.com/post_url\"\n  },\n  \"redirect\": {\n    \"url\": \"http://your_website.com/redirect_url\"\n  }\n}\n"
 val requestBody = jsonObject.toString()
+        val mapper = ObjectMapper()
 
         val request = Request.Builder()
             .url("https://api.tap.company/v2/charges/")
@@ -453,11 +460,15 @@ val requestBody = jsonObject.toString()
                 }
 
             }else {
-                var json: JSONObject? = response.body?.string()?.let { JSONObject(it) }
-                Log.e("TAG", "callChargeAPI: " + json)
+                var json: JSONObject? = JSONObject(response.body?.string())
+
                 Handler(Looper.getMainLooper()).post {
-                    // Toast.makeText(this, "callChargeAPI"+json, Toast.LENGTH_LONG).show()
-                    textView.setText("Charge Response Success>>>>" + json)
+
+                    val gson = GsonBuilder().setPrettyPrinting().create()
+                    val je: JsonElement = JsonParser.parseString(json.toString())
+                    val prettyJsonString = gson.toJson(je)
+                    Log.e("TAG", "callChargeAPI: " + prettyJsonString)
+                    textView.setText("Charge Response Success>>>>" + prettyJsonString)
 
                 }
             }
