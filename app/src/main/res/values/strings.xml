@@ -33,6 +33,7 @@
     <string-array name="ScopeList">
         <item>SAMSUNG_TOKEN</item>
         <item>TAP_TOKEN</item>
+
     </string-array>
 
     <string-array name="ScopeList_default_values">

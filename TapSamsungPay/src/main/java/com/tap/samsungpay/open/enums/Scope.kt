@@ -9,7 +9,7 @@ package com.tap.samsungpay.open.enums
 
 enum class Scope {
     TAP_TOKEN,
-    SAMSUNG_TOKEN
+    SAMSUNG_TOKEN,
 }
 
 

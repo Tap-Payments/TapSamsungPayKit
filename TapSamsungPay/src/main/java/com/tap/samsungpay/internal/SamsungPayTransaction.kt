@@ -29,7 +29,8 @@ class SamsungPayTransaction {
 
         println("orfder"+initResponseModel?.paymentOptionsResponse?.orderID?.getId()?.removePrefix("ord_"))
         return CustomSheetPaymentInfo.Builder()
-            .setMerchantId(initResponseModel?.merchant?.id)
+           // .setMerchantId(initResponseModel?.merchant?.id)
+            .setMerchantId("3000003161")//TODO remove hard coded
             .setMerchantName(initResponseModel?.merchant?.name)
             // If you want to enter address, please refer to the javaDoc :
             // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html

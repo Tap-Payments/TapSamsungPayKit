@@ -9,14 +9,22 @@ package com.tap.samsungpay
 
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.chillibits.simplesettings.tool.getPrefs
 import com.tap.samsungpay.internal.api.responses.Token
+import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.builder.publicKeybuilder.Operator
 import com.tap.samsungpay.internal.builder.transactionBuilder.OrderDetail
-import com.tap.samsungpay.internal.builder.merchantBuilder.Merchant
 import com.tap.samsungpay.internal.models.Acceptance
 import com.tap.samsungpay.internal.models.PhoneNumber
 import com.tap.samsungpay.internal.models.Shipping
@@ -31,7 +39,15 @@ import com.tap.samsungpay.open.enums.Language
 import com.tap.samsungpay.open.enums.Scope
 import com.tap.samsungpay.open.enums.ThemeMode
 import com.tap.tapsamsungpay.R
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
+import java.io.IOException
 import java.util.Formatter
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
@@ -42,6 +58,10 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
     private lateinit var tapConfiguration: TapConfiguration
     private var postUrl: String = ""
     private lateinit var hashString: String
+    private lateinit var textView: TextView
+    private lateinit var textView1: TextView
+    private lateinit var progressBar: ProgressBar
+   var chargeCalled : Boolean = false
 
     object Hmac {
         fun digest(
@@ -73,6 +93,9 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
          */
         initConfigurations()
         TapConfiguration.configureSamsungPayWithTapConfiguration(tapConfiguration, this, this)
+        textView = findViewById(R.id.textCiew)
+        textView1 = findViewById(R.id.textView1)
+        progressBar = findViewById(R.id.progress_circular)
 
     }
 
@@ -184,6 +207,10 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                 .setTax(taxList)
                 .build()
 
+        if(getScope("scopeKey").name.contains("CHARGE")){
+            chargeCalled = true
+        }
+
     }
 
 
@@ -262,8 +289,28 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
             .setPositiveButton("Yes") {
                 // When the user click yes button then app will close
                     dialog, which ->
-                dialog.dismiss()
-                finish()
+                if(title.contains("onTapToken Called")){
+                    dialog.dismiss()
+                    lifecycleScope.launch {
+                        progressBar.visibility = View.VISIBLE
+                        val backgroundResult = withContext(Dispatchers.Default) {
+                            // The code you would have had in doInBackground.
+                            // Last line of withContext lambda should evaluate to your result, what you would have
+                            // returned in doInBackground.
+                            callChargeAPI(message.toString())
+                        }
+
+                        // The code you would have had in onPostExecute. You can use the value of
+                        // backgroundResult here.
+                        progressBar.visibility = View.GONE
+
+                    }
+                }else{
+                    dialog.dismiss()
+                    finish()
+                }
+
+
 
             }
              // Set the Negative button with No name Lambda OnClickListener method is use of DialogInterface interface.
@@ -313,7 +360,110 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                 '\n' +token.type +
                 '\n' +token.used)
 
-        customAlertBox("onTapToken Called", token.toString())
+        //textView1.setText("Tap Token is >>>>"+ token.id.toString())
+        customAlertBox("onTapToken Called", token.id.toString())
+
+           /* lifecycleScope.launch {
+                progressBar.visibility = View.VISIBLE
+                val backgroundResult = withContext(Dispatchers.Default) {
+                    // The code you would have had in doInBackground.
+                    // Last line of withContext lambda should evaluate to your result, what you would have
+                    // returned in doInBackground.
+                    callChargeAPI(token.id.toString())
+                }
+
+                // The code you would have had in onPostExecute. You can use the value of
+                // backgroundResult here.
+                progressBar.visibility = View.GONE
+
+            }*/
+      //   customAlertBox("onTapToken Called", token.toString())
+
+
+
+    }
+
+
+
+
+    private fun callChargeAPI(token: String) {
+
+
+        val client = OkHttpClient()
+
+        val MEDIA_TYPE = "application/json".toMediaType()
+// PLease use the amount + currency from the demo values
+// Please use the Tap Token
+// PLease print the charge response in the demo page + auto copy to clibpoard
+        var jsonObject:JSONObject = JSONObject()
+        var jsonCustomer:JSONObject = JSONObject()
+        var phoneObject:JSONObject = JSONObject()
+        phoneObject.put("country_code","965")
+        phoneObject.put("number","66175090")
+
+        var merchantObject:JSONObject = JSONObject()
+        merchantObject.put("id","1124340")
+
+        var postObejct:JSONObject = JSONObject()
+        postObejct.put("post","http://your_website.com/post_url")
+
+         var redirectObject:JSONObject = JSONObject()
+        redirectObject.put("redirect","http://your_website.com/redirect_url")
+
+        var sourceObjecr:JSONObject = JSONObject()
+        sourceObjecr.put("id",token)
+
+
+        jsonCustomer.put("first_name","test")
+        jsonCustomer.put("middle_name","test")
+        jsonCustomer.put("last_name","test")
+        jsonCustomer.put("email","test@gmail.com")
+        jsonCustomer.put("phone",phoneObject)
+
+        jsonObject.put("amount", getPrefStringValue("amountKey",
+            "0.2"))
+
+        jsonObject.put("currency", getPrefStringValue(
+            "selectedCurrencyKey",
+            "KWD"
+        ))
+        jsonObject.put("customer", jsonCustomer)
+        jsonObject.put("merchant", merchantObject)
+        jsonObject.put("post", postObejct)
+        jsonObject.put("source", sourceObjecr)
+        jsonObject.put("redirect", redirectObject)
+
+    //    val requestBody = "\n{\n  \"amount\": 1,\n  \"currency\": \"KWD\",\n  \"customer\": {\n    \"first_name\": \"test\",\n    \"middle_name\": \"test\",\n    \"last_name\": \"test\",\n    \"email\": \"test@test.com\",\n    \"phone\": {\n      \"country_code\": 965,\n      \"number\": 51234567\n    }\n  },\n  \"merchant\": {\n    \"id\": \"1124340\"\n  },\n  \"source\": {\n    \"id\": \"tok_0WX4824149cRuT21uQ7R883\"\n  },\n  \"post\": {\n    \"url\": \"http://your_website.com/post_url\"\n  },\n  \"redirect\": {\n    \"url\": \"http://your_website.com/redirect_url\"\n  }\n}\n"
+val requestBody = jsonObject.toString()
+
+        val request = Request.Builder()
+            .url("https://api.tap.company/v2/charges/")
+            .post(requestBody.toRequestBody(MEDIA_TYPE))
+            .header("Authorization", "Bearer sk_test_xliFRQtUrGfMdcCEgO9ohDSw")
+            .header("accept", "application/json")
+            .header("content-type", "application/json")
+            .build()
+
+        client.newCall(request).execute().use { response ->
+            if (!response.isSuccessful) {
+                Handler(Looper.getMainLooper()).post {
+                    // Toast.makeText(this, "callChargeAPI"+json, Toast.LENGTH_LONG).show()
+                    textView.setText("Charge Response Failed>>>>"+response)
+
+                }
+
+            }else {
+                var json: JSONObject? = response.body?.string()?.let { JSONObject(it) }
+                Log.e("TAG", "callChargeAPI: " + json)
+                Handler(Looper.getMainLooper()).post {
+                    // Toast.makeText(this, "callChargeAPI"+json, Toast.LENGTH_LONG).show()
+                    textView.setText("Charge Response Success>>>>" + json)
+
+                }
+            }
+
+        }
+
 
     }
 
