@@ -19,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.chillibits.simplesettings.tool.getPrefs
-import com.fasterxml.jackson.databind.ObjectMapper
+
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
@@ -441,7 +441,6 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
 
     //    val requestBody = "\n{\n  \"amount\": 1,\n  \"currency\": \"KWD\",\n  \"customer\": {\n    \"first_name\": \"test\",\n    \"middle_name\": \"test\",\n    \"last_name\": \"test\",\n    \"email\": \"test@test.com\",\n    \"phone\": {\n      \"country_code\": 965,\n      \"number\": 51234567\n    }\n  },\n  \"merchant\": {\n    \"id\": \"1124340\"\n  },\n  \"source\": {\n    \"id\": \"tok_0WX4824149cRuT21uQ7R883\"\n  },\n  \"post\": {\n    \"url\": \"http://your_website.com/post_url\"\n  },\n  \"redirect\": {\n    \"url\": \"http://your_website.com/redirect_url\"\n  }\n}\n"
 val requestBody = jsonObject.toString()
-        val mapper = ObjectMapper()
 
         val request = Request.Builder()
             .url("https://api.tap.company/v2/charges/")
