@@ -41,6 +41,7 @@ class SamsungPayTransaction {
             .setCardHolderNameEnabled(true)
             .setRecurringEnabled(false)
             .setCustomSheet(customSheet)
+            .setMerchantCountryCode(initResponseModel?.merchant?.countryCode)
             //  .setExtraPaymentInfo(extraPaymentInfo)
             .build()
     }
