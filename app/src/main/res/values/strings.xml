@@ -31,9 +31,9 @@
     <string name="secret_key">Secret Key</string>
 
     <string-array name="ScopeList">
-        <item>SAMSUNG_TOKEN</item>
-        <item>TAP_TOKEN</item>
 
+        <item>TAP_TOKEN</item>
+        <item>SAMSUNG_TOKEN</item>
     </string-array>
 
     <string-array name="ScopeList_default_values">
@@ -59,12 +59,15 @@
     </string-array>
 
     <string-array name="SupportedSchemes">
+        <item>MADA</item>
         <item>AMERICANEXPRESS</item>
         <item>VISA</item>
         <item>MASTERCARD</item>
         <item>DISCOVER</item>
     </string-array>
-
+    <string-array name="SupportedSchemesValues">
+        <item>1</item>
+    </string-array>
 
     <string-array name="Lanugages">
         <item>ENGLISH</item>
@@ -94,10 +97,10 @@
     </string-array>
 
     <string-array name="currencies">
+        <item>SAR</item>
         <item>USD</item>
         <item>KWD</item>
         <item>AED</item>
-        <item>SAR</item>
         <item>BHD</item>
 
     </string-array>
