@@ -50,7 +50,7 @@ class Repository : APIRequestCallback {
     lateinit var tokenResponse: Token
     lateinit var cardRepositoryContext: Context
     private lateinit var smsungPayViewModel: SmsungPayViewModel
-    private var activity: AppCompatActivity? = null
+    private lateinit var activity: AppCompatActivity
     var merchantDataModel: MerchantData? = null
     var assetsModel: AssetsModel? = null
 
@@ -62,11 +62,12 @@ class Repository : APIRequestCallback {
 
     fun getInitData(
         _context: Context,
-        smsungPayViewModel: SmsungPayViewModel?
+        smsungPayViewModel: SmsungPayViewModel? ,_activity: AppCompatActivity
     ) {
         if (smsungPayViewModel != null) {
             this.smsungPayViewModel = smsungPayViewModel
         }
+        this.activity = _activity
 
       //  val supportedCurrenciesList : ArrayList<String>? = ArrayList<String>()
         if( !PaymentDataSourceImpl?.getSupportedCurrencies()?.contains("SAR")!! == true){
@@ -113,10 +114,12 @@ class Repository : APIRequestCallback {
 
         @RequiresApi(Build.VERSION_CODES.N)
         fun getSPayTokenRequest(
-            _activity: AppCompatActivity,
+            _activity: AppCompatActivity?,
             createTokenSamsungPayRequest: CreateTokenSamsungPayRequest
         ) {
-           this.activity =_activity
+            if (_activity != null) {
+                this.activity =_activity
+            }
             val jsonString = Gson().toJson(createTokenSamsungPayRequest)
             NetworkController.getInstance().processRequest(
                 TapMethodType.POST, ApiService.TOKEN, jsonString,
@@ -201,7 +204,7 @@ class Repository : APIRequestCallback {
                                 cardRepositoryContext,
                                 ApiService.BASE_URL,
                                 true,
-                                activity
+                                null
                             )
 
                             PaymentDataSourceImpl.setMerchantData(merchantDataModel)
@@ -229,8 +232,9 @@ class Repository : APIRequestCallback {
             response?.body().let {
                // println("response is"+response)
                 tokenResponse = Gson().fromJson(it, Token::class.java)
+                activity.finish()
                 DataConfiguration.getListener()?.onTapToken(tokenResponse)
-                activity?.finish()
+
             }
 
 

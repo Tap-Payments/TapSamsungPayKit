@@ -53,7 +53,7 @@ object DataConfiguration {
 
 
     fun initalizeCheckoutProfileAPi(
-        context: Activity,
+        activity: AppCompatActivity,
         dataConfig: TapConfiguration,
     ) {
 
@@ -101,12 +101,12 @@ object DataConfiguration {
         PaymentDataSourceImpl.setDefaultCardHolderName("")
 
         NetworkApp.initNetwork(
-            context,"pk_test_6jdl4Qo0FYOSXmrZTR1U5EHp",
-            context.packageName,
+            activity.applicationContext,"pk_test_kyloCJZi6DcqOsv4t9GxwbRV",
+            activity.applicationContext.packageName,
             if (dataConfig.environment == SDKMODE.SANDBOX) ApiService.BASE_URL else ApiService.PRODUCTION_URL,
             if(dataConfig.typeDevice == null || dataConfig.typeDevice == "") "Native Android" else dataConfig.typeDevice,
             true,
-            context.resources.getString(company.tap.tapnetworkkit_android.R.string.enryptkey),
+            activity.applicationContext.resources.getString(company.tap.tapnetworkkit_android.R.string.enryptkey),
             null
         )
 
@@ -115,8 +115,8 @@ object DataConfiguration {
         SmsungPayViewModel().processEvent(
             CardViewEvent.InitEvent,
             null,
-            context,
-            activity = context as AppCompatActivity,
+            activity.applicationContext,
+            activity,
         )
     }
 

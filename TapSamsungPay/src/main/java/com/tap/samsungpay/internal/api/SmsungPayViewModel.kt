@@ -43,11 +43,13 @@ class SmsungPayViewModel : ViewModel() {
 
     private fun getInitData(
         smsungPayViewModel: SmsungPayViewModel?,
-        _context: Context?,
+        _context: Context?,activity: AppCompatActivity?
     ) {
         if (_context != null) {
             this.context = _context
-            repository.getInitData(_context, smsungPayViewModel)
+            if (activity != null) {
+                repository.getInitData(_context, smsungPayViewModel,activity)
+            }
         }
 
 
@@ -62,7 +64,7 @@ class SmsungPayViewModel : ViewModel() {
         activity: AppCompatActivity? = null,
     ) {
         when (event) {
-            CardViewEvent.InitEvent -> getInitData(this, context)
+            CardViewEvent.InitEvent -> getInitData(this, context,activity)
             /*CardViewEvent.CreateTokenEvent -> createTokenWithEncryptedCard(
                 cardDataRequest,
                 activity

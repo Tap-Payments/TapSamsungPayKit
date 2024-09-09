@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.chillibits.simplesettings.tool.getPrefs
-
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
 import com.google.gson.JsonParser
@@ -48,6 +47,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import java.util.Formatter
 import java.util.concurrent.TimeUnit
@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
         val stringmsg = "x_publickey${
             getPrefStringValue(
                 "publicKey",
-                "pk_test_6jdl4Qo0FYOSXmrZTR1U5EHp"
+                "pk_test_kyloCJZi6DcqOsv4t9GxwbRV"
             )
         }x_amount${
             (getPrefStringValue(
@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                         .setPublicKey(
                             getPrefStringValue(
                                 "publicKey",
-                                "pk_test_6jdl4Qo0FYOSXmrZTR1U5EHp"
+                                "pk_test_kyloCJZi6DcqOsv4t9GxwbRV"
                             )
                         )
                         .setHashString(hashString)
@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                 )//**Required**//
                 .setOrders(
                     OrderDetail.Builder()
-                        .setAmount((getPrefStringValue("amountKey", "0.2")).toDouble())
+                        .setAmount((getPrefStringValue("amountKey", "10")).toDouble())
                         .setCurrency((getPrefStringValue("selectedCurrencyKey", "USD")))
                         .setShipping(
                             Shipping(
@@ -363,23 +363,23 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                 '\n' +token.used)
 
         //textView1.setText("Tap Token is >>>>"+ token.id.toString())
-        customAlertBox("onTapToken Called", token.id.toString())
+      //  customAlertBox("Tap Token generated", token.id.toString()+ "\n" +"\n"+"Click yes to generate charge")
 
-           /* lifecycleScope.launch {
-                progressBar.visibility = View.VISIBLE
-                val backgroundResult = withContext(Dispatchers.Default) {
-                    // The code you would have had in doInBackground.
-                    // Last line of withContext lambda should evaluate to your result, what you would have
-                    // returned in doInBackground.
-                    callChargeAPI(token.id.toString())
-                }
+            /* lifecycleScope.launch {
+                 progressBar.visibility = View.VISIBLE
+                 val backgroundResult = withContext(Dispatchers.Default) {
+                     // The code you would have had in doInBackground.
+                     // Last line of withContext lambda should evaluate to your result, what you would have
+                     // returned in doInBackground.
+                     callChargeAPI(token.id.toString())
+                 }
 
-                // The code you would have had in onPostExecute. You can use the value of
-                // backgroundResult here.
-                progressBar.visibility = View.GONE
+                 // The code you would have had in onPostExecute. You can use the value of
+                 // backgroundResult here.
+                 progressBar.visibility = View.GONE
 
-            }*/
-      //   customAlertBox("onTapToken Called", token.toString())
+             }*/
+         customAlertBox("onTapToken Called", token.toString())
 
 
 
@@ -389,9 +389,13 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
 
 
     private fun callChargeAPI(token: String) {
+        val builder: OkHttpClient.Builder = OkHttpClient().newBuilder()
 
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        builder.addInterceptor(interceptor)
 
-        val client = OkHttpClient.Builder()
+        val client = builder
             .connectTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)

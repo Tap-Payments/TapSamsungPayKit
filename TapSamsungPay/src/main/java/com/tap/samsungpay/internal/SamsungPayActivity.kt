@@ -19,6 +19,7 @@ import com.google.gson.JsonElement
 import com.samsung.android.sdk.samsungpay.v2.PartnerInfo
 import com.samsung.android.sdk.samsungpay.v2.SamsungPay
 import com.samsung.android.sdk.samsungpay.v2.SpaySdk
+import com.samsung.android.sdk.samsungpay.v2.SpaySdk.EXTRA_ERROR_REASON
 import com.samsung.android.sdk.samsungpay.v2.StatusListener
 import com.samsung.android.sdk.samsungpay.v2.payment.CardInfo
 import com.samsung.android.sdk.samsungpay.v2.payment.CustomSheetPaymentInfo
@@ -145,6 +146,10 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 //                    Toast.LENGTH_SHORT
 //                ).show()
 
+                val extraError = bundle?.getInt(SamsungPay.EXTRA_ERROR_REASON)
+                if (extraError == SamsungPay.ERROR_SPAY_SETUP_NOT_COMPLETED) {
+                    doActivateSamsungPay(SpaySdk.ServiceType.INAPP_PAYMENT.toString())
+                }
                 DataConfiguration.getListener()?.onError(errorCode.toString())
             }
         })
@@ -154,8 +159,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
        // println("TapConfiguration.getTapConfiguration()"+ TapConfiguration.getTapConfiguration())
         with(TapConfiguration.getTapConfiguration()) {
             this?.let {
-                DataConfiguration.initalizeCheckoutProfileAPi(
-                    context = this@SamsungPayActivity,
+                DataConfiguration.initalizeCheckoutProfileAPi(this@SamsungPayActivity,
                     it
                 )
             }
@@ -374,7 +378,9 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                     /*
                      *You will now be  passing samsung token to tap api
                      * **/
+
                     handleSuccessCallBack(paymentCredential)
+                    this@SamsungPayActivity.finish()
                 }
 
 
@@ -427,7 +433,9 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                     CreateTokenSamsungPayRequest(
                         TokenData(jsonToken),"samsungpay"
                     )
-          Repository().getSPayTokenRequest(this,createTokenSamsungPayRequest)
+
+             Repository().getSPayTokenRequest(this,createTokenSamsungPayRequest)
+
 
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -507,8 +515,8 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             }
             brandStrings += "  VI = $visaCount,  MC = $mcCount,  AX = $amexCount,  DS= $dsCount"
             Log.d("SamsungPay ACT", "cardInfoListener onResult  : $brandStrings")
-            Toast.makeText(this@SamsungPayActivity, "cardInfoListener onResult" + brandStrings,
-                Toast.LENGTH_LONG).show()
+          //  Toast.makeText(this@SamsungPayActivity, "cardInfoListener onResult" + brandStrings,
+              //  Toast.LENGTH_LONG).show()
         }
         /*
          * This callback is received when the card information cannot be retrieved.
