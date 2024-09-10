@@ -532,7 +532,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
          */
         override fun onFailure(errorCode: Int, errorData: Bundle) {
             //Called when an error occurs during In-App cryptogram generation
-            Toast.makeText(this@SamsungPayActivity, "cardInfoListener onFailure : " + errorCode,Toast.LENGTH_LONG).show()
+           // Toast.makeText(this@SamsungPayActivity, "cardInfoListener onFailure : " + errorCode,Toast.LENGTH_LONG).show()
 
 
         }
