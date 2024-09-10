@@ -8,12 +8,13 @@
 
         <EditTextPreference
             app:key="publicKey"
-            app:defaultValue="pk_test_OYw82dpQRWGn7tEy6LclFsev"
+            app:defaultValue="pk_test_kyloCJZi6DcqOsv4t9GxwbRV"
             app:title="Public Key"
             app:useSimpleSummaryProvider="true"/>
 
-        <EditTextPreference
+  <EditTextPreference
             app:key="hashKey"
+      app:isPreferenceVisible="false"
             app:defaultValue="test"
             app:title="Hash String"
             app:useSimpleSummaryProvider="true"/>
@@ -40,6 +41,7 @@
             app:title="@string/supportedFundSource"
             app:entries="@array/SupportedFundSource"
             app:entryValues="@array/SupportedFundSource"
+
             app:isPreferenceVisible="false"
 
             />
@@ -61,6 +63,7 @@
             app:title="@string/supported_scheme"
             app:entries="@array/SupportedSchemes"
             app:entryValues="@array/SupportedSchemes"
+            android:defaultValue="@array/SupportedSchemes"
             />
 
     </PreferenceCategory>
@@ -76,14 +79,14 @@
 
         <EditTextPreference
             app:key="amountKey"
-            app:defaultValue="0.2"
+            app:defaultValue="10"
             app:title="@string/amount"
             app:useSimpleSummaryProvider="true"/>
         <DropDownPreference
             app:key="selectedCurrencyKey"
             app:entries="@array/currencies"
             app:entryValues="@array/currencies"
-            app:defaultValue="USD"
+            app:defaultValue="SAR"
             app:useSimpleSummaryProvider="true"/>
 
         <EditTextPreference
@@ -122,8 +125,9 @@
 
 
 
-    <PreferenceCategory
-        app:title="@string/merchant_details">
+   <PreferenceCategory
+        app:title="@string/merchant_details"
+       app:isPreferenceVisible="false">
 
         <EditTextPreference
             app:key="gatewayIdKey"
@@ -160,7 +164,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
+  <!--  <PreferenceCategory
         app:title="@string/interface_">
 
         <DropDownPreference
@@ -202,11 +206,11 @@
 
 
 
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
 
 
-    <PreferenceCategory
+ <!--   <PreferenceCategory
         app:title="@string/KeysFor"
        >
 
@@ -230,7 +234,7 @@
             app:useSimpleSummaryProvider="true"/>
 
 
-    </PreferenceCategory>
+    </PreferenceCategory>-->
 
 
 
@@ -263,6 +267,7 @@
     <Preference
         app:key="dialog_preference"
         android:title="Done"
+        app:isPreferenceVisible="false"
         app:summary="Tap to show Button" />
 
 </PreferenceScreen>

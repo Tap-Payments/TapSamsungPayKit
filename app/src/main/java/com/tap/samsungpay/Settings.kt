@@ -8,6 +8,8 @@ package com.tap.samsungpay
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
 import androidx.preference.Preference
@@ -18,7 +20,7 @@ import com.chillibits.simplesettings.core.SimpleSettingsConfig
 import com.tap.samsungpay.open.TapConfiguration
 import com.tap.tapsamsungpay.R
 
-class Settings : AppCompatActivity() , SimpleSettingsConfig.PreferenceCallback {
+class Settings : AppCompatActivity() , SimpleSettingsConfig.PreferenceCallback  ,SimpleSettingsConfig.OptionsItemSelectedCallback{
     lateinit var settings:FrameLayout
     lateinit var tapConfiguration: TapConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +30,7 @@ class Settings : AppCompatActivity() , SimpleSettingsConfig.PreferenceCallback {
         val configuration = SimpleSettingsConfig.Builder()
             .setActivityTitle("Configuration")
             .setPreferenceCallback(this)
-            .displayHomeAsUpEnabled(false)
+            .displayHomeAsUpEnabled(false).setOptionsMenu(R.menu.menu_main,this)
             .build()
         SimpleSettings(this, configuration).show(R.xml.preferences)
 
@@ -46,9 +48,18 @@ class Settings : AppCompatActivity() , SimpleSettingsConfig.PreferenceCallback {
 
             else -> super.onPreferenceClick(context, key)
         }
+
     }
 
 
+    override fun onSettingsOptionsItemSelected(itemId: Int) {
+        if(itemId == R.id.actionDone){
+            val intent = Intent(this@Settings, MainActivity::class.java)
+            finish()
+            startActivity(intent)
+        }
+
+    }
 
 
 }

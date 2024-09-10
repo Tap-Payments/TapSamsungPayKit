@@ -14,8 +14,10 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.AppLaunchChecker
 import androidx.lifecycle.lifecycleScope
 import com.chillibits.simplesettings.tool.getPrefStringValue
 import com.chillibits.simplesettings.tool.getPrefs
@@ -89,6 +91,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         /**
          * Required step.
          * Configure SDK with your choice from the given list.
@@ -276,7 +279,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
 
     private fun customAlertBox(title: String, message: String) {
         // Create the object of AlertDialog Builder class
-        val builder = AlertDialog.Builder(this)
+        val builder = AlertDialog.Builder(this@MainActivity)
 
         // Set the message show for the Alert time
         builder.setMessage(message)
@@ -379,9 +382,22 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                  progressBar.visibility = View.GONE
 
              }*/
-         customAlertBox("onTapToken Called", token.toString())
+       //  customAlertBox("onTapToken Called", token.toString())
 
+        lifecycleScope.launch {
+            progressBar.visibility = View.VISIBLE
+            val backgroundResult = withContext(Dispatchers.Default) {
+                // The code you would have had in doInBackground.
+                // Last line of withContext lambda should evaluate to your result, what you would have
+                // returned in doInBackground.
+                callChargeAPI(token.id.toString())
+            }
 
+            // The code you would have had in onPostExecute. You can use the value of
+            // backgroundResult here.
+            progressBar.visibility = View.GONE
+
+        }
 
     }
 
@@ -458,6 +474,7 @@ val requestBody = jsonObject.toString()
             if (!response.isSuccessful) {
                 Handler(Looper.getMainLooper()).post {
                     // Toast.makeText(this, "callChargeAPI"+json, Toast.LENGTH_LONG).show()
+
                     textView.setText("Charge Response Failed>>>>"+response)
 
                 }
@@ -482,7 +499,9 @@ val requestBody = jsonObject.toString()
     }
 
     override fun onCancel(cancel: String) {
-        customAlertBox("onCancel Called", cancel)
+
+            customAlertBox("onCancel Called", cancel)
+
     }
 
 
