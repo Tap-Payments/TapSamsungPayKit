@@ -5,25 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+   >
+
+
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textIsSelectable="true"
-        android:id="@+id/textView1"/>
-
+        android:id="@+id/textView1"
+        android:visibility="gone"/>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textIsSelectable="true"
         android:id="@+id/textCiew"/>
+</ScrollView>
     <ProgressBar
         android:layout_width="@dimen/_80sdp"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:visibility="gone"
+        android:visibility="visible"
+       android:layout_weight="1"
         android:id="@+id/progress_circular"/>
 
 
