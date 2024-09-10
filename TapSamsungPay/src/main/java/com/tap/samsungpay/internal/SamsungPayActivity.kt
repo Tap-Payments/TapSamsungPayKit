@@ -391,13 +391,20 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
                // println("errorData>>>" + errorData)
                 Log.e("onFailure >>>>>", errorCode.toString() )
                 if(errorCode.toString()!=null && errorCode==-7){
+                    this@SamsungPayActivity.finish()
+                    samsungPayButton.stopShimmer();
                     DataConfiguration.getListener()?.onCancel("Payment cancelled")
-                    finish()
+
 
                 }else DataConfiguration.getListener()?.onError("Failed to show"+errorData.toString())
 
             }
         }
+
+    override fun onStop() {
+        super.onStop()
+        this@SamsungPayActivity.finish()
+    }
 
     override fun onError(error: String?) {
         Log.e("SPAYY >>>>>", error.toString() )
@@ -447,6 +454,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
     override fun onBackPressed() {
         super.onBackPressed()
+        samsungPayButton.stopShimmer();
         finish()
     }
     /*
