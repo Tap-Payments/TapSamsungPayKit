@@ -1,4 +1,4 @@
-# TapSamsungPayKit
+# TapSamsungPayKitt
 A standalone kit for handling SamsungPay
 
 [![Platform](https://img.shields.io/badge/platform-Android-inactive.svg?style=flat)](https://github.com/Tap-Payments/TapSamsungPayKit/)
