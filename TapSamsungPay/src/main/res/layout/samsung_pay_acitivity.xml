@@ -4,6 +4,7 @@
     xmlns:shimmer="http://schemas.android.com/tools"
     android:id="@+id/view_samsung"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
 
