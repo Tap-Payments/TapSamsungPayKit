@@ -204,7 +204,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
                 .setServiceId(
                     getPrefStringValue(
                         "serviceIdKey",
-                        "1cd18649418d46478eb800"
+                        "fff80d901c2849ba8f3641"
                     )
                 )//**Required**//
                 .setShipping(

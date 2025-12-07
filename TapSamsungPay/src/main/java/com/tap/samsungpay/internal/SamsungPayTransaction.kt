@@ -25,7 +25,7 @@ class SamsungPayTransaction {
         val customSheet = CustomSheet()
 
 
-        customSheet.addControl(makeAmountControl())
+        makeAmountControl()?.let { customSheet.addControl(it) }
 
         println("orfder"+initResponseModel?.paymentOptionsResponse?.orderID?.getId()?.removePrefix("ord_"))
         return CustomSheetPaymentInfo.Builder()
@@ -46,29 +46,35 @@ class SamsungPayTransaction {
             .build()
     }
 
-    private fun makeAmountControl(): AmountBoxControl {
+    private fun makeAmountControl(): AmountBoxControl? {
 
         /**
          * amountBox from  integration guide
          */
-        val amountBoxControl = AmountBoxControl(
-            AMOUNT_CONTROL_ID,
-            tapConfiguration.getTapConfiguration()?.orderDetail?.currency
-        )
-        // amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
-        tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
-            amountBoxControl.addItem(
-                PRODUCT_TAX_ID, tapConfiguration.getTapConfiguration()?.orderDetail!!.tax?.name,
-                it, ""
+        val amountBoxControl = tapConfiguration.getTapConfiguration()?.orderDetail?.currency?.let {
+            AmountBoxControl(
+                AMOUNT_CONTROL_ID,
+                it
             )
         }
+        // amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
+        tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
+            tapConfiguration.getTapConfiguration()?.orderDetail!!.tax?.name?.let { it1 ->
+                amountBoxControl?.addItem(
+                    PRODUCT_TAX_ID, it1,
+                    it, ""
+                )
+            }
+        }
         tapConfiguration.getTapConfiguration()?.orderDetail?.shipping?.amount?.let {
-            amountBoxControl.addItem(
-                PRODUCT_SHIPPING_ID,
-                tapConfiguration.getTapConfiguration()?.orderDetail!!.shipping?.name,
-                it,
-                ""
-            )
+            tapConfiguration.getTapConfiguration()?.orderDetail!!.shipping?.name?.let { it1 ->
+                amountBoxControl?.addItem(
+                    PRODUCT_SHIPPING_ID,
+                    it1,
+                    it,
+                    ""
+                )
+            }
         }
 
         var totalPrice: Double? = tapConfiguration.getTapConfiguration()?.orderDetail?.amount?.let {
@@ -82,7 +88,7 @@ class SamsungPayTransaction {
 
 
         if (totalPrice != null) {
-            amountBoxControl.setAmountTotal(
+            amountBoxControl?.setAmountTotal(
                 totalPrice, AmountConstants.FORMAT_TOTAL_PRICE_ONLY
             )
         }

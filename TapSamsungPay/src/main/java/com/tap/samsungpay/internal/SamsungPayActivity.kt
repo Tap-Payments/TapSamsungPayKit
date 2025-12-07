@@ -218,10 +218,12 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             partnerInfo
         )
 
-        paymentManager.startInAppPayWithCustomSheet(
-            samsungPayTransaction.makeTransactionDetailsWithSheet() ,
-            transactionInfoListener
-        )
+        samsungPayTransaction.makeTransactionDetailsWithSheet()?.let {
+            paymentManager.startInAppPayWithCustomSheet(
+                it,
+                transactionInfoListener
+            )
+        }
 
 
     }
