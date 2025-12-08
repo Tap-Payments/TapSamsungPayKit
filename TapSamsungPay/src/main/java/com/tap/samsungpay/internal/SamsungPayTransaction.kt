@@ -93,8 +93,6 @@ class SamsungPayTransaction {
             )
         }
 
-
-
         return amountBoxControl
 
 //        with(TapConfiguration.getTapConfiguration()) {
