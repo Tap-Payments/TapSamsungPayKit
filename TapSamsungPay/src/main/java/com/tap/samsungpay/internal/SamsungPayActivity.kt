@@ -356,12 +356,12 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
      * the applicable Samsung Pay SDK API method for the operation being invoked.
      */
     private fun makeCustomSheetPaymentInfo(): CustomSheetPaymentInfo {
-        val brandList = ArrayList<SpaySdk.Brand>()
+      //  val brandList = ArrayList<SpaySdk.Brand>()
         // If the supported brand is not specified, all card brands in Samsung Pay are
         // listed in the Payment Sheet.
-        brandList.add(SpaySdk.Brand.VISA)
-        brandList.add(SpaySdk.Brand.MASTERCARD)
-        brandList.add(SpaySdk.Brand.AMERICANEXPRESS)
+       // brandList.add(SpaySdk.Brand.VISA)
+      //  brandList.add(SpaySdk.Brand.MASTERCARD)
+      //  brandList.add(SpaySdk.Brand.AMERICANEXPRESS)
         /*
          * Make the SheetControls you want and add them to custom sheet.
          * Place each control in sequence with AmountBoxControl listed last.
@@ -391,6 +391,31 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
         return customSheetPaymentInfo.build()
     }
+
+    private val brandList: ArrayList<SpaySdk.Brand>
+        get() {
+            val _brandList: Array<SpaySdk.Brand> = SpaySdk.Brand.values()
+            val bransList: ArrayList<SpaySdk.Brand> = ArrayList<SpaySdk.Brand>()
+            with(TapConfiguration.getTapConfiguration()) {
+                //   var tapBrands = this?.acceptance?.supportedBrands?.map { it.rawValue.replace("_","") }
+                var tapBrands =
+                    initResponseModel?.paymentOptionsResponse?.paymentOptions?.get(0)?.supportedCardBrands
+                // val tapBrands = TapConfiguration.getTapConfiguration()?.acceptance?.supportedSchemes
+                println("tapBrands are" + tapBrands)
+
+
+                for (i in tapBrands?.indices!!) {
+                    if (_brandList.contains(SpaySdk.Brand.valueOf(tapBrands[i].name.toUpperCase()))) {
+                        bransList.add(SpaySdk.Brand.valueOf(tapBrands[i].name.toUpperCase()))
+
+                    }
+                }
+            }
+
+            return bransList
+        }
+
+}
     fun makeAmountControl(): AmountBoxControl {
         val amountBoxControl = AmountBoxControl("AMOUNT_CONTROL_ID", "USD")
         amountBoxControl.addItem("PRODUCT_ITEM_ID", "Item", 1000.0, "")
@@ -435,6 +460,4 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
 
         }
-
-    }
-}
+        }
