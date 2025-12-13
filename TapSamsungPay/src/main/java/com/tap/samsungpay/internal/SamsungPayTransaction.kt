@@ -13,10 +13,10 @@ import com.tap.samsungpay.internal.PaymentDataSourceImpl.initResponseModel
 import com.tap.samsungpay.internal.PaymentDataSourceImpl.paymentOptionsResponse
 import com.tap.samsungpay.open.TapConfiguration
 
-private const val AMOUNT_CONTROL_ID = "amountControlId"
+const val AMOUNT_CONTROL_ID = "amountControlId"
 private const val PRODUCT_ITEM_ID = "productItemId"
-private const val PRODUCT_TAX_ID = "productTaxId"
-private const val PRODUCT_SHIPPING_ID = "productShippingId"
+const val PRODUCT_TAX_ID = "productTaxId"
+const val PRODUCT_SHIPPING_ID = "productShippingId"
 
 class SamsungPayTransaction {
     val tapConfiguration = TapConfiguration

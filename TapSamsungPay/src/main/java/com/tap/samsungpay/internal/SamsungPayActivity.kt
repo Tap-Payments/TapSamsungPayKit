@@ -350,16 +350,78 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
         samsungPayButton.stopShimmer();
         finish()
     }
+
+    private fun makeCustomSheetPaymentInfo(): CustomSheetPaymentInfo {
+
+        // 1️⃣ Create Custom Sheet
+        val customSheet = CustomSheet()
+
+        // 2️⃣ Amount control (MUST be last)
+        val amountControl = initResponseModel?.paymentOptionsResponse?.let {
+            it?.currency?.let { it1 ->
+                AmountBoxControl(
+                    "AMOUNT_CONTROL_ID",
+                    it1
+                )
+            }
+        }
+
+        tapConfiguration.getTapConfiguration()?.orderDetail!!.tax?.name?.let {
+            tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let { it1 ->
+                amountControl?.addItem(
+                    PRODUCT_TAX_ID,
+                    it,
+                    it1,
+                    ""
+                )
+            }
+        }
+
+        /*tapConfiguration.getTapConfiguration()?.orderDetail?.shipping?.amount?.let {
+            tapConfiguration.getTapConfiguration()?.orderDetail!!.shipping?.name?.let { it1 ->
+                amountBoxControl?.addItem(
+                    PRODUCT_SHIPPING_ID,
+                    it1,
+                    it,
+                    ""
+                )
+            }*/
+        tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
+            amountControl?.setAmountTotal(
+                it,
+                AmountConstants.FORMAT_TOTAL_PRICE_ONLY
+            )
+        }
+
+        if (amountControl != null) {
+            customSheet.addControl(amountControl)
+        }
+
+        // 3️⃣ Build CustomSheetPaymentInfo
+        return CustomSheetPaymentInfo.Builder()
+            .setMerchantId("3000003161")//TODO remove hard coded
+            .setMerchantName(initResponseModel?.merchant?.name)
+            // If you want to enter address, please refer to the javaDoc :
+            // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
+            .setOrderNumber(initResponseModel?.paymentOptionsResponse?.orderID?.getId()?.removePrefix("ord_"))
+            .setCardHolderNameEnabled(true)
+            .setRecurringEnabled(false)
+            .setCustomSheet(customSheet)
+            .setMerchantCountryCode(initResponseModel?.merchant?.countryCode)
+            .setAddressInPaymentSheet(CustomSheetPaymentInfo.AddressInPaymentSheet.DO_NOT_SHOW)
+            .build()
+    }
+
     /*
      * Make user's transaction details.
      * The merchant app should send CustomSheetPaymentInfo to Samsung Pay via
      * the applicable Samsung Pay SDK API method for the operation being invoked.
      */
-    private fun makeCustomSheetPaymentInfo(): CustomSheetPaymentInfo {
-        /*
+  /*  private fun makeCustomSheetPaymentInfo(): CustomSheetPaymentInfo {
+        *//*
          * Make the SheetControls you want and add them to custom sheet.
          * Place each control in sequence with AmountBoxControl listed last.
-         */
+         *//*
         val customSheet = CustomSheet()
       //  customSheet.addControl(makeBillingAddressControl())
       //  customSheet.addControl(makeShippingAddressControl())
@@ -384,7 +446,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             .setAllowedCardBrands(brandList)
 
         return customSheetPaymentInfo.build()
-    }
+    }*/
 
     private val brandList: ArrayList<SpaySdk.Brand>
         get() {
@@ -410,7 +472,7 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
         }
 
 }
-    fun makeAmountControl(): AmountBoxControl {
+/*    fun makeAmountControl(): AmountBoxControl {
         val amountBoxControl = AmountBoxControl("AMOUNT_CONTROL_ID", "USD")
         amountBoxControl.addItem("PRODUCT_ITEM_ID", "Item", 1000.0, "")
 
@@ -418,7 +480,101 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             AmountConstants.FORMAT_TOTAL_PRICE_ONLY)
 
         return amountBoxControl
+    }*/ val tapConfiguration = TapConfiguration
+private fun makeAmountControl(): AmountBoxControl? {
+
+    /**
+     * amountBox from  integration guide
+     */
+    val amountBoxControl = tapConfiguration.getTapConfiguration()?.orderDetail?.currency?.let {
+        AmountBoxControl(
+            AMOUNT_CONTROL_ID,
+            it
+        )
     }
+    // amountBoxControl.addItem(PRODUCT_ITEM_ID, "Item", 0.1, "")
+    tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
+        tapConfiguration.getTapConfiguration()?.orderDetail!!.tax?.name?.let { it1 ->
+            amountBoxControl?.addItem(
+                PRODUCT_TAX_ID, it1,
+                it, ""
+            )
+        }
+    }
+    tapConfiguration.getTapConfiguration()?.orderDetail?.shipping?.amount?.let {
+        tapConfiguration.getTapConfiguration()?.orderDetail!!.shipping?.name?.let { it1 ->
+            amountBoxControl?.addItem(
+                PRODUCT_SHIPPING_ID,
+                it1,
+                it,
+                ""
+            )
+        }
+    }
+
+    var totalPrice: Double? = tapConfiguration.getTapConfiguration()?.orderDetail?.amount?.let {
+        tapConfiguration.getTapConfiguration()?.orderDetail?.shipping?.amount?.let { it1 ->
+            tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.plus(it1)?.plus(
+                it
+            )
+        }
+    }
+
+
+
+    if (totalPrice != null) {
+        amountBoxControl?.setAmountTotal(
+            totalPrice, AmountConstants.FORMAT_TOTAL_PRICE_ONLY
+        )
+    }
+
+    return amountBoxControl
+
+//        with(TapConfiguration.getTapConfiguration()) {
+//            val amountBoxControl =
+//                AmountBoxControl(AMOUNT_CONTROL_ID, this?.transaction?.currency)
+//
+//            /**
+//             * amount product
+//             */
+//            this?.transaction?.amount?.let {
+//                amountBoxControl.addItem(
+//                    PRODUCT_ITEM_ID, "Item",
+//                    it, ""
+//                )
+//            }
+//            /**
+//             *  product tax name and value cost
+//             */
+//            this?.transaction?.tax?.amount?.let { taxAmount ->
+//                amountBoxControl.addItem(
+//                    PRODUCT_TAX_ID, "Tax", taxAmount,
+//                    this.transaction.tax?.name.toString()
+//                )
+//            }
+//            /**
+//             *  product shipping name and value cost
+//             */
+//            this?.transaction?.shipping?.amount?.let { shippingAmount ->
+//                amountBoxControl.addItem(
+//                    PRODUCT_SHIPPING_ID, "Shipping",
+//                    shippingAmount, this.transaction.shipping?.name.toString()
+//                )
+//            }
+//            /**
+//             *  product total cost
+//             *  @TODO : need to check if need to add all previous values or not
+//             */
+//            this?.transaction?.amount?.let {
+//                amountBoxControl.setAmountTotal(
+//                    it,
+//                    AmountConstants.FORMAT_TOTAL_PRICE_ONLY
+//                )
+//            }
+//            return amountBoxControl
+//        }
+
+}
     val cardInfoListener: PaymentManager.CardInfoListener = object :
         PaymentManager.CardInfoListener {
         // This callback is received when the card information is received successfully
