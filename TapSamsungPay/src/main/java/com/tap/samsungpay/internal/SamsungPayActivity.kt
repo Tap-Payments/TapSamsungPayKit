@@ -356,12 +356,6 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
      * the applicable Samsung Pay SDK API method for the operation being invoked.
      */
     private fun makeCustomSheetPaymentInfo(): CustomSheetPaymentInfo {
-      //  val brandList = ArrayList<SpaySdk.Brand>()
-        // If the supported brand is not specified, all card brands in Samsung Pay are
-        // listed in the Payment Sheet.
-       // brandList.add(SpaySdk.Brand.VISA)
-      //  brandList.add(SpaySdk.Brand.MASTERCARD)
-      //  brandList.add(SpaySdk.Brand.AMERICANEXPRESS)
         /*
          * Make the SheetControls you want and add them to custom sheet.
          * Place each control in sequence with AmountBoxControl listed last.
