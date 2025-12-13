@@ -31,6 +31,7 @@ import com.samsung.android.sdk.samsungpay.v2.payment.sheet.AmountConstants
 
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.CustomSheet
 import com.samsung.android.sdk.samsungpay.v2.payment.sheet.SheetControl
+import com.tap.samsungpay.internal.PaymentDataSourceImpl.initResponseModel
 import com.tap.samsungpay.internal.api.Repository
 import com.tap.samsungpay.internal.api.requests.CreateTokenSamsungPayRequest
 import com.tap.samsungpay.internal.api.requests.TokenData
@@ -220,123 +221,13 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
 
         samsungPayTransaction.makeTransactionDetailsWithSheet()?.let {
             paymentManager.startInAppPayWithCustomSheet(
-                it,
+                makeCustomSheetPaymentInfo(),
                 transactionInfoListener
             )
         }
 
 
-    }
 
-/*    //Not used for now
-    private fun startInAppPayment() {
-
-        try {
-
-
-            val bundle = Bundle()
-            bundle.putString(
-                SamsungPay.PARTNER_SERVICE_TYPE,
-                SpaySdk.ServiceType.INAPP_PAYMENT.toString()
-            )
-
-            val partnerInfo = PartnerInfo(SERVICE_ID, bundle)
-            paymentManager = PaymentManager(this, partnerInfo)
-            paymentManager.requestCardInfo(Bundle(), cardInfoListener)
-
-            paymentManager.startInAppPay(
-                makeTransactionDetails(),
-                object : TransactionInfoListener {
-                    override fun onAddressUpdated(p0: PaymentInfo?) {
-                        Toast.makeText(
-                            this@SamsungPayActivity,
-                            "address Updated",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
-                    }
-
-                    override fun onCardInfoUpdated(p0: CardInfo?) {
-                        Toast.makeText(this@SamsungPayActivity, "card Updated", Toast.LENGTH_SHORT)
-                            .show()
-
-                    }
-
-                    override fun onSuccess(
-                        p0: PaymentInfo?,
-                        paymentCredential: String?,
-                        bundle: Bundle?
-                    ) {
-                        Toast.makeText(
-                            this@SamsungPayActivity,
-                            "success  $paymentCredential",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        Log.e("error", bundle.toString())
-
-                    }
-
-                    override fun onFailure(errorCode: Int, bundle: Bundle?) {
-                        Toast.makeText(
-                            this@SamsungPayActivity,
-                            "failure error code ${errorCode} , bundle data : ${bundle.toString()}",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        Log.e("error", bundle.toString())
-
-                    }
-
-                })
-        } catch (e: Exception) {
-            Log.e("exception thrown", e.toString())
-            Toast.makeText(
-                this@SamsungPayActivity,
-                "exception thrown ${e.message.toString()}",
-                Toast.LENGTH_LONG
-            ).show();
-
-        }
-    }*/
-
-    private fun makeTransactionDetails(): PaymentInfo? {
-        val brandList: ArrayList<SpaySdk.Brand> = ArrayList()
-        // If the supported brand is not specified, all card brands in Samsung Pay are listed
-        // in the Payment Sheet.
-        brandList.add(SpaySdk.Brand.MASTERCARD)
-        brandList.add(SpaySdk.Brand.VISA)
-        brandList.add(SpaySdk.Brand.AMERICANEXPRESS)
-        val shippingAddress =
-            PaymentInfo.Address.Builder()
-                .setAddressee("name")
-                .setAddressLine1("addLine1")
-                .setAddressLine2("addLine2")
-                .setCity("city")
-                .setState("state")
-                .setCountryCode("United States")
-                .setPostalCode("zip")
-                .build()
-        val amount =
-            PaymentInfo.Amount.Builder()
-                .setCurrencyCode("USD")
-                .setItemTotalPrice("1000")
-                .setShippingPrice("10")
-                .setTax("50")
-                .setTotalPrice("1060")
-                .build()
-        return PaymentInfo.Builder()
-            .setMerchantId("123456")
-            .setMerchantName("Sample Merchant")
-            .setOrderNumber("AMZ007MAR")
-            .setPaymentProtocol(PaymentInfo.PaymentProtocol.PROTOCOL_3DS) // Merchant requires billing address from Samsung Pay and
-            // sends the shipping address to Samsung Pay.
-            // Option shows both billing and shipping address on the payment sheet.
-            .setAddressInPaymentSheet(PaymentInfo.AddressInPaymentSheet.NEED_BILLING_SEND_SHIPPING)
-            .setShippingAddress(shippingAddress)
-            .setAllowedCardBrands(brandList)
-            .setCardHolderNameEnabled(true)
-            .setRecurringEnabled(false)
-            .setAmount(amount)
-            .build()
     }
 
 
@@ -482,15 +373,21 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
        // customSheet.addControl(makeShippingMethodSpinnerControl())
         customSheet.addControl(makeAmountControl())
         val customSheetPaymentInfo = CustomSheetPaymentInfo.Builder()
-            .setMerchantId("123456")
-            .setMerchantName("Sample Merchant")
             // Merchant requires billing address from Samsung Pay and
             // sends the shipping address to Samsung Pay.
             // Show both billing and shipping address on the payment sheet.
-            .setAddressInPaymentSheet(CustomSheetPaymentInfo.AddressInPaymentSheet.NEED_BILLING_SEND_SHIPPING)
-            //.setAllowedCardBrands(brandList)
+            // .setMerchantId(initResponseModel?.merchant?.id)
+            .setMerchantId("3000003161")//TODO remove hard coded
+            .setMerchantName(initResponseModel?.merchant?.name)
+            // If you want to enter address, please refer to the javaDoc :
+            // reference/com/samsung/android/sdk/samsungpay/v2/payment/sheet/AddressControl.html
+            .setOrderNumber(initResponseModel?.paymentOptionsResponse?.orderID?.getId()?.removePrefix("ord_"))
             .setCardHolderNameEnabled(true)
             .setRecurringEnabled(false)
+            .setCustomSheet(customSheet)
+            .setMerchantCountryCode(initResponseModel?.merchant?.countryCode)
+            .setAddressInPaymentSheet(CustomSheetPaymentInfo.AddressInPaymentSheet.DO_NOT_SHOW)
+            .setAllowedCardBrands(brandList)
 
         return customSheetPaymentInfo.build()
     }
