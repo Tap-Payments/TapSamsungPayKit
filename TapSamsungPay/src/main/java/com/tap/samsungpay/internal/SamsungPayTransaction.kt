@@ -20,7 +20,7 @@ const val PRODUCT_SHIPPING_ID = "productShippingId"
 
 class SamsungPayTransaction {
     val tapConfiguration = TapConfiguration
-    fun makeTransactionDetailsWithSheet(): CustomSheetPaymentInfo? {
+    fun makeTransactionDetailsWithSheet(): CustomSheetPaymentInfo {
         val extraPaymentInfo = Bundle()
         val customSheet = CustomSheet()
 
