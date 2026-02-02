@@ -183,14 +183,14 @@
 
         <EditTextPreference
             app:key="sandboxKey"
-            app:defaultValue="sk_test_kovrMB0mupFJXfNZWx6Etg5y"
+            app:defaultValue="XXXXXXXXXX"
             app:title="@string/sandbox_key"
             app:useSimpleSummaryProvider="true"/>
 
 
         <EditTextPreference
             app:key="productionKey"
-            app:defaultValue="sk_test_kovrMB0mupFJXfNZWx6Etg5y"
+            app:defaultValue="XXXXXXXXXXXXXX"
 
             app:title="@string/production_key"
             app:useSimpleSummaryProvider="true"/>

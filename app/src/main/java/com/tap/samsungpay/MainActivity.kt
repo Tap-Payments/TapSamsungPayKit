@@ -62,8 +62,8 @@ class MainActivity : AppCompatActivity(), SimpleSettingsConfig.PreferenceCallbac
                     TapInterface(getLanguageMode("selectedlangKey"), Edges.CURVED,getThemeMode("selectedthemeKey"))
 
                 ).setAuthToken(
-                    AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
-                        .setProductionLiveKey("sk_test_kovrMB0mupFJXfNZWx6Etg5y").build()
+                    AuthKey.Builder().setSandBox("XXXXXXXXXXXXX")
+                        .setProductionLiveKey("XXXXXXXXXXXXX").build()
                 )
                 .setPackageName(getPrefStringValue("packageKey","company.tap.samsungpay"))
                 .setDeviceType(getPrefStringValue("deviceTypeKey","Android Native"))
