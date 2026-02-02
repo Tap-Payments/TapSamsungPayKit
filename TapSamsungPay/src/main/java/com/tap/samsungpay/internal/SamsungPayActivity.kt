@@ -377,20 +377,19 @@ class SamsungPayActivity : AppCompatActivity(), InternalCheckoutProfileDelegate 
             }
         }
 
-        /*tapConfiguration.getTapConfiguration()?.orderDetail?.shipping?.amount?.let {
-            tapConfiguration.getTapConfiguration()?.orderDetail!!.shipping?.name?.let { it1 ->
-                amountBoxControl?.addItem(
-                    PRODUCT_SHIPPING_ID,
+     var  totalAmount : Double? = tapConfiguration.getTapConfiguration()?.orderDetail?.amount?.let {
+         tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.plus(
+             it
+         )
+     }
+
+        tapConfiguration.getTapConfiguration()?.orderDetail?.amount?.let {
+            totalAmount?.let { it1 ->
+                amountControl?.setAmountTotal(
                     it1,
-                    it,
-                    ""
+                    AmountConstants.FORMAT_TOTAL_PRICE_ONLY
                 )
-            }*/
-        tapConfiguration.getTapConfiguration()?.orderDetail?.tax?.amount?.let {
-            amountControl?.setAmountTotal(
-                it,
-                AmountConstants.FORMAT_TOTAL_PRICE_ONLY
-            )
+            }
         }
 
         if (amountControl != null) {

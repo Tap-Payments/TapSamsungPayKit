@@ -136,7 +136,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
         hashString = Hmac.digest(
             msg = stringmsg, key = getPrefStringValue(
                 "secretKey",
-                "sk_test_bNgRpokWMylX3CBJ6FOresTq"
+                "XXXXXX"
             )
         )
         // Log.e("encrypted hashString",hashstring.toString())
@@ -465,7 +465,7 @@ val requestBody = jsonObject.toString()
         val request = Request.Builder()
             .url("https://api.tap.company/v2/charges/")
             .post(requestBody.toRequestBody(MEDIA_TYPE))
-            .header("Authorization", "Bearer sk_test_xliFRQtUrGfMdcCEgO9ohDSw")
+            .header("Authorization", "Bearer XXXXXX")
             .header("accept", "application/json")
             .header("content-type", "application/json")
             .build()
