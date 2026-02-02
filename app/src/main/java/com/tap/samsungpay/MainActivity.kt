@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity(), TapSamsungPayDelegate {
         hashString = Hmac.digest(
             msg = stringmsg, key = getPrefStringValue(
                 "secretKey",
-                "sk_test_bNgRpokWMylX3CBJ6FOresTq"
+                "XX"
             )
         )
         // Log.e("encrypted hashString",hashstring.toString())

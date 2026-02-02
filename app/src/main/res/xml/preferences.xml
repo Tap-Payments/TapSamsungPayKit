@@ -213,18 +213,18 @@
         <EditTextPreference
             app:key="sandboxKey"
             app:isPreferenceVisible="false"
-            app:defaultValue="sk_test_xliFRQtUrGfMdcCEgO9ohDSw"
+            app:defaultValue="XXXXXXXXXXXXXX"
             app:title="@string/sandbox_key"
             app:useSimpleSummaryProvider="true"/>
         <EditTextPreference
             app:key="secretKey"
-            app:defaultValue="sk_test_xliFRQtUrGfMdcCEgO9ohDSw"
+            app:defaultValue="XXXXXXXXXXXXXX"
             app:title="@string/secret_key"
             app:useSimpleSummaryProvider="true"/>
 
         <EditTextPreference
             app:key="productionKey"
-            app:defaultValue="sk_test_xliFRQtUrGfMdcCEgO9ohDSw"
+            app:defaultValue="XXXXXXXXXXXXXX"
             app:isPreferenceVisible="false"
             app:title="@string/production_key"
             app:useSimpleSummaryProvider="true"/>
