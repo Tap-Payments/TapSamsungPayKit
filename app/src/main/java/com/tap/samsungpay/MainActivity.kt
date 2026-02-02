@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
                     TapInterface(Language.EN.name, Edges.CURVED, ThemeMode.LIGHT)
 
                 ).setAuthToken(
-                    AuthKey.Builder().setSandBox("sk_test_kovrMB0mupFJXfNZWx6Etg5y")
-                        .setProductionLiveKey("sk_test_kovrMB0mupFJXfNZWx6Etg5y").build()
+                    AuthKey.Builder().setSandBox("XXXXXXXX")
+                        .setProductionLiveKey("XXXXXXXX").build()
                 )
                 .setPackageName("company.tap.samsungpay")
                 .setDeviceType("Android Native")
